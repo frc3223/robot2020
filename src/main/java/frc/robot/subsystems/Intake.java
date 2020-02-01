@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
@@ -20,17 +20,27 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
 
-  CANSparkMax intakeMotor = null;
-  Solenoid intakePiston = null;
+  CANSparkMax intakeMotor;
+  DoubleSolenoid intakeSolenoid;
 
   public Intake() {
-      intakeMotor = new CANSparkMax(Constants.MANIPULATOR_CONTROLLER_INTAKE_CONTROLLER, MotorType.kBrushless);
-      intakePiston = new Solenoid(Constants.INTAKE_SOLENOID);
+    intakeMotor = new CANSparkMax(Constants.MANIPULATOR_CONTROLLER_INTAKE_CONTROLLER, MotorType.kBrushless);
+    intakeSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.INTAKE_SOLENOID_FORWARDS, Constants.INTAKE_SOLENOID_BACKWARDS);
 
   }
+public void intakeRaise() {
+   intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+public void intakeLower() {
+  intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+public void intakeMotorOn() {
+  intakeMotor.set(0.75);
+}
+
+public void intakeMotorOff() {
+  intakeMotor.set(-0.75);
+}
+
 }

@@ -13,8 +13,18 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
+
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
+
 import frc.robot.commands.DriveArcade;
+import frc.robot.commands.IntakeLower;
+import frc.robot.commands.IntakeRaise;
+import frc.robot.commands.ClimberDown;
+import frc.robot.commands.ClimberUp;
+
+import edu.wpi.first.wpilibj.XboxController;
 // Robot Container is the new OI, which is setting up buttons, using numbers from Constants, and linking controllers and sensors.
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -25,21 +35,25 @@ import frc.robot.commands.DriveArcade;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   int driverPort;
-
   int manipulatorPort;
 
   public Joystick driverController;
-  
   public Joystick manipulatorController;
 
+  public XboxController XdriverController;
+  public XboxController XmanipulatorController;
+
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
   private final DriveTrain m_drivetrain;
-
   private final DriveArcade m_drivearcade;
 
+  private final Climber m_climber;
+  private final ClimberUp m_climberUp;
+  private final ClimberDown m_climberDown;
+  private final Intake m_intake;
+  private final IntakeLower m_intakeLower;
+  private final IntakeRaise m_intakeRaise;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -49,7 +63,14 @@ public class RobotContainer {
     configureButtonBindings();
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
-    System.out.println("new robot container");
+    m_intake = new Intake();
+    m_intakeRaise = new IntakeRaise(m_intake);
+    m_intakeLower = new IntakeLower(m_intake);
+    
+
+    m_climber = new Climber();
+    m_climberUp = new ClimberUp(); 
+    m_climberDown = new ClimberDown(); 
   }
 
   /**
@@ -79,5 +100,18 @@ public class RobotContainer {
 
   public Command getDriveArcade() {
     return m_drivearcade;
+  }
+  public Command getIntakeRaise() {
+    return m_intakeRaise;
+  }
+
+  public Command getIntakeLower() {
+    return m_intakeLower;
+  }
+  public Command getClimbUp(){
+    return m_climberUp;
+  }
+  public Command getClimbDown(){
+    return m_climberDown;
   }
 }

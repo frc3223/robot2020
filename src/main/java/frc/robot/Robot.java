@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private Command m_teleopCommand;
+  private Command m_intakeLowerCommand;
+  private Command m_intakeRaiseCommand;
+  private Command m_climbUpCommand;
+  private Command m_climbDownCommand;
 
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
@@ -106,15 +110,26 @@ public class Robot extends TimedRobot {
     if (m_teleopCommand != null) {
       m_teleopCommand.schedule();
     }
-    
+    m_intakeLowerCommand = m_robotContainer.getIntakeLower();
+    if (m_intakeLowerCommand != null) {
+      m_intakeLowerCommand.schedule();
+    }
+    m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
+    if (m_intakeRaiseCommand != null) {
+      m_intakeRaiseCommand.schedule();
+    }
+    m_climbUpCommand = m_robotContainer.getClimbUp();
+    if(m_climbUpCommand != null){
+      m_climbUpCommand.schedule();
+    }
+    m_climbDownCommand = m_robotContainer.getClimbDown();
+    if(m_climbDownCommand != null){
+      m_climbDownCommand.schedule();
+    }
   }
-
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
-  public void teleopPeriodic() {
-    
+  public void teleopPeriodic(){
+
   }
 
   @Override
