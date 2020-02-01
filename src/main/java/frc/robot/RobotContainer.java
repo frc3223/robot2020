@@ -60,6 +60,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     driverPort = 0;
+    manipulatorPort = 1;
     configureButtonBindings();
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
@@ -67,10 +68,12 @@ public class RobotContainer {
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
     
+    XdriverController = new XboxController(driverPort);
+    XmanipulatorController = new XboxController(manipulatorPort);
 
     m_climber = new Climber();
-    m_climberUp = new ClimberUp(); 
-    m_climberDown = new ClimberDown(); 
+    m_climberUp = new ClimberUp(XdriverController); 
+    m_climberDown = new ClimberDown(XdriverController); 
   }
 
   /**

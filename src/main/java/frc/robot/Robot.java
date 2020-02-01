@@ -10,6 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.RobotContainer;
+import frc.robot.Constants;
 
 
 
@@ -29,6 +32,9 @@ public class Robot extends TimedRobot {
 
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
+
+  public XboxController driverController;
+  public XboxController manipulatorController;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -111,24 +117,19 @@ public class Robot extends TimedRobot {
       m_teleopCommand.schedule();
     }
     m_intakeLowerCommand = m_robotContainer.getIntakeLower();
-    if (m_intakeLowerCommand != null) {
-      m_intakeLowerCommand.schedule();
-    }
     m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
-    if (m_intakeRaiseCommand != null) {
-      m_intakeRaiseCommand.schedule();
-    }
     m_climbUpCommand = m_robotContainer.getClimbUp();
-    if(m_climbUpCommand != null){
-      m_climbUpCommand.schedule();
-    }
     m_climbDownCommand = m_robotContainer.getClimbDown();
-    if(m_climbDownCommand != null){
-      m_climbDownCommand.schedule();
-    }
+    
   }
   @Override
   public void teleopPeriodic(){
+    if(m_robotContainer.XdriverController.getAButton()){
+      m_climbDownCommand.schedule();
+    }
+    if(m_robotContainer.XdriverController.getYButton()){
+      m_climbUpCommand.schedule();
+    }
 
   }
 

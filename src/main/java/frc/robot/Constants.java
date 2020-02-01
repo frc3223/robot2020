@@ -20,13 +20,15 @@ public final class Constants {
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 15;
-    public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 16;
-    public static final int DRIVETRAIN_LEFT_BACK_SPARK = 1;
-    public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 2;
-
+    public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 14;
+    public static final int DRIVETRAIN_LEFT_BACK_SPARK = 20;
+    public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 1;
+    public static final int PDP_ID_NUMBER = 0;
     //climber talon constants
     public static final int CLIMBER_ARM_TALON = 3;
     public static final int CLIMBER_WINCH_TALON = 4;
+
+    public static final int INTAKE_MOTOR = 10;
     
     //~~~~~~~~~~~~~~~~~~~CONTROLLER BUTTONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //intake controller controls

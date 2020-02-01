@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Climber;
 import frc.robot.RobotContainer;
@@ -14,11 +15,13 @@ import frc.robot.Constants;
 
 public class ClimberUp extends CommandBase {
   public Climber climber;
+  public XboxController driverController;
   /**
    * Creates a new ClimberUp.
    */
-  public ClimberUp() {
+  public ClimberUp(XboxController driverController) {
     climber = new Climber();
+    this.driverController = driverController;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -31,11 +34,16 @@ public class ClimberUp extends CommandBase {
   @Override
   public void execute() {
     climber.extend();
+    System.out.print("the climber should extend and the Y button was pushed");
+    if(driverController.getYButtonReleased()){
+      end(false);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climber.armstop();
   }
 
   // Returns true when the command should end.

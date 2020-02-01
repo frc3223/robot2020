@@ -8,12 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkMax;
-import frc.robot.RobotContainer;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -21,16 +16,21 @@ public class Climber extends SubsystemBase {
   public WPI_TalonSRX winch;
   public WPI_TalonSRX arm;
 
-  public Constants constants;
-
   /**
    * Creates a new Climber.
    */
   public Climber() {
-    constants = new Constants();
-    winch = new WPI_TalonSRX(constants.CLIMBER_WINCH_TALON);
-    arm = new WPI_TalonSRX(constants.CLIMBER_ARM_TALON);
+    winch = new WPI_TalonSRX(Constants.CLIMBER_WINCH_TALON);
+    arm = new WPI_TalonSRX(Constants.CLIMBER_ARM_TALON);
 
+  }
+
+  public void armstop(){
+    arm.set(0);
+  }
+
+  public void winchstop(){
+    winch.set(0);
   }
 
   public void extend(){
