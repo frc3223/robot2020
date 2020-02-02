@@ -13,11 +13,11 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
-
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
-
+import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
 import frc.robot.commands.IntakeRaise;
@@ -54,6 +54,7 @@ public class RobotContainer {
   private final Intake m_intake;
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
+  private final Compressor m_compressor;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -67,13 +68,14 @@ public class RobotContainer {
     m_intake = new Intake();
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
-    
+    m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
+    m_compressor.setClosedLoopControl(true);
     XdriverController = new XboxController(driverPort);
     XmanipulatorController = new XboxController(manipulatorPort);
 
     m_climber = new Climber();
-    m_climberUp = new ClimberUp(XdriverController); 
-    m_climberDown = new ClimberDown(XdriverController); 
+    m_climberUp = new ClimberUp(m_climber, XdriverController); 
+    m_climberDown = new ClimberDown(m_climber,XdriverController); 
   }
 
   /**

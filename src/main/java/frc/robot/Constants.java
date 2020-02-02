@@ -19,17 +19,19 @@ public final class Constants {
 
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
-    public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 15;
-    public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 14;
-    public static final int DRIVETRAIN_LEFT_BACK_SPARK = 20;
-    public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 1;
+    public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 20;
+    public static final int DRIVETRAIN_RIGHT_FRONT_SPARK = 15;
+    public static final int DRIVETRAIN_LEFT_BACK_SPARK = 1;
+    public static final int DRIVETRAIN_RIGHT_BACK_SPARK = 14;
     public static final int PDP_ID_NUMBER = 0;
     //climber talon constants
-    public static final int CLIMBER_ARM_TALON = 3;
-    public static final int CLIMBER_WINCH_TALON = 4;
-
+    public static final int CLIMBER_ARM_TALON = 8;
+    public static final int CLIMBER_WINCH_TALON = 13;
+    //Intake Motor
     public static final int INTAKE_MOTOR = 10;
-    
+    //Shooter Motors
+    public static final int SHOOTER_LEFT_MOTOR = 4;
+    public static final int SHOOTER_RIGHT_MOTOR = 5;
     //~~~~~~~~~~~~~~~~~~~CONTROLLER BUTTONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //intake controller controls
     public static final int MANIPULATOR_CONTROLLER_INTAKE_IN = 3;
@@ -48,14 +50,14 @@ public final class Constants {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;
-    public static final int INTAKE_SOLENOID_FORWARDS = 9;
-    public static final int INTAKE_SOLENOID_BACKWARDS = 11;
+    public static final int INTAKE_SOLENOID_FORWARDS = 0;
+    public static final int INTAKE_SOLENOID_BACKWARDS = 1;
 
     public static final int COLORWHEEL_SOLENOID_FORWARDS = 13;
     public static final int COLORWHEEL_SOLENOID_BACkWARDS = 12;
 
      //~~~~~~~~~~~~~~~~~~~~~~~~ColorWheel!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public static final int COLORWHEEL_MOTOR = 8;
+    public static final int COLORWHEEL_MOTOR = 7;
     
 
 }

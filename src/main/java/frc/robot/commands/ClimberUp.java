@@ -19,10 +19,11 @@ public class ClimberUp extends CommandBase {
   /**
    * Creates a new ClimberUp.
    */
-  public ClimberUp(XboxController driverController) {
-    climber = new Climber();
+  public ClimberUp(Climber climber, XboxController driverController) {
     this.driverController = driverController;
+    this.climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.

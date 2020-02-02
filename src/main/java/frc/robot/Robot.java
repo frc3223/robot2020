@@ -116,6 +116,7 @@ public class Robot extends TimedRobot {
     if (m_teleopCommand != null) {
       m_teleopCommand.schedule();
     }
+    
     m_intakeLowerCommand = m_robotContainer.getIntakeLower();
     m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
     m_climbUpCommand = m_robotContainer.getClimbUp();

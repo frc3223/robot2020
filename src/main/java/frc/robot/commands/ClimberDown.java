@@ -19,10 +19,11 @@ public class ClimberDown extends CommandBase {
   /**
    * Creates a new ClimberDown.
    */
-  public ClimberDown(XboxController driverController) {
-    climber = new Climber();
+  public ClimberDown(Climber climber, XboxController driverController) {
     this.driverController = driverController;
+    this.climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
