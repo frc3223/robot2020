@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
-
+// does not exist --import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick;
 
 
 /**
@@ -33,8 +36,11 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
 
-  public XboxController driverController;
-  public XboxController manipulatorController;
+  public Joystick driverController;
+  public Joystick manipulatorController;
+
+  public ButtonType Ybutton;
+  public ButtonType Abutton;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -46,6 +52,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_constants = new Constants();
+    driverController = new Joystick(0);
+    manipulatorController = new Joystick(1);
 
     System.out.println("Robot is now online.");
 
@@ -125,11 +133,13 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopPeriodic(){
-    if(m_robotContainer.XdriverController.getAButton()){
+    if(driverController.getRawButton(1)){
       m_climbDownCommand.schedule();
+      System.out.print("climber retracting, winch, #13, the A button was pushed");
     }
-    if(m_robotContainer.XdriverController.getYButton()){
+    if(driverController.getRawButton(2)){
       m_climbUpCommand.schedule();
+      System.out.print("climber extending, arm, #8, the B button was pushed");
     }
 
   }

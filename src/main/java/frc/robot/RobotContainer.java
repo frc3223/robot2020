@@ -24,7 +24,11 @@ import frc.robot.commands.IntakeRaise;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick;
+
+//import edu.wpi.first.wpilibj.XboxController; [REDACTED]
 // Robot Container is the new OI, which is setting up buttons, using numbers from Constants, and linking controllers and sensors.
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -40,8 +44,6 @@ public class RobotContainer {
   public Joystick driverController;
   public Joystick manipulatorController;
 
-  public XboxController XdriverController;
-  public XboxController XmanipulatorController;
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -70,12 +72,10 @@ public class RobotContainer {
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
     m_compressor.setClosedLoopControl(true);
-    XdriverController = new XboxController(driverPort);
-    XmanipulatorController = new XboxController(manipulatorPort);
 
     m_climber = new Climber();
-    m_climberUp = new ClimberUp(m_climber, XdriverController); 
-    m_climberDown = new ClimberDown(m_climber,XdriverController); 
+    m_climberUp = new ClimberUp(m_climber, driverController); 
+    m_climberDown = new ClimberDown(m_climber,driverController); 
   }
 
   /**

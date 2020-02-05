@@ -13,13 +13,17 @@ import frc.robot.subsystems.Climber;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick;
+
 public class ClimberUp extends CommandBase {
   public Climber climber;
-  public XboxController driverController;
+  public Joystick driverController;
   /**
    * Creates a new ClimberUp.
    */
-  public ClimberUp(Climber climber, XboxController driverController) {
+  public ClimberUp(Climber climber, Joystick driverController) {
     this.driverController = driverController;
     this.climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,9 +38,10 @@ public class ClimberUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    climber.extend();
-    System.out.print("the climber should extend and the Y button was pushed");
-    if(driverController.getYButtonReleased()){
+      climber.extend();
+      
+    if(!driverController.getRawButton(2)){
+      climber.armstop();
       end(false);
     }
   }

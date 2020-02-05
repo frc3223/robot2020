@@ -9,19 +9,19 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-//import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+//import com.ctre.phoenix.motorcontrol.can.*;
 
 public class Climber extends SubsystemBase {
-  public WPI_TalonSRX winch;
-  public WPI_TalonSRX arm;
+  public WPI_VictorSPX winch;
+  public WPI_VictorSPX arm;
 
   /**
    * Creates a new Climber.
    */
   public Climber() {
-    winch = new WPI_TalonSRX(Constants.CLIMBER_WINCH_TALON);
-    arm = new WPI_TalonSRX(Constants.CLIMBER_ARM_TALON);
+    winch = new WPI_VictorSPX(Constants.CLIMBER_WINCH_TALON);
+    arm = new WPI_VictorSPX(Constants.CLIMBER_ARM_TALON);
 
   }
 
@@ -38,6 +38,6 @@ public class Climber extends SubsystemBase {
   }
 
   public void retract(){
-    winch.set(1);
+    winch.set(-1);
   }
 }
