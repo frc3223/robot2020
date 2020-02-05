@@ -133,15 +133,22 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopPeriodic(){
-    if(driverController.getRawButton(1)){
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_CLIMBER_DOWN)){
       m_climbDownCommand.schedule();
       System.out.print("climber retracting, winch, #13, the A button was pushed");
     }
-    if(driverController.getRawButton(2)){
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_CLIMBER_UP)){
       m_climbUpCommand.schedule();
-      System.out.print("climber extending, arm, #8, the B button was pushed");
+      System.out.print("climber extending, arm, #8, the Y button was pushed");
     }
-
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_IN)){
+      m_intakeRaiseCommand.schedule();
+      System.out.print("Intake In,pneumatics, the X button was pushed");
+    }
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_OUT)){
+      m_intakeLowerCommand.schedule();
+      System.out.print("Intake Out,pneumatics, the B button was pushed");
+    }
   }
 
   @Override

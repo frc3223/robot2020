@@ -34,14 +34,19 @@ public final class Constants {
     public static final int SHOOTER_RIGHT_MOTOR = 5;
     //~~~~~~~~~~~~~~~~~~~CONTROLLER BUTTONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //intake controller controls
-    public static final int MANIPULATOR_CONTROLLER_INTAKE_IN = 3;
-    public static final int MANIPULATOR_CONTROLLER_INTAKE_OUT = 4;
-    public static final int MANIPULATOR_CONTROLLER_INTAKE_CONTROLLER = 5;
+   // public static final int MANIPULATOR_CONTROLLER_INTAKE_IN = 3;
+   // public static final int MANIPULATOR_CONTROLLER_INTAKE_OUT = 4;
+    public static final int INTAKE_MOTOR_CONTROLLER = 5;
     //x-box controller buttons
     public static final int DRIVER_CONTROLLER_LEFT_MOVE_AXIS = 1; //left joystick up down
     public static final int DRIVER_CONTROLLER_LEFT_ROTATE_AXIS = 0; //left joysick left right
     public static final int DRIVER_CONTROLLER_RIGHT_MOVE_AXIS = 5; //right joystick up down
     public static final int DRIVER_CONTROLLER_RIGHT_ROTATE_AXIS = 4; //right joysick left right
+
+    public static final int DRIVER_CONTROLLER_CLIMBER_DOWN = 1; // A button
+    public static final int DRIVER_CONTROLLER_CLIMBER_UP = 4;//Y button
+    public static final int DRIVER_CONTROLLER_INTAKE_IN = 3;//X button
+    public static final int DRIVER_CONTROLLER_INTAKE_OUT = 2;//B button
 
     public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
     public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;
