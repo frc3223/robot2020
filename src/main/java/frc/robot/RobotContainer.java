@@ -17,12 +17,15 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.IntakeWheel;
 import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
 import frc.robot.commands.IntakeRaise;
 import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
+import frc.robot.commands.IntakeWheelIn;
+import frc.robot.commands.IntakeWheelOut;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
@@ -49,6 +52,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
   private final DriveArcade m_drivearcade;
+  private final IntakeWheel m_intakeWheel;
 
   private final Climber m_climber;
   private final ClimberUp m_climberUp;
@@ -57,6 +61,9 @@ public class RobotContainer {
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
   private final Compressor m_compressor;
+  private final IntakeWheelIn m_intakeForward;
+  private final IntakeWheelOut m_intakeBackward;
+   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -72,6 +79,9 @@ public class RobotContainer {
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
     m_compressor.setClosedLoopControl(true);
+    m_intakeForward = new IntakeWheelIn(m_intake,driverController);
+    m_intakeBackward = new IntakeWheelOut(m_intake,driverController);
+    m_intakeWheel = new IntakeWheel();
 
     m_climber = new Climber();
     m_climberUp = new ClimberUp(m_climber, driverController); 
@@ -118,5 +128,11 @@ public class RobotContainer {
   }
   public Command getClimbDown(){
     return m_climberDown;
+  }
+  public Command getIntakeForward(){
+    return m_intakeForward;
+  }
+  public Command getIntakeBackward(){
+    return m_intakeBackward;
   }
 }

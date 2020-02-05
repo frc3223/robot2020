@@ -48,6 +48,9 @@ public final class Constants {
     public static final int DRIVER_CONTROLLER_INTAKE_IN = 3;//X button
     public static final int DRIVER_CONTROLLER_INTAKE_OUT = 2;//B button
 
+    public static final int DRIVER_CONTROLLER_INTAKE_FORWARD = 5;//Left Bumper
+    public static final int DRIVER_CONTROLLER_INTAKE_BACKWARD = 6;// right bumper
+
     public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
     public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;
     //public static final int MANIPULATOR_CONTROLLER_HIGHSHOTSHOOT = ;

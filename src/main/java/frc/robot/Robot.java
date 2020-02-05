@@ -32,6 +32,8 @@ public class Robot extends TimedRobot {
   private Command m_intakeRaiseCommand;
   private Command m_climbUpCommand;
   private Command m_climbDownCommand;
+  private Command m_intakeWheelForwardCommand;
+  private Command m_intakeWheelBackwardCommand;
 
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
@@ -129,6 +131,8 @@ public class Robot extends TimedRobot {
     m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
     m_climbUpCommand = m_robotContainer.getClimbUp();
     m_climbDownCommand = m_robotContainer.getClimbDown();
+    m_intakeWheelForwardCommand = m_robotContainer.getIntakeForward();
+    m_intakeWheelBackwardCommand = m_robotContainer.getIntakeBackward();
     
   }
   @Override
@@ -148,6 +152,14 @@ public class Robot extends TimedRobot {
     if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_OUT)){
       m_intakeLowerCommand.schedule();
       System.out.print("Intake Out,pneumatics, the B button was pushed");
+    }
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_FORWARD)){
+      m_intakeWheelForwardCommand.schedule();
+      System.out.print("Intake wheels in, the left bumper was pressed");
+    }
+    if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_BACKWARD)){
+      m_intakeWheelBackwardCommand.schedule();
+      System.out.print("Intake wheels in, the right bumper was pressed");
     }
   }
 

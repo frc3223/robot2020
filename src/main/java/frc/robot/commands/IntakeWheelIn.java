@@ -8,28 +8,48 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
+import frc.robot.Constants;
+import frc.robot.subsystems.Intake;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class IntakeWheelIn extends CommandBase {
+  Joystick driverController;
+  Intake intake;
+  
   /**
    * Creates a new IntakeWheelIN.
    */
-  public IntakeWheelIn() {
+  public IntakeWheelIn(Intake Intake, Joystick DriverController) {
+    this.driverController = DriverController;
+    intake = Intake;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    intake.intakeMotorForward();
+
+    if(!driverController.getRawButton(5)){
+      end(false);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.intakeMotorOff();
   }
 
   // Returns true when the command should end.
