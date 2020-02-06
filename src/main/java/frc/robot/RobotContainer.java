@@ -14,11 +14,14 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
+//subsystems imports
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.IntakeWheel;
+import frc.robot.subsystems.ColorWheel;
 import edu.wpi.first.wpilibj.Compressor;
+// commands imports
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
 import frc.robot.commands.IntakeRaise;
@@ -26,7 +29,9 @@ import frc.robot.commands.ClimberDown;
 import frc.robot.commands.ClimberUp;
 import frc.robot.commands.IntakeWheelIn;
 import frc.robot.commands.IntakeWheelOut;
-
+import frc.robot.commands.ColorWheelIn;
+import frc.robot.commands.ColorWheelOut;
+//buttons imports
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -47,12 +52,12 @@ public class RobotContainer {
   public Joystick driverController;
   public Joystick manipulatorController;
 
-
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
   private final DriveArcade m_drivearcade;
   private final IntakeWheel m_intakeWheel;
+  private final ColorWheel m_colorWheel;
 
   private final Climber m_climber;
   private final ClimberUp m_climberUp;
@@ -63,6 +68,8 @@ public class RobotContainer {
   private final Compressor m_compressor;
   private final IntakeWheelIn m_intakeForward;
   private final IntakeWheelOut m_intakeBackward;
+  private final ColorWheelIn m_colorLeft;
+  private final ColorWheelOut m_colorRight;
    
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -83,6 +90,10 @@ public class RobotContainer {
     m_intakeBackward = new IntakeWheelOut(m_intake,driverController);
     m_intakeWheel = new IntakeWheel();
 
+    m_colorWheel = new ColorWheel();
+    m_colorLeft = new ColorWheelIn(m_colorWheel,driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT),driverController);
+    m_colorRight = new ColorWheelOut(m_colorWheel,driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT),driverController);
+
     m_climber = new Climber();
     m_climberUp = new ClimberUp(m_climber, driverController); 
     m_climberDown = new ClimberDown(m_climber,driverController); 
@@ -96,12 +107,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     driverController = new Joystick(driverPort);
-   
     manipulatorController = new Joystick(manipulatorPort);
-
   }
-
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -112,14 +119,12 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
-
   public Command getDriveArcade() {
     return m_drivearcade;
   }
   public Command getIntakeRaise() {
     return m_intakeRaise;
   }
-
   public Command getIntakeLower() {
     return m_intakeLower;
   }
@@ -134,5 +139,11 @@ public class RobotContainer {
   }
   public Command getIntakeBackward(){
     return m_intakeBackward;
+  }
+  public Command getColorLeft(){
+    return m_colorLeft;
+  }
+  public Command getColorRight(){
+    return m_colorRight;
   }
 }

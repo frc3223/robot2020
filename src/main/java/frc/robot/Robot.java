@@ -34,15 +34,14 @@ public class Robot extends TimedRobot {
   private Command m_climbDownCommand;
   private Command m_intakeWheelForwardCommand;
   private Command m_intakeWheelBackwardCommand;
+  private Command m_colorWheelLeftCommand;
+  private Command m_colorWheelRightCommand;
 
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
 
   public Joystick driverController;
   public Joystick manipulatorController;
-
-  public ButtonType Ybutton;
-  public ButtonType Abutton;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -133,6 +132,8 @@ public class Robot extends TimedRobot {
     m_climbDownCommand = m_robotContainer.getClimbDown();
     m_intakeWheelForwardCommand = m_robotContainer.getIntakeForward();
     m_intakeWheelBackwardCommand = m_robotContainer.getIntakeBackward();
+    m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
+    m_colorWheelRightCommand = m_robotContainer.getColorRight();
     
   }
   @Override
@@ -160,6 +161,14 @@ public class Robot extends TimedRobot {
     if(driverController.getRawButton(m_constants.DRIVER_CONTROLLER_INTAKE_BACKWARD)){
       m_intakeWheelBackwardCommand.schedule();
       System.out.print("Intake wheels in, the right bumper was pressed");
+    }
+    if(driverController.getRawAxis(m_constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT)>= 0.05){
+      m_colorWheelLeftCommand.schedule();
+      System.out.print("Left trigger pressed, Color Wheel turning Left");
+    }
+    if(driverController.getRawAxis(m_constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT)>= 0.05){
+      m_colorWheelRightCommand.schedule();
+      System.out.print("Right trigger pressed, Color Wheel turning Right");
     }
   }
 

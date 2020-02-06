@@ -28,6 +28,17 @@ public class ColorWheel extends SubsystemBase {
     colorWheelSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.COLORWHEEL_SOLENOID_FORWARDS, Constants.COLORWHEEL_SOLENOID_BACkWARDS);
   }
 
+  public void WheelSpin(double Speed){
+    colorWheelMotor.set(Speed);
+  }
+
+  public void WheelOut(){
+    colorWheelSolenoid.set(DoubleSolenoid.Value.kForward);
+  }
+
+  public void WheelIn(){
+    colorWheelSolenoid.set(DoubleSolenoid.Value.kReverse);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

@@ -36,7 +36,6 @@ public final class Constants {
     //intake controller controls
    // public static final int MANIPULATOR_CONTROLLER_INTAKE_IN = 3;
    // public static final int MANIPULATOR_CONTROLLER_INTAKE_OUT = 4;
-    public static final int INTAKE_MOTOR_CONTROLLER = 5;
     //x-box controller buttons
     public static final int DRIVER_CONTROLLER_LEFT_MOVE_AXIS = 1; //left joystick up down
     public static final int DRIVER_CONTROLLER_LEFT_ROTATE_AXIS = 0; //left joysick left right
@@ -50,6 +49,12 @@ public final class Constants {
 
     public static final int DRIVER_CONTROLLER_INTAKE_FORWARD = 5;//Left Bumper
     public static final int DRIVER_CONTROLLER_INTAKE_BACKWARD = 6;// right bumper
+
+    public static final int DRIVER_CONTROLLER_WHEEL_EXTEND = 9;//left under-button
+    public static final int DRIVER_CONTROLLER_WHEEL_RETRACT = 10;//right under-button
+    public static final int DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT = 2;//left trigger
+    public static final int DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT = 3;//right trigger
+
 
     public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
     public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;

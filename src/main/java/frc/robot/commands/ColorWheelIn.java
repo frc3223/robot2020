@@ -9,15 +9,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.RobotContainer;
+import frc.robot.Constants;
 
-public class ColorWheelRaise extends CommandBase {
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick;
+
+public class ColorWheelIn extends CommandBase {
   private final ColorWheel m_colorWheel;
+  private double speed;
+  private final Joystick driverController;
 
   /**
    * Creates a new ColorWheelIn.
    */
-  public ColorWheelRaise(ColorWheel colorWheel) {
+  public ColorWheelIn(ColorWheel colorWheel, double Speed, Joystick DriverController) {
+    driverController = DriverController;
     m_colorWheel = colorWheel;
+    this.speed = Speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(colorWheel);
   }
@@ -30,89 +40,19 @@ public class ColorWheelRaise extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //this.m_colorWheel.ColorWheelIn();
-    //this.m_colorWheel.ColorWheelRaise();
-    end(false);
+    m_colorWheel.WheelSpin(speed);
+
+    if(driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT) <= 0.05){
+      m_colorWheel.WheelSpin(0.0);
+      end(false);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
