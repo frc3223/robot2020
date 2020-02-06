@@ -36,6 +36,8 @@ public class Robot extends TimedRobot {
   private Command m_intakeWheelBackwardCommand;
   private Command m_colorWheelLeftCommand;
   private Command m_colorWheelRightCommand;
+  private Command m_colorWheelExtendCommand;
+  private Command m_colorWheelRetractCommand;
 
   public static RobotContainer m_robotContainer = null;
   public static Constants m_constants = null;
@@ -134,6 +136,8 @@ public class Robot extends TimedRobot {
     m_intakeWheelBackwardCommand = m_robotContainer.getIntakeBackward();
     m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
+    m_colorWheelExtendCommand = m_robotContainer.getColorExtend();
+    m_colorWheelRetractCommand = m_robotContainer.getColorRetract();
     
   }
   @Override
@@ -162,13 +166,21 @@ public class Robot extends TimedRobot {
       m_intakeWheelBackwardCommand.schedule();
       System.out.print("Intake wheels in, the right bumper was pressed");
     }
-    if(driverController.getRawAxis(m_constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT)>= 0.05){
+    if(driverController.getRawAxis(m_constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05){
       m_colorWheelLeftCommand.schedule();
       System.out.print("Left trigger pressed, Color Wheel turning Left");
     }
-    if(driverController.getRawAxis(m_constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT)>= 0.05){
+    if(driverController.getRawAxis(m_constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT)>= 0.05){
       m_colorWheelRightCommand.schedule();
       System.out.print("Right trigger pressed, Color Wheel turning Right");
+    }
+    if(manipulatorController.getRawButton(m_constants.MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND)) {
+      m_colorWheelExtendCommand.schedule();
+      System.out.print(" left manipulator button pressed, extending color wheel");
+    }
+    if(manipulatorController.getRawButton(m_constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT)) {
+      m_colorWheelRetractCommand.schedule();
+      System.out.print("right manipulator button pressed, retracting color wheel");
     }
   }
 

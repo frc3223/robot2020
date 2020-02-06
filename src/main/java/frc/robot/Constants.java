@@ -52,12 +52,16 @@ public final class Constants {
 
     public static final int DRIVER_CONTROLLER_WHEEL_EXTEND = 9;//left under-button
     public static final int DRIVER_CONTROLLER_WHEEL_RETRACT = 10;//right under-button
-    public static final int DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT = 2;//left trigger
-    public static final int DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT = 3;//right trigger
+    public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT = 2;//left trigger
+    public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT = 3;//right trigger
 
 
     public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
     public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEELIN = 2;
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEELOUT = 3;
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 4;
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 5;
     //public static final int MANIPULATOR_CONTROLLER_HIGHSHOTSHOOT = ;
     //public static final int MANIPULATOR_CONTROLLER_LOWSHOTSHOOT = ;
 
@@ -66,8 +70,8 @@ public final class Constants {
     public static final int INTAKE_SOLENOID_FORWARDS = 0;
     public static final int INTAKE_SOLENOID_BACKWARDS = 1;
 
-    public static final int COLORWHEEL_SOLENOID_FORWARDS = 13;
-    public static final int COLORWHEEL_SOLENOID_BACkWARDS = 12;
+    public static final int COLORWHEEL_SOLENOID_FORWARDS = 2;
+    public static final int COLORWHEEL_SOLENOID_BACkWARDS = 3;
 
      //~~~~~~~~~~~~~~~~~~~~~~~~ColorWheel!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int COLORWHEEL_MOTOR = 7;

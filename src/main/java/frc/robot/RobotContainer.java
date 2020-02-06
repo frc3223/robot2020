@@ -31,6 +31,8 @@ import frc.robot.commands.IntakeWheelIn;
 import frc.robot.commands.IntakeWheelOut;
 import frc.robot.commands.ColorWheelIn;
 import frc.robot.commands.ColorWheelOut;
+import frc.robot.commands.ColorWheelLower;
+import frc.robot.commands.ColorWheelRaise;
 //buttons imports
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
@@ -70,6 +72,8 @@ public class RobotContainer {
   private final IntakeWheelOut m_intakeBackward;
   private final ColorWheelIn m_colorLeft;
   private final ColorWheelOut m_colorRight;
+  private final ColorWheelLower m_colorRetract;
+  private final ColorWheelRaise m_colorExtend;
    
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -91,8 +95,10 @@ public class RobotContainer {
     m_intakeWheel = new IntakeWheel();
 
     m_colorWheel = new ColorWheel();
-    m_colorLeft = new ColorWheelIn(m_colorWheel,driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_LEFT),driverController);
-    m_colorRight = new ColorWheelOut(m_colorWheel,driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT),driverController);
+    m_colorLeft = new ColorWheelIn(m_colorWheel,manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT),manipulatorController);
+    m_colorRight = new ColorWheelOut(m_colorWheel,manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT),manipulatorController);
+    m_colorExtend = new ColorWheelRaise(m_colorWheel);
+    m_colorRetract = new ColorWheelLower(m_colorWheel);
 
     m_climber = new Climber();
     m_climberUp = new ClimberUp(m_climber, driverController); 
@@ -145,5 +151,11 @@ public class RobotContainer {
   }
   public Command getColorRight(){
     return m_colorRight;
+  }
+  public Command getColorExtend(){
+    return m_colorExtend;
+  }
+  public Command getColorRetract(){
+    return m_colorRetract;
   }
 }

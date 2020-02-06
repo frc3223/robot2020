@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ColorWheelOut extends CommandBase {
   private final ColorWheel m_colorWheel;
   private double speed;
-  private final Joystick driverController;
+  private final Joystick manipController;
   /**
    * Creates a new ColorWheelOut.
    */
-  public ColorWheelOut(ColorWheel colorWheel, double Speed, Joystick DriverController) {
-    driverController = DriverController;
+  public ColorWheelOut(ColorWheel colorWheel, double Speed, Joystick ManipController) {
+    manipController = ManipController;
     m_colorWheel = colorWheel;
     this.speed = Speed;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -41,7 +41,7 @@ public class ColorWheelOut extends CommandBase {
   public void execute() {
     m_colorWheel.WheelSpin(-speed);
 
-    if(driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TRIGGER_WHEEL_ROTATE_RIGHT) <= 0.05){
+    if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT) <= 0.05){
       m_colorWheel.WheelSpin(0.0);
       end(false);
     }
