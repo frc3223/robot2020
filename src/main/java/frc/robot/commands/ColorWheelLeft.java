@@ -1,4 +1,4 @@
-/*----------------------------------------------------------------------------*/
+//*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
@@ -8,40 +8,41 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ColorWheel;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.Joystick;
 
-public class IntakeWheelIn extends CommandBase {
-  Joystick driverController;
-  Intake intake;
-  
+public class ColorWheelLeft extends CommandBase {
+  private final ColorWheel m_colorWheel;
+  private double speed;
+  private final Joystick manipController;
+
   /**
-   * Creates a new IntakeWheelIN.
+   * Creates a new ColorWheelIn.
    */
-  public IntakeWheelIn(Intake Intake, Joystick DriverController) {
-    this.driverController = DriverController;
-    intake = Intake;
+  public ColorWheelLeft(ColorWheel colorWheel, Joystick ManipController) {
+    manipController = ManipController;
+    m_colorWheel = colorWheel;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.intakeMotorForward();
+    m_colorWheel.wheelSpin(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT));
 
-    if(!driverController.getRawButton(5)){
+    if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT) <= 0.05){
+      m_colorWheel.wheelSpin(0.0);
       end(false);
     }
   }
@@ -49,12 +50,11 @@ public class IntakeWheelIn extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.intakeMotorOff();
-  }
 
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

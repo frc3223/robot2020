@@ -17,6 +17,9 @@ package frc.robot;
  */
 public final class Constants {
 
+    public static final int DRIVER_CONTROLLER = 0;
+    public static final int MANIPULATOR_CONTROLLER=0;
+
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 20;
@@ -42,26 +45,26 @@ public final class Constants {
     public static final int DRIVER_CONTROLLER_RIGHT_MOVE_AXIS = 5; //right joystick up down
     public static final int DRIVER_CONTROLLER_RIGHT_ROTATE_AXIS = 4; //right joysick left right
 
-    public static final int DRIVER_CONTROLLER_CLIMBER_DOWN = 1; // A button
-    public static final int DRIVER_CONTROLLER_CLIMBER_UP = 4;//Y button
+    public static final int DRIVER_CONTROLLER_CLIMBER_WINCH_DOWN = 1; // A button
+    public static final int DRIVER_CONTROLLER_CLIMBER_ARM_UP = 4;//Y button
+    public static final int DRIVER_CONTROLLER_CLIMBER_WINCH_UP = 3; //X button
+    public static final int DRIVER_CONTROLLER_CLIMBER_ARM_DOWN = 2; //B button
+
     public static final int DRIVER_CONTROLLER_INTAKE_IN = 3;//X button
     public static final int DRIVER_CONTROLLER_INTAKE_OUT = 2;//B button
 
-    public static final int DRIVER_CONTROLLER_INTAKE_FORWARD = 5;//Left Bumper
-    public static final int DRIVER_CONTROLLER_INTAKE_BACKWARD = 6;// right bumper
+    public static final int DRIVER_CONTROLLER_INTAKE_SHOOT_OUT = 5;//Left Bumper
+    public static final int DRIVER_CONTROLLER_INTAKE_PULL_IN = 6;// right bumper
 
     public static final int DRIVER_CONTROLLER_WHEEL_EXTEND = 9;//left under-button
     public static final int DRIVER_CONTROLLER_WHEEL_RETRACT = 10;//right under-button
+
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT = 2;//left trigger
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT = 3;//right trigger
-
-
-    public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
-    public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEELIN = 2;
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEELOUT = 3;
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 4;
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 5;
+    //public static final int MANIPULATOR_CONTROLLER_LOWSHOTAIM = 1;
+    //public static final int MANIPULATOR_CONTROLLER_HIGHSHOTAIM = 2;
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 5;//left bumper
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 6;//right bumber
     //public static final int MANIPULATOR_CONTROLLER_HIGHSHOTSHOOT = ;
     //public static final int MANIPULATOR_CONTROLLER_LOWSHOTSHOOT = ;
 
@@ -71,7 +74,7 @@ public final class Constants {
     public static final int INTAKE_SOLENOID_BACKWARDS = 1;
 
     public static final int COLORWHEEL_SOLENOID_FORWARDS = 2;
-    public static final int COLORWHEEL_SOLENOID_BACkWARDS = 3;
+    public static final int COLORWHEEL_SOLENOID_BACKWARDS = 3;
 
      //~~~~~~~~~~~~~~~~~~~~~~~~ColorWheel!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int COLORWHEEL_MOTOR = 7;

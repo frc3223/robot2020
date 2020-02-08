@@ -8,34 +8,44 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Climber;
+import frc.robot.Constants;
 
-public class IntakeRaise extends CommandBase {
-  private final Intake m_intake;
+import edu.wpi.first.wpilibj.Joystick;
+
+public class ClimberWinchDown extends CommandBase {
+  public Climber climber;
+  public Joystick driverController;
   /**
-   * Creates a new intakeRaise.
+   * Creates a new ClimberDown.
    */
-  public IntakeRaise(Intake intake) {
-    m_intake = intake;
+  public ClimberWinchDown(Climber climber, Joystick driverController) {
+    this.driverController = driverController;
+    this.climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake);
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.m_intake.intakeRaise();
-    end(false);
+      climber.winchRetract();
+    
+    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_WINCH_DOWN)){
+      end(false);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    climber.winchstop();
   }
 
   // Returns true when the command should end.

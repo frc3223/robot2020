@@ -35,13 +35,14 @@ public void intakeLower() {
   intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
 }
 
-public void intakeMotorForward() {
+public void intakeMotorShootOut() {
   intakeMotor.set(0.75);
 }
 
-public void intakeMotorBackward() {
+public void intakeMotorPullIn() {
   intakeMotor.set(-0.75);
 }
+
 public void intakeMotorOff(){
   intakeMotor.set(0.0);
 }

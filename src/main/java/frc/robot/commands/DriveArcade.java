@@ -45,12 +45,6 @@ public class DriveArcade extends CommandBase {
     double slowMoveSpeed = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_RIGHT_MOVE_AXIS);
     double slowRotateSpeed = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_RIGHT_ROTATE_AXIS);
 
-    
-    System.out.println("moveSpeed: " + moveSpeed);
-    System.out.println("rotateSpeed: " + rotateSpeed);
-    System.out.println("slowMoveSpeed: " + slowMoveSpeed);
-    System.out.println("slowRotateSpeed: " + slowRotateSpeed);
-
 
 
     if(Math.abs(slowMoveSpeed) >= 0.1 || Math.abs(slowRotateSpeed) >= 0.1) {

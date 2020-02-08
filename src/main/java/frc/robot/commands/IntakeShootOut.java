@@ -8,41 +8,38 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorWheel;
-import frc.robot.RobotContainer;
-import frc.robot.Constants;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import frc.robot.Constants;
+import frc.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj.Joystick;
 
-public class ColorWheelOut extends CommandBase {
-  private final ColorWheel m_colorWheel;
-  private double speed;
-  private final Joystick manipController;
+public class IntakeShootOut extends CommandBase {
+  Joystick driverController;
+  Intake intake;
+  
   /**
-   * Creates a new ColorWheelOut.
+   * Creates a new IntakeWheelIN.
    */
-  public ColorWheelOut(ColorWheel colorWheel, double Speed, Joystick ManipController) {
-    manipController = ManipController;
-    m_colorWheel = colorWheel;
-    this.speed = Speed;
+  public IntakeShootOut(Intake intake, Joystick DriverController) {
+    this.driverController = DriverController;
+    this.intake = intake;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(colorWheel);
+    addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheel.WheelSpin(-speed);
+    intake.intakeMotorShootOut();
 
-    if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT) <= 0.05){
-      m_colorWheel.WheelSpin(0.0);
+    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_SHOOT_OUT)){
       end(false);
     }
   }
@@ -50,6 +47,7 @@ public class ColorWheelOut extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.intakeMotorOff();
   }
 
   // Returns true when the command should end.

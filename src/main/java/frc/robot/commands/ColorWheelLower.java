@@ -28,7 +28,7 @@ public class ColorWheelLower extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheel.WheelIn();
+    m_colorWheel.wheelIn();
     end(false);
   }
 

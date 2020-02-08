@@ -29,15 +29,25 @@ public class Climber extends SubsystemBase {
     arm.set(0);
   }
 
+  
+  public void armExtend(){
+    arm.set(1);
+  }
+
+  public void armRetract(){
+    arm.set(-1);
+  }
+
+  public void winchRetract(){
+    winch.set(-1);
+  }
+
+  public void winchExtend(){
+    winch.set(1);
+  }
+
   public void winchstop(){
     winch.set(0);
   }
 
-  public void extend(){
-    arm.set(1);
-  }
-
-  public void retract(){
-    winch.set(-1);
-  }
 }

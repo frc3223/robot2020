@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
-import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
 public class ColorWheel extends SubsystemBase {
@@ -25,22 +24,18 @@ public class ColorWheel extends SubsystemBase {
    */
   public ColorWheel() {
     colorWheelMotor = new CANSparkMax(Constants.COLORWHEEL_MOTOR, MotorType.kBrushless);
-    colorWheelSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.COLORWHEEL_SOLENOID_FORWARDS, Constants.COLORWHEEL_SOLENOID_BACkWARDS);
+    colorWheelSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.COLORWHEEL_SOLENOID_FORWARDS, Constants.COLORWHEEL_SOLENOID_BACKWARDS);
   }
 
-  public void WheelSpin(double Speed){
+  public void wheelSpin(double Speed){
     colorWheelMotor.set(Speed);
   }
 
-  public void WheelOut(){
+  public void wheelOut(){
     colorWheelSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
-  public void WheelIn(){
+  public void wheelIn(){
     colorWheelSolenoid.set(DoubleSolenoid.Value.kReverse);
-  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

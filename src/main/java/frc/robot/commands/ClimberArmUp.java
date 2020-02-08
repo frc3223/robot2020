@@ -8,26 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.Climber;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.Joystick;
 
-public class IntakeWheelOut extends CommandBase {
-  Joystick driverController;
-  Intake intake;
+public class ClimberArmUp extends CommandBase {
+  public Climber climber;
+  public Joystick driverController;
   /**
-   * Creates a new IntakeWheelOut.
+   * Creates a new ClimberUp.
    */
-  public IntakeWheelOut(Intake Intake, Joystick DriverController) {
+  public ClimberArmUp(Climber climber, Joystick driverController) {
+    this.driverController = driverController;
+    this.climber = climber;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.driverController = DriverController;
-    intake = Intake;
-
-    addRequirements(intake);
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
@@ -38,18 +34,17 @@ public class IntakeWheelOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.intakeMotorBackward();
-
-    if(!driverController.getRawButton(6)){
+      climber.armExtend();
+      
+    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_UP)){
       end(false);
     }
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.intakeMotorOff();
+    climber.armstop();
   }
 
   // Returns true when the command should end.

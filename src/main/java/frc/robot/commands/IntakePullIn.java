@@ -8,16 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
-public class IntakeRaise extends CommandBase {
-  private final Intake m_intake;
+import edu.wpi.first.wpilibj.Joystick;
+
+public class IntakePullIn extends CommandBase {
+  Joystick driverController;
+  Intake intake;
   /**
-   * Creates a new intakeRaise.
+   * Creates a new IntakeWheelOut.
    */
-  public IntakeRaise(Intake intake) {
-    m_intake = intake;
+  public IntakePullIn(Intake intake, Joystick DriverController) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.driverController = DriverController;
+    this.intake = intake;
+
     addRequirements(intake);
   }
 
@@ -29,13 +35,18 @@ public class IntakeRaise extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.m_intake.intakeRaise();
-    end(false);
+    intake.intakeMotorPullIn();
+
+    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_PULL_IN)){
+      end(false);
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    intake.intakeMotorOff();
   }
 
   // Returns true when the command should end.

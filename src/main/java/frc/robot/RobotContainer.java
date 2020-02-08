@@ -25,18 +25,18 @@ import edu.wpi.first.wpilibj.Compressor;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
 import frc.robot.commands.IntakeRaise;
-import frc.robot.commands.ClimberDown;
-import frc.robot.commands.ClimberUp;
-import frc.robot.commands.IntakeWheelIn;
-import frc.robot.commands.IntakeWheelOut;
-import frc.robot.commands.ColorWheelIn;
-import frc.robot.commands.ColorWheelOut;
+import frc.robot.commands.ClimberArmDown;
+import frc.robot.commands.ClimberArmUp;
+import frc.robot.commands.ClimberWinchDown;
+import frc.robot.commands.ClimberWinchUp;
+import frc.robot.commands.IntakeShootOut;
+import frc.robot.commands.IntakePullIn;
+import frc.robot.commands.ColorWheelLeft;
+import frc.robot.commands.ColorWheelRight;
 import frc.robot.commands.ColorWheelLower;
 import frc.robot.commands.ColorWheelRaise;
 //buttons imports
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
-import edu.wpi.first.wpilibj.Joystick;
+
 
 //import edu.wpi.first.wpilibj.XboxController; [REDACTED]
 // Robot Container is the new OI, which is setting up buttons, using numbers from Constants, and linking controllers and sensors.
@@ -62,16 +62,18 @@ public class RobotContainer {
   private final ColorWheel m_colorWheel;
 
   private final Climber m_climber;
-  private final ClimberUp m_climberUp;
-  private final ClimberDown m_climberDown;
+  private final ClimberArmUp m_climberArmUp;
+  private final ClimberArmDown m_climberArmDown;
+  private final ClimberWinchDown m_climberWinchDown;
+  private final ClimberWinchUp m_climberWinchUp;
   private final Intake m_intake;
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
   private final Compressor m_compressor;
-  private final IntakeWheelIn m_intakeForward;
-  private final IntakeWheelOut m_intakeBackward;
-  private final ColorWheelIn m_colorLeft;
-  private final ColorWheelOut m_colorRight;
+  private final IntakeShootOut m_intakeShootOut;
+  private final IntakePullIn m_intakePullIn;
+  private final ColorWheelLeft m_colorLeft;
+  private final ColorWheelRight m_colorRight;
   private final ColorWheelLower m_colorRetract;
   private final ColorWheelRaise m_colorExtend;
    
@@ -90,19 +92,21 @@ public class RobotContainer {
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
     m_compressor.setClosedLoopControl(true);
-    m_intakeForward = new IntakeWheelIn(m_intake,driverController);
-    m_intakeBackward = new IntakeWheelOut(m_intake,driverController);
+    m_intakeShootOut = new IntakeShootOut(m_intake,driverController);
+    m_intakePullIn = new IntakePullIn(m_intake,driverController);
     m_intakeWheel = new IntakeWheel();
 
     m_colorWheel = new ColorWheel();
-    m_colorLeft = new ColorWheelIn(m_colorWheel,manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT),manipulatorController);
-    m_colorRight = new ColorWheelOut(m_colorWheel,manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT),manipulatorController);
+    m_colorLeft = new ColorWheelLeft(m_colorWheel,manipulatorController);
+    m_colorRight = new ColorWheelRight(m_colorWheel,manipulatorController);
     m_colorExtend = new ColorWheelRaise(m_colorWheel);
     m_colorRetract = new ColorWheelLower(m_colorWheel);
 
     m_climber = new Climber();
-    m_climberUp = new ClimberUp(m_climber, driverController); 
-    m_climberDown = new ClimberDown(m_climber,driverController); 
+    m_climberArmUp = new ClimberArmUp(m_climber, driverController); 
+    m_climberArmDown = new ClimberArmDown(m_climber,driverController); 
+    m_climberWinchUp = new ClimberWinchUp(m_climber, driverController); 
+    m_climberWinchDown = new ClimberWinchDown(m_climber,driverController); 
   }
 
   /**
@@ -134,17 +138,23 @@ public class RobotContainer {
   public Command getIntakeLower() {
     return m_intakeLower;
   }
-  public Command getClimbUp(){
-    return m_climberUp;
+  public Command getClimbArmUp(){
+    return m_climberArmUp;
   }
-  public Command getClimbDown(){
-    return m_climberDown;
+  public Command getClimbArmDown(){
+    return m_climberArmDown;
   }
-  public Command getIntakeForward(){
-    return m_intakeForward;
+  public Command getClimbWinchUp(){
+    return m_climberWinchUp;
   }
-  public Command getIntakeBackward(){
-    return m_intakeBackward;
+  public Command getClimbWinchDown(){
+    return m_climberWinchDown;
+  }
+  public Command getIntakeShootOut(){
+    return m_intakeShootOut;
+  }
+  public Command getIntakePullIn(){
+    return m_intakePullIn;
   }
   public Command getColorLeft(){
     return m_colorLeft;
