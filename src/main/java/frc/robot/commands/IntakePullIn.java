@@ -37,7 +37,7 @@ public class IntakePullIn extends CommandBase {
   public void execute() {
     intake.intakeMotorPullIn();
 
-    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_PULL_IN)){
+    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
       end(false);
     }
 

@@ -8,22 +8,23 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorWheel;
 import frc.robot.Constants;
+import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class ColorWheelRight extends CommandBase {
-  private final ColorWheel m_colorWheel;
-  private final Joystick manipController;
+public class HopperShootOut extends CommandBase {
+  Joystick driverController;
+  Shooter shooter;
   /**
-   * Creates a new ColorWheelOut.
+   * Creates a new IntakeWheelOut.
    */
-  public ColorWheelRight(ColorWheel colorWheel, Joystick ManipController) {
-    manipController = ManipController;
-    m_colorWheel = colorWheel;
+  public HopperShootOut(Shooter shooter, Joystick DriverController) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(colorWheel);
+    this.driverController = DriverController;
+    this.shooter = shooter;
+
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -34,18 +35,18 @@ public class ColorWheelRight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheel.wheelSpin(-1 * manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
-    System.out.println("ColorWheelRight value is: " + -1 * manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
-    if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT) <= 0.05){
-      System.out.println("stopping Color Wheel");
+    shooter.hopperShootOut();
+
+    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_HOPPER_OUT)){
       end(false);
     }
+
   }
 
-  // Called once the command ends or is interrupted.
+  // Called once the command ends or is interrupted.s
   @Override
   public void end(boolean interrupted) {
-    m_colorWheel.wheelSpinStop();
+    shooter.hopperMotorOff();
   }
 
   // Returns true when the command should end.

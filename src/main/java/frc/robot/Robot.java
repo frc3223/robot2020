@@ -52,9 +52,10 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    
     driverController = new Joystick(Constants.DRIVER_CONTROLLER);
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
+    m_robotContainer = new RobotContainer(driverController , manipulatorController);
 
     System.out.println("Robot is now online.");
 
@@ -155,32 +156,30 @@ public class Robot extends TimedRobot {
       m_climbWinchUpCommand.schedule();
     }
     
-    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_IN)){
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_RAISE)){
       m_intakeRaiseCommand.schedule();
-      System.out.println("Intake In,pneumatics, the X button was pushed");
     }
-    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_OUT)){
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_LOWER)){
       m_intakeLowerCommand.schedule();
-      System.out.println("Intake Out,pneumatics, the B button was pushed");
     }
-    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_SHOOT_OUT) && !m_intakeShootOutCommand.isScheduled()){
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT)){
       m_intakeShootOutCommand.schedule();
     }
-    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_PULL_IN) && !m_intakePullInCommand.isScheduled()){
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
       m_intakePullInCommand.schedule();
     }
     */
-    if(driverController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05){
+    if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
       m_colorWheelLeftCommand.schedule();
-      System.out.println("Left trigger pressed, Color Wheel turning Left");
+      System.out.println("Left trigger pressed, Color Wheel Left");
     }
-    if(driverController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT)>= 0.05){
+    if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT)>= 0.05 ){
       m_colorWheelRightCommand.schedule();
-      System.out.println("Right trigger pressed, Color Wheel turning Right");
+      System.out.println("Right trigger pressed, Color Wheel Right");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND)) {
       m_colorWheelExtendCommand.schedule();
-      System.out.println(" left manipulator button pressed, extending color wheel");
+      System.out.println("left manipulator button pressed, extending color wheel");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT)) {
       m_colorWheelRetractCommand.schedule();

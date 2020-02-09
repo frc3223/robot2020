@@ -31,6 +31,10 @@ public class ColorWheel extends SubsystemBase {
     colorWheelMotor.set(Speed);
   }
 
+  public void wheelSpinStop() {
+    colorWheelMotor.set(0.0);
+  }
+
   public void wheelOut(){
     colorWheelSolenoid.set(DoubleSolenoid.Value.kForward);
   }

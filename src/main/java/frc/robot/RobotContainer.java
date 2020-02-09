@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,8 +16,8 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.IntakeWheel;
 import frc.robot.subsystems.ColorWheel;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
 // commands imports
 import frc.robot.commands.DriveArcade;
@@ -35,6 +33,13 @@ import frc.robot.commands.ColorWheelLeft;
 import frc.robot.commands.ColorWheelRight;
 import frc.robot.commands.ColorWheelLower;
 import frc.robot.commands.ColorWheelRaise;
+import frc.robot.commands.ShooterLower;
+import frc.robot.commands.ShooterRaise;
+import frc.robot.commands.ShooterShootOut;
+import frc.robot.commands.ShooterPullIn;
+import frc.robot.commands.HopperPullIn;
+import frc.robot.commands.HopperShootOut;
+
 //buttons imports
 
 
@@ -48,17 +53,11 @@ import frc.robot.commands.ColorWheelRaise;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  int driverPort;
-  int manipulatorPort;
-
-  public Joystick driverController;
-  public Joystick manipulatorController;
 
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
   private final DriveArcade m_drivearcade;
-  private final IntakeWheel m_intakeWheel;
   private final ColorWheel m_colorWheel;
 
   private final Climber m_climber;
@@ -76,15 +75,21 @@ public class RobotContainer {
   private final ColorWheelRight m_colorRight;
   private final ColorWheelLower m_colorRetract;
   private final ColorWheelRaise m_colorExtend;
+  private final Shooter m_shooter;
+  private final ShooterLower m_shooterLower;
+  private final ShooterRaise m_shooterRaise;
+  private final ShooterShootOut m_shooterShootOut;
+  private final ShooterPullIn m_shooterPullIn;
+  private final HopperPullIn m_hopperPullIn;
+  private final HopperShootOut m_hopperShootOut;
+
+
    
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer() {
+  public RobotContainer(Joystick driverController, Joystick manipulatorController) {
     // Configure the button bindings
-    driverPort = 0;
-    manipulatorPort = 1;
-    configureButtonBindings();
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
     m_intake = new Intake();
@@ -94,7 +99,6 @@ public class RobotContainer {
     m_compressor.setClosedLoopControl(true);
     m_intakeShootOut = new IntakeShootOut(m_intake,driverController);
     m_intakePullIn = new IntakePullIn(m_intake,driverController);
-    m_intakeWheel = new IntakeWheel();
 
     m_colorWheel = new ColorWheel();
     m_colorLeft = new ColorWheelLeft(m_colorWheel,manipulatorController);
@@ -107,6 +111,15 @@ public class RobotContainer {
     m_climberArmDown = new ClimberArmDown(m_climber,driverController); 
     m_climberWinchUp = new ClimberWinchUp(m_climber, driverController); 
     m_climberWinchDown = new ClimberWinchDown(m_climber,driverController); 
+
+    m_shooter = new Shooter();
+    m_shooterLower = new ShooterLower(m_shooter);
+    m_shooterRaise = new ShooterRaise(m_shooter);
+    m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
+    m_shooterPullIn = new ShooterPullIn(m_shooter, driverController);
+    m_hopperPullIn = new HopperPullIn(m_shooter, driverController);
+    m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
+
   }
 
   /**
@@ -115,10 +128,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-    driverController = new Joystick(driverPort);
-    manipulatorController = new Joystick(manipulatorPort);
-  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -167,5 +176,24 @@ public class RobotContainer {
   }
   public Command getColorRetract(){
     return m_colorRetract;
+  }
+  public Command getShooterLower(){
+    return m_shooterLower;
+  }
+  public Command getShooterRaise(){
+    return m_shooterRaise;
+  }
+  public Command getShooterPullIn(){
+    return m_shooterPullIn;
+  }
+  public Command getShooterShootOut(){
+    return m_shooterShootOut;
+  }
+  
+  public Command getHopperPullIn(){
+    return m_hopperPullIn;
+  }
+  public Command getHopperShootOut(){
+    return m_hopperShootOut;
   }
 }

@@ -39,7 +39,7 @@ public class IntakeShootOut extends CommandBase {
   public void execute() {
     intake.intakeMotorShootOut();
 
-    if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_INTAKE_SHOOT_OUT)){
+    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT)){
       end(false);
     }
   }
