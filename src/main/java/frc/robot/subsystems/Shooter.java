@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
     hopperMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
     ShootSpeed = 1; /* the thing about ShootSpeed is that we are using a button to control the shooter, so by defenition, we cannot have a passed in variable for the motor value.
     If we were to change this, then we need to do a whole makeover of the two shooting commands, robot and robotcontainer,  as well as this subsystem. thanks for your time.  */
-    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.INTAKE_SOLENOID_FORWARDS, Constants.INTAKE_SOLENOID_BACKWARDS);
+    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.SHOOTER_SOLENOID_FORWARDS, Constants.SHOOTER_SOLENOID_BACKWARDS);
   }
   //Left and right motors are talons 
 

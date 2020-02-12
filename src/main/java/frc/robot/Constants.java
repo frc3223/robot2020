@@ -90,6 +90,9 @@ public final class Constants {
 
     public static final int COLORWHEEL_SOLENOID_FORWARDS = 2;
     public static final int COLORWHEEL_SOLENOID_BACKWARDS = 3;
+
+    public static final int SHOOTER_SOLENOID_FORWARDS = 4;
+    public static final int SHOOTER_SOLENOID_BACKWARDS = 5;
     
 
 }
