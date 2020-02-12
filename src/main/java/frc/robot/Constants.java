@@ -54,7 +54,7 @@ public final class Constants {
     public static final int DRIVER_CONTROLLER_CLIMBER_ARM_DOWN = 1; //A button
     
 
-    //Manipulator Controller
+    //Manipulator Controller~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
     //Intake pneumatics
     public static final int MANIPULATOR_CONTROLLER_INTAKE_RAISE = 4;//Y button
     public static final int MANIPULATOR_CONTROLLER_INTAKE_LOWER = 2;//B button
@@ -63,14 +63,13 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT = 6;//Right Bumper
     public static final int MANIPULATOR_CONTROLLER_INTAKE_PULL_IN = 5;// Left bumper
 
-
     //Colorwheel spin
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT = 2;//left trigger
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT = 3;//right trigger
 
     //Colorwheel pneumatics
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 5;//left bumper CHANGE TO back button left
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 6;//right bumber CHANGE TO back button right
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 9;//back button left
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 10;// back button right
 
     //Shooter wheel
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT = 3; //X button
@@ -79,10 +78,10 @@ public final class Constants {
     //Shooter 
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 1; //(CHANGE TO dpad up)
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOWER = 1; //CHANGE TO dpad down)
-    //Manipulator or driveerrrrrrrrr
+    //Manipulator or driver
     
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_IN = 222122122;
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 2932;
+    public static final int MANIPULATOR_CONTROLLER_HOPPER_IN = 222122122;// dpad left
+    public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 2932;//dpad right
 
     //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;
