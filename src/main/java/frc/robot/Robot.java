@@ -39,6 +39,14 @@ public class Robot extends TimedRobot {
   private Command m_colorWheelExtendCommand;
   private Command m_colorWheelRetractCommand;
 
+  private Command m_shooterRaiseCommand;
+  private Command m_shooterShootOutCommand;
+  private Command m_shooterPullInCommand;
+  private Command m_shooterLowerCommand;
+  private Command m_hopperPullInCommand;
+  private Command m_hopperShootOutCommand;
+  
+
   public static RobotContainer m_robotContainer = null;
 
   public Joystick driverController;
@@ -129,16 +137,26 @@ public class Robot extends TimedRobot {
     
     m_intakeLowerCommand = m_robotContainer.getIntakeLower();
     m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
+
     m_climbArmUpCommand = m_robotContainer.getClimbArmUp();
     m_climbArmDownCommand = m_robotContainer.getClimbArmDown();
     m_climbWinchUpCommand = m_robotContainer.getClimbWinchUp();
     m_climbWinchDownCommand = m_robotContainer.getClimbWinchDown();
+
     m_intakePullInCommand = m_robotContainer.getIntakePullIn();
     m_intakeShootOutCommand = m_robotContainer.getIntakeShootOut();
+
     m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
     m_colorWheelExtendCommand = m_robotContainer.getColorExtend();
     m_colorWheelRetractCommand = m_robotContainer.getColorRetract();
+
+    m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
+    m_shooterLowerCommand = m_robotContainer.getShooterRaise();
+    m_shooterShootOutCommand = m_robotContainer.getShooterShootOut();
+    m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
+    m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
+    m_hopperShootOutCommand = m_robotContainer.getHopperShootOut();
     
   }
   @Override
@@ -179,11 +197,38 @@ public class Robot extends TimedRobot {
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND)) {
       m_colorWheelExtendCommand.schedule();
-      System.out.println("left manipulator button pressed, extending color wheel");
+      System.out.println("left manipulator back button pressed, extending color wheel");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT)) {
       m_colorWheelRetractCommand.schedule();
-      System.out.println("right manipulator button pressed, retracting color wheel");
+      System.out.println("right manipulator back button pressed, retracting color wheel");
+    }
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT)) {
+      m_shooterShootOutCommand.schedule();
+      System.out.println("Shoot out(X) button pressed, shooter motor spinning out");
+    }
+    if(manipulatorController.getPOV() == 0){
+      m_shooterRaiseCommand.schedule();
+      System.out.println("Up POV pressed, should be raising the shooter");
+    }
+    if(manipulatorController.getPOV() == 180){
+    m_shooterLowerCommand.schedule();
+    System.out.println("Down POV pressed, should be lowering the shooter");
+    }
+    if(manipulatorController.getPOV() == 90){
+      m_hopperShootOutCommand.schedule();
+      System.out.println("Right POV pressed, should be shooting the hopper out");
+    }
+    if(manipulatorController.getPOV() == 270){
+      m_hopperPullInCommand.schedule();
+      System.out.println("Left POV pressed, should be pulling the hopper in");
+    }
+    
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN)){
+      m_shooterPullInCommand.schedule();
+    }
+  if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT)){
+      m_shooterShootOutCommand.schedule();
     }
   }
 

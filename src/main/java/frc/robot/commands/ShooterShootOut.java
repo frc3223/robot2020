@@ -37,8 +37,7 @@ public class ShooterShootOut extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() { 
-      double shootSpeed = 1.0;
-      shooter.shooterMotorShootOut(shootSpeed);
+      shooter.shooterMotorShootOut();
   
       if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT)){
         end(false);

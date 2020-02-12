@@ -37,8 +37,7 @@ public class ShooterPullIn extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() { 
-      double shootSpeed = 1.0;
-      shooter.shooterMotorPullIn(shootSpeed);
+      shooter.shooterMotorPullIn();
   
       if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN)){
         end(false);
