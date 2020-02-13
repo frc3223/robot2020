@@ -34,8 +34,8 @@ public class ColorWheelRight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_colorWheel.wheelSpin(-manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
-    System.out.println("ColorWheelRight value is: " + -manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
+    m_colorWheel.wheelSpin(-1 *manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
+    System.out.println("ColorWheelRight value is: " + -1 *manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT));
     if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT) <= 0.05){
       System.out.println("stopping Color Wheel");
       end(false);
