@@ -29,7 +29,7 @@ public class ColorWheelLower extends CommandBase {
   @Override
   public void execute() {
     m_colorWheel.wheelIn();
-    end(false);
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +40,6 @@ public class ColorWheelLower extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

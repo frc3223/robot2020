@@ -18,7 +18,7 @@ package frc.robot;
 public final class Constants {
 
     public static final int DRIVER_CONTROLLER = 0;
-    public static final int MANIPULATOR_CONTROLLER = 1;
+    public static final int MANIPULATOR_CONTROLLER = 0;// 0 for testing purposes REMEMBER TO CHANGE BACK TO 1 EVENTUALLY
 
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
@@ -76,12 +76,10 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN = 1; // A button
 
     //Shooter 
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 1; //(CHANGE TO dpad up)
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOWER = 1; //CHANGE TO dpad down)
-    //Manipulator or driver
-    
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_IN = 222122122;// dpad left
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 2932;//dpad right
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 000; //dpad up
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOWER = 000; // dpad down 
+    public static final int MANIPULATOR_CONTROLLER_HOPPER_IN  = 000;// dpad left
+    public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 000;//dpad right
 
     //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;

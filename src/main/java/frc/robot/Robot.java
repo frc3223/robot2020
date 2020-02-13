@@ -161,7 +161,9 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void teleopPeriodic(){
-  /*  if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
+
+  /* REMEMBER TO UNCOMMENT THIS WHEN TESTING THE ENTIRE ROBOT 
+  if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
       m_climbArmDownCommand.schedule();
     }
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_UP)){
@@ -173,18 +175,22 @@ public class Robot extends TimedRobot {
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_WINCH_UP)){
       m_climbWinchUpCommand.schedule();
     }
-    
+     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_RAISE)){
       m_intakeRaiseCommand.schedule();
+      System.out.println("the Y button was pressed, intake raising");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_LOWER)){
       m_intakeLowerCommand.schedule();
+      System.out.println("the B button was pressed, intake lowering");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT)){
       m_intakeShootOutCommand.schedule();
+      System.out.println("Right bumper was pressed, intake shooting out");
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
       m_intakePullInCommand.schedule();
+      System.out.println("Left bumber was pressed, intake pulling in");
     }
     */
     if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
@@ -226,9 +232,7 @@ public class Robot extends TimedRobot {
     
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN)){
       m_shooterPullInCommand.schedule();
-    }
-  if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT)){
-      m_shooterShootOutCommand.schedule();
+      System.out.println("the A button was pressed, the shooter should be pulling in");
     }
   }
 

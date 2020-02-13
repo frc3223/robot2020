@@ -189,7 +189,6 @@ public class RobotContainer {
   public Command getShooterShootOut(){
     return m_shooterShootOut;
   }
-  
   public Command getHopperPullIn(){
     return m_hopperPullIn;
   }
