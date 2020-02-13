@@ -39,7 +39,7 @@ public class ShooterPullIn extends CommandBase {
     public void execute() { 
       shooter.shooterMotorPullIn();
   
-      if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN)){
+      if(driverController.getPOV() != 180){
         this.shooter.shooterMotorsOff();
         end(false);
       }

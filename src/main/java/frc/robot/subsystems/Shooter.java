@@ -17,7 +17,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
-
 public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shooterLeftMotor;
   public WPI_TalonSRX shooterRightMotor;

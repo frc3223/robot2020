@@ -38,7 +38,6 @@ public class IntakeShootOut extends CommandBase {
   @Override
   public void execute() {
     intake.intakeMotorShootOut();
-
     if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT)){
       end(false);
     }

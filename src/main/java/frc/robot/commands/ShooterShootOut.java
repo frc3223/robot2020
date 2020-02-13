@@ -39,7 +39,7 @@ public class ShooterShootOut extends CommandBase {
     public void execute() { 
       shooter.shooterMotorShootOut();
   
-      if(driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT) == false){
+      if(driverController.getPOV() != 0){
         this.shooter.shooterMotorsOff();
         end(false);
       }

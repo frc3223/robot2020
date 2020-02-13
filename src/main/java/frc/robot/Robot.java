@@ -12,10 +12,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
-// does not exist --import edu.wpi.first.wpilibj.buttons.Button;
 
 import edu.wpi.first.wpilibj.Joystick;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -63,10 +61,9 @@ public class Robot extends TimedRobot {
     
     driverController = new Joystick(Constants.DRIVER_CONTROLLER);
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
-    m_robotContainer = new RobotContainer(driverController , manipulatorController);
+    m_robotContainer = new RobotContainer(driverController, manipulatorController);
 
     System.out.println("Robot is now online.");
-
   }
 
   /**
@@ -162,7 +159,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic(){
 
-  /* REMEMBER TO UNCOMMENT THIS WHEN TESTING THE ENTIRE ROBOT 
+  // REMEMBER TO UNCOMMENT THIS WHEN TESTING THE ENTIRE ROBOT 
   if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
       m_climbArmDownCommand.schedule();
     }
@@ -192,7 +189,7 @@ public class Robot extends TimedRobot {
       m_intakePullInCommand.schedule();
       System.out.println("Left bumber was pressed, intake pulling in");
     }
-    */
+    
     if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
       m_colorWheelLeftCommand.schedule();
       System.out.println("Left trigger pressed, Color Wheel Left");
@@ -209,16 +206,16 @@ public class Robot extends TimedRobot {
       m_colorWheelRetractCommand.schedule();
       System.out.println("right manipulator back button pressed, retracting color wheel");
     }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_SHOOT_OUT)) {
-      m_shooterShootOutCommand.schedule();
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
+      m_shooterRaiseCommand.schedule();
       System.out.println("Shoot out(X) button pressed, shooter motor spinning out");
     }
     if(manipulatorController.getPOV() == 0){
-      m_shooterRaiseCommand.schedule();
+      m_shooterShootOutCommand.schedule();
       System.out.println("Up POV pressed, should be raising the shooter");
     }
     if(manipulatorController.getPOV() == 180){
-    m_shooterLowerCommand.schedule();
+      m_shooterPullInCommand.schedule();
     System.out.println("Down POV pressed, should be lowering the shooter");
     }
     if(manipulatorController.getPOV() == 90){
@@ -230,8 +227,8 @@ public class Robot extends TimedRobot {
       System.out.println("Left POV pressed, should be pulling the hopper in");
     }
     
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_PULL_IN)){
-      m_shooterPullInCommand.schedule();
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOWER)){
+      m_shooterLowerCommand.schedule();
       System.out.println("the A button was pressed, the shooter should be pulling in");
     }
   }
