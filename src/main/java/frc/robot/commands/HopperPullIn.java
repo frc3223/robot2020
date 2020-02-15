@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class HopperPullIn extends CommandBase {
   Joystick driverController;
   Shooter shooter;
+  boolean isDone; 
   /**
    * Creates a new IntakeWheelOut.
    */
@@ -29,15 +30,16 @@ public class HopperPullIn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    shooter.hopperPullIn();
+    isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.hopperPullIn();
-
     if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_HOPPER_IN)){
       end(false);
+      isDone = true;
     }
 
   }
@@ -51,6 +53,6 @@ public class HopperPullIn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

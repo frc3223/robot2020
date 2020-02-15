@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ClimberArmUp extends CommandBase {
   public Climber climber;
   public Joystick driverController;
+  public boolean isDone;
   /**
    * Creates a new ClimberUp.
    */
@@ -29,15 +30,16 @@ public class ClimberArmUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    climber.armExtend();
+    isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      climber.armExtend();
-      
     if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_UP)){
       end(false);
+      isDone = true;
     }
   }
 
@@ -50,6 +52,6 @@ public class ClimberArmUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

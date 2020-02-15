@@ -14,14 +14,15 @@ import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class IntakePullIn extends CommandBase {
-  Joystick driverController;
+  Joystick manipulatorController;
   Intake intake;
+  boolean isDone;
   /**
    * Creates a new IntakeWheelOut.
    */
-  public IntakePullIn(Intake intake, Joystick DriverController) {
+  public IntakePullIn(Intake intake, Joystick manipulatorController) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.driverController = DriverController;
+    this.manipulatorController = manipulatorController;
     this.intake = intake;
 
     addRequirements(intake);
@@ -30,15 +31,16 @@ public class IntakePullIn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    intake.intakeMotorPullIn();
+    isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.intakeMotorPullIn();
-
-    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
+    if(!manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
       end(false);
+      isDone = true;
     }
 
   }
@@ -52,6 +54,6 @@ public class IntakePullIn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

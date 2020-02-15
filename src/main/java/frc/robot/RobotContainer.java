@@ -18,7 +18,9 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ColorWheel;
 import frc.robot.subsystems.Shooter;
+// Misc.
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.AnalogInput;
 // commands imports
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
@@ -29,6 +31,7 @@ import frc.robot.commands.ClimberWinchDown;
 import frc.robot.commands.ClimberWinchUp;
 import frc.robot.commands.IntakeShootOut;
 import frc.robot.commands.IntakePullIn;
+import frc.robot.commands.IntakeAutoLower;
 import frc.robot.commands.ColorWheelLeft;
 import frc.robot.commands.ColorWheelRight;
 import frc.robot.commands.ColorWheelLower;
@@ -68,13 +71,14 @@ public class RobotContainer {
   private final Intake m_intake;
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
+  private final IntakeAutoLower m_intakeAutoLower;
   private final Compressor m_compressor;
   private final IntakeShootOut m_intakeShootOut;
   private final IntakePullIn m_intakePullIn;
   private final ColorWheelLeft m_colorLeft;
   private final ColorWheelRight m_colorRight;
-  private final ColorWheelLower m_colorRetract;
-  private final ColorWheelRaise m_colorExtend;
+  private final ColorWheelLower m_colorLower;
+  private final ColorWheelRaise m_colorRaise;
   private final Shooter m_shooter;
   private final ShooterLower m_shooterLower;
   private final ShooterRaise m_shooterRaise;
@@ -82,6 +86,9 @@ public class RobotContainer {
   private final ShooterPullIn m_shooterPullIn;
   private final HopperPullIn m_hopperPullIn;
   private final HopperShootOut m_hopperShootOut;
+  private final AnalogInput m_wideSonar;
+  private final AnalogInput m_narrowSonar;
+  
 
 
    
@@ -97,14 +104,15 @@ public class RobotContainer {
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
     m_compressor.setClosedLoopControl(true);
-    m_intakeShootOut = new IntakeShootOut(m_intake,driverController);
-    m_intakePullIn = new IntakePullIn(m_intake,driverController);
+    m_intakeShootOut = new IntakeShootOut(m_intake,manipulatorController);
+    m_intakePullIn = new IntakePullIn(m_intake,manipulatorController);
+    m_intakeAutoLower = new IntakeAutoLower(m_intake, manipulatorController);
 
     m_colorWheel = new ColorWheel();
     m_colorLeft = new ColorWheelLeft(m_colorWheel,manipulatorController);
     m_colorRight = new ColorWheelRight(m_colorWheel,manipulatorController);
-    m_colorExtend = new ColorWheelRaise(m_colorWheel);
-    m_colorRetract = new ColorWheelLower(m_colorWheel);
+    m_colorRaise = new ColorWheelRaise(m_colorWheel);
+    m_colorLower = new ColorWheelLower(m_colorWheel);
 
     m_climber = new Climber();
     m_climberArmUp = new ClimberArmUp(m_climber, driverController); 
@@ -112,7 +120,10 @@ public class RobotContainer {
     m_climberWinchUp = new ClimberWinchUp(m_climber, driverController); 
     m_climberWinchDown = new ClimberWinchDown(m_climber,driverController); 
 
-    m_shooter = new Shooter();
+    m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
+    m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
+
+    m_shooter = new Shooter(m_wideSonar, m_narrowSonar );
     m_shooterLower = new ShooterLower(m_shooter);
     m_shooterRaise = new ShooterRaise(m_shooter);
     m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
@@ -165,17 +176,20 @@ public class RobotContainer {
   public Command getIntakePullIn(){
     return m_intakePullIn;
   }
+  public Command getIntakeAutoLower(){
+    return m_intakeAutoLower;
+  }
   public Command getColorLeft(){
     return m_colorLeft;
   }
   public Command getColorRight(){
     return m_colorRight;
   }
-  public Command getColorExtend(){
-    return m_colorExtend;
+  public Command getColorRaise(){
+    return m_colorRaise;
   }
-  public Command getColorRetract(){
-    return m_colorRetract;
+  public Command getColorLower(){
+    return m_colorLower;
   }
   public Command getShooterLower(){
     return m_shooterLower;

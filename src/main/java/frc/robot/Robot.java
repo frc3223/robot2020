@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
 
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -32,10 +33,11 @@ public class Robot extends TimedRobot {
   private Command m_climbWinchDownCommand;
   private Command m_intakeShootOutCommand;
   private Command m_intakePullInCommand;
+  private Command m_intakeAutoLowerCommand;
   private Command m_colorWheelLeftCommand;
   private Command m_colorWheelRightCommand;
-  private Command m_colorWheelExtendCommand;
-  private Command m_colorWheelRetractCommand;
+  private Command m_colorWheelRaiseCommand;
+  private Command m_colorWheelLowerCommand;
 
   private Command m_shooterRaiseCommand;
   private Command m_shooterShootOutCommand;
@@ -49,6 +51,7 @@ public class Robot extends TimedRobot {
 
   public Joystick driverController;
   public Joystick manipulatorController;
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -62,8 +65,11 @@ public class Robot extends TimedRobot {
     driverController = new Joystick(Constants.DRIVER_CONTROLLER);
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
     m_robotContainer = new RobotContainer(driverController, manipulatorController);
+    
 
     System.out.println("Robot is now online.");
+
+    
   }
 
   /**
@@ -143,10 +149,12 @@ public class Robot extends TimedRobot {
     m_intakePullInCommand = m_robotContainer.getIntakePullIn();
     m_intakeShootOutCommand = m_robotContainer.getIntakeShootOut();
 
+    m_intakeAutoLowerCommand = m_robotContainer.getIntakeAutoLower();
+
     m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
-    m_colorWheelExtendCommand = m_robotContainer.getColorExtend();
-    m_colorWheelRetractCommand = m_robotContainer.getColorRetract();
+    m_colorWheelRaiseCommand = m_robotContainer.getColorRaise();
+    m_colorWheelLowerCommand = m_robotContainer.getColorLower();
 
     m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
     m_shooterLowerCommand = m_robotContainer.getShooterRaise();
@@ -160,7 +168,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic(){
 
   // REMEMBER TO UNCOMMENT THIS WHEN TESTING THE ENTIRE ROBOT 
-  if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
+    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
       m_climbArmDownCommand.schedule();
     }
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_UP)){
@@ -172,8 +180,10 @@ public class Robot extends TimedRobot {
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_WINCH_UP)){
       m_climbWinchUpCommand.schedule();
     }
+
+    
      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_RAISE)){
+    /*if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_RAISE)){
       m_intakeRaiseCommand.schedule();
       System.out.println("the Y button was pressed, intake raising");
     }
@@ -187,10 +197,13 @@ public class Robot extends TimedRobot {
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
       m_intakePullInCommand.schedule();
-      System.out.println("Left bumber was pressed, intake pulling in");
+      System.out.println("Left bumper was pressed, intake pulling in");
+    }*/
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
+      m_intakeAutoLowerCommand.schedule();
     }
     
-    if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
+    /*if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
       m_colorWheelLeftCommand.schedule();
       System.out.println("Left trigger pressed, Color Wheel Left");
     }
@@ -198,14 +211,22 @@ public class Robot extends TimedRobot {
       m_colorWheelRightCommand.schedule();
       System.out.println("Right trigger pressed, Color Wheel Right");
     }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND)) {
-      m_colorWheelExtendCommand.schedule();
-      System.out.println("left manipulator back button pressed, extending color wheel");
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_Raise)) {
+      m_colorWheelRaiseCommand.schedule();
+      System.out.println("left manipulator back button pressed, Raiseing color wheel");
     }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT)) {
-      m_colorWheelRetractCommand.schedule();
-      System.out.println("right manipulator back button pressed, retracting color wheel");
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_Lower)) {
+      m_colorWheelLowerCommand.schedule();
+      System.out.println("right manipulator back button pressed, Lowering color wheel");
     }
+    */
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RAISE)) {
+      m_colorWheelRaiseCommand.schedule();
+    }
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN)) {
+
+    }
+
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
       m_shooterRaiseCommand.schedule();
       System.out.println("Shoot out(X) button pressed, shooter motor spinning out");

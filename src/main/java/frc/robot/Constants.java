@@ -63,13 +63,19 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT = 6;//Right Bumper
     public static final int MANIPULATOR_CONTROLLER_INTAKE_PULL_IN = 5;// Left bumper
 
+    //Intake auto
+    public static final int MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER = 6;//Right Bumper
+
     //Colorwheel spin
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT = 2;//left trigger
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT = 3;//right trigger
 
     //Colorwheel pneumatics
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_EXTEND = 9;//back button left
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RETRACT = 10;// back button right
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_RAISE = 9;//back button left
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_LOWER = 10;// back button right
+
+    //Colorwheel Auto
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN = 4;//Y button
 
     //Shooter wheel
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 3; //X button
@@ -92,5 +98,8 @@ public final class Constants {
     public static final int SHOOTER_SOLENOID_FORWARDS = 4;
     public static final int SHOOTER_SOLENOID_BACKWARDS = 5;
     
-
+    /* Ultrasonic Sonars */
+    public static final int SONAR_WIDE = 0;
+    public static final int SONAR_NARROW = 1;
+    public static final int SONAR_OVERSAMPLE_COUNT = 2;
 }

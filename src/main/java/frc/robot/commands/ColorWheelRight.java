@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ColorWheelRight extends CommandBase {
   private final ColorWheel m_colorWheel;
   private final Joystick manipController;
+  public boolean isDone; 
   /**
    * Creates a new ColorWheelOut.
    */
@@ -29,6 +30,7 @@ public class ColorWheelRight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,6 +41,7 @@ public class ColorWheelRight extends CommandBase {
     if(manipController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT) <= 0.05){
       System.out.println("stopping Color Wheel");
       end(false);
+      isDone = true;
     }
   }
 
@@ -51,6 +54,6 @@ public class ColorWheelRight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

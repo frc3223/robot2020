@@ -29,18 +29,18 @@ public class Intake extends SubsystemBase {
 
   }
 public void intakeRaise() {
-   intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+   intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
 }
 public void intakeLower() {
-  intakeSolenoid.set(DoubleSolenoid.Value.kReverse);
+  intakeSolenoid.set(DoubleSolenoid.Value.kForward);
 }
 
 public void intakeMotorShootOut() {
-  intakeMotor.set(0.75);
+  intakeMotor.set(1.0);
 }
 
 public void intakeMotorPullIn() {
-  intakeMotor.set(-0.75);
+  intakeMotor.set(-1.0);
 }
 
 public void intakeMotorOff(){

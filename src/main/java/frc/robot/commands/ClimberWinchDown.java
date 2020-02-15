@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ClimberWinchDown extends CommandBase {
   public Climber climber;
   public Joystick driverController;
+  public boolean isDone;
   /**
    * Creates a new ClimberDown.
    */
@@ -29,16 +30,16 @@ public class ClimberWinchDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    climber.winchRetract();
+    isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      climber.winchRetract();
-    
     if(!driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_WINCH_DOWN)){
       end(false);
+      isDone = true;
     }
   }
 
@@ -51,6 +52,6 @@ public class ClimberWinchDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return isDone;
   }
 }

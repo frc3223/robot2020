@@ -8,52 +8,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.Joystick;
-
-public class HopperShootOut extends CommandBase {
-  Joystick driverController;
-  Shooter shooter;
-  boolean isDone;
+public class ColorwheelAutoSpin extends CommandBase {
   /**
-   * Creates a new IntakeWheelOut.
+   * Creates a new ColorwheelAutoSpin.
    */
-  public HopperShootOut(Shooter shooter, Joystick DriverController) {
+  public ColorwheelAutoSpin() {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.driverController = DriverController;
-    this.shooter = shooter;
-
-    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isDone = false;
-    shooter.hopperShootOut();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_HOPPER_OUT)){
-      end(false);
-      isDone = true;
-    }
-
   }
 
-  // Called once the command ends or is interrupted.s
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.hopperMotorOff();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isDone;
+    return false;
   }
 }

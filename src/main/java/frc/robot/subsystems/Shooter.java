@@ -13,9 +13,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 import frc.robot.RobotContainer;
 import frc.robot.Constants;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shooterLeftMotor;
@@ -24,19 +29,36 @@ public class Shooter extends SubsystemBase {
 
   public DoubleSolenoid shooterSolenoid;
 
+  public NetworkTableEntry yaw;
+  public NetworkTableEntry isDriverMode;
+
+  private AnalogInput m_wideSonar;
+  private AnalogInput m_narrowSonar;
+
   public static double ShootSpeed;
 
   /**
    * Creates a new Shooter.
    */
-  public Shooter() {
+  public Shooter(AnalogInput wide, AnalogInput narrow) {
     shooterLeftMotor = new WPI_TalonSRX(Constants.SHOOTER_LEFT_MOTOR);
     shooterRightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR);
     hopperMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
     ShootSpeed = 1; /* the thing about ShootSpeed is that we are using a button to control the shooter, so by defenition, we cannot have a passed in variable for the motor value.
     If we were to change this, then we need to do a whole makeover of the two shooting commands, robot and robotcontainer,  as well as this subsystem. thanks for your time.  */
     shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.SHOOTER_SOLENOID_FORWARDS, Constants.SHOOTER_SOLENOID_BACKWARDS);
+  
+    m_wideSonar = wide;
+    m_narrowSonar = narrow;
   }
+
+  /**
+   * 1. Configure our sensors (oversample, etc.)
+   * 2. Create functions we want sensors to do
+   *      - getDistance()
+   *      - getPinpointDistance()/getNarrowDistance()
+   */
+
   //Left and right motors are talons 
 
   public void shooterMotorShootOut(){
