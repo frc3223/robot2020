@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 //subsystems imports
+//change this to:
+//import frc.robot.subsystems;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
@@ -22,6 +24,8 @@ import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.AnalogInput;
 // commands imports
+//change this to:
+//import frc.robot.commands;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.IntakeLower;
 import frc.robot.commands.IntakeRaise;

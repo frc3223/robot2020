@@ -17,8 +17,15 @@ package frc.robot;
  */
 public final class Constants {
 
+    //~~~~~~~~CONFIGURATION VARIABLES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    //controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int MANIPULATOR_CONTROLLER = 1;// 0 for testing purposes REMEMBER TO CHANGE BACK TO 1 EVENTUALLY
+
+    //user preferences
+    public static final double TANK_DRIVE_SPEED_RATIO = 0.8; //Reduced turning speed for tank drive
+
 
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
@@ -47,6 +54,11 @@ public final class Constants {
     public static final int DRIVER_CONTROLLER_LEFT_ROTATE_AXIS = 0; //left joysick left right
     public static final int DRIVER_CONTROLLER_RIGHT_MOVE_AXIS = 5; //right joystick up down
     public static final int DRIVER_CONTROLLER_RIGHT_ROTATE_AXIS = 4; //right joysick left right
+
+    //Drive tank joysticks
+    public static final int DRIVER_CONTROLLER_TANK_LEFT = 1; //left joystick up down
+    public static final int DRIVER_CONTROLLER_TANK_RIGHT = 5; //right joystick up down
+
     //Climber buttons
     public static final int DRIVER_CONTROLLER_CLIMBER_WINCH_DOWN = 3; //X button
     public static final int DRIVER_CONTROLLER_CLIMBER_ARM_UP = 4;//Y button
