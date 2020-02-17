@@ -7,45 +7,17 @@
 
 package frc.robot;
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
-//subsystems imports
-//change this to:
-//import frc.robot.subsystems;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.ColorWheel;
-import frc.robot.subsystems.Shooter;
+
+import frc.robot.subsystems.*;
+
 // Misc.
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.AnalogInput;
-// commands imports
-//change this to:
-//import frc.robot.commands;
-import frc.robot.commands.DriveArcade;
-import frc.robot.commands.IntakeLower;
-import frc.robot.commands.IntakeRaise;
-import frc.robot.commands.ClimberArmDown;
-import frc.robot.commands.ClimberArmUp;
-import frc.robot.commands.ClimberWinchDown;
-import frc.robot.commands.ClimberWinchUp;
-import frc.robot.commands.IntakeShootOut;
-import frc.robot.commands.IntakePullIn;
-import frc.robot.commands.IntakeAutoLower;
-import frc.robot.commands.ColorWheelLeft;
-import frc.robot.commands.ColorWheelRight;
-import frc.robot.commands.ColorWheelLower;
-import frc.robot.commands.ColorWheelRaise;
-import frc.robot.commands.ShooterLower;
-import frc.robot.commands.ShooterRaise;
-import frc.robot.commands.ShooterShootOut;
-import frc.robot.commands.ShooterPullIn;
-import frc.robot.commands.HopperPullIn;
-import frc.robot.commands.HopperShootOut;
+
+import frc.robot.commands.*;
 
 //buttons imports
 
@@ -64,6 +36,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
+  private final DriveTank m_drivetank;
   private final DriveArcade m_drivearcade;
   private final ColorWheel m_colorWheel;
 
@@ -83,6 +56,8 @@ public class RobotContainer {
   private final ColorWheelRight m_colorRight;
   private final ColorWheelLower m_colorLower;
   private final ColorWheelRaise m_colorRaise;
+  private final ColorwheelAutoSpin m_colorAuto;
+  private final ColorWheelFindColor m_findColor;
   private final Shooter m_shooter;
   private final ShooterLower m_shooterLower;
   private final ShooterRaise m_shooterRaise;
@@ -103,6 +78,7 @@ public class RobotContainer {
     // Configure the button bindings
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
+    m_drivetank = new DriveTank(m_drivetrain, driverController);
     m_intake = new Intake();
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
@@ -117,6 +93,8 @@ public class RobotContainer {
     m_colorRight = new ColorWheelRight(m_colorWheel,manipulatorController);
     m_colorRaise = new ColorWheelRaise(m_colorWheel);
     m_colorLower = new ColorWheelLower(m_colorWheel);
+    m_colorAuto = new ColorwheelAutoSpin(m_colorWheel);
+    m_findColor = new ColorWheelFindColor(m_colorWheel);
 
     m_climber = new Climber();
     m_climberArmUp = new ClimberArmUp(m_climber, driverController); 
@@ -152,6 +130,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+  }
+  public Command getDriveTank() {
+    return m_drivetank;
   }
   public Command getDriveArcade() {
     return m_drivearcade;
@@ -194,6 +175,12 @@ public class RobotContainer {
   }
   public Command getColorLower(){
     return m_colorLower;
+  }
+  public Command getColorAuto(){
+    return m_colorAuto;
+  }
+  public Command getFindColor(){
+    return m_findColor;
   }
   public Command getShooterLower(){
     return m_shooterLower;

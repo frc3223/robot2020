@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
   private Command m_colorWheelRightCommand;
   private Command m_colorWheelRaiseCommand;
   private Command m_colorWheelLowerCommand;
-
+  private Command m_colorAutoCommand;
   private Command m_shooterRaiseCommand;
   private Command m_shooterShootOutCommand;
   private Command m_shooterPullInCommand;
@@ -133,7 +133,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_teleopCommand = m_robotContainer.getDriveArcade();
+    m_teleopCommand = m_robotContainer.getDriveTank();
     if (m_teleopCommand != null) {
       m_teleopCommand.schedule();
     }
@@ -155,6 +155,7 @@ public class Robot extends TimedRobot {
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
     m_colorWheelRaiseCommand = m_robotContainer.getColorRaise();
     m_colorWheelLowerCommand = m_robotContainer.getColorLower();
+    m_colorAutoCommand = m_robotContainer.getColorAuto();
 
     m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
     m_shooterLowerCommand = m_robotContainer.getShooterRaise();
@@ -224,7 +225,7 @@ public class Robot extends TimedRobot {
       m_colorWheelRaiseCommand.schedule();
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN)) {
-
+      m_colorAutoCommand.schedule();
     }
 
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {

@@ -87,7 +87,8 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_LOWER = 10;// back button right
 
     //Colorwheel Auto
-    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN = 4;//Y button
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN = 8;//Start button
+    public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_FIND_COLOR = 4;//Y button
 
     //Shooter wheel
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 3; //X button

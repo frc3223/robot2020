@@ -8,53 +8,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
-import java.lang.Math;
-import frc.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.ColorWheel;
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.DriverStation;
 
-public class DriveTank extends CommandBase {
-
-  private final DriveTrain m_driveTrain;
-  private final Joystick m_driverController;
-
+public class ColorWheelFindColor extends CommandBase {
+  private final ColorWheel m_colorWheel;
+  private String gameData;
+  private Color initialColor;
+  private String initialColorString;
   /**
-   * Creates a new DriveTank.
+   * Creates a new ColorWheelFindColor.
    */
-  public DriveTank(DriveTrain driveTrain, Joystick driverController) {
-    m_driveTrain = driveTrain;
-    m_driverController = driverController;
+  public ColorWheelFindColor(ColorWheel colorWheel) {
+     m_colorWheel = colorWheel;
+    addRequirements(colorWheel);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    initialColor = m_colorWheel.getColor();
+    initialColorString = m_colorWheel.getColorString(initialColor);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_LEFT);
-    double rightStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_RIGHT);
-
-    if(leftStick*rightStick < 0) {
-      //Turning make it slower
-      m_driveTrain.tankDrive(leftStick*Constants.TANK_DRIVE_SPEED_RATIO, rightStick*Constants.TANK_DRIVE_SPEED_RATIO);
-    } else {
-      m_driveTrain.tankDrive(leftStick, rightStick);
-    }
-
-    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_driveTrain.stop();
   }
 
   // Returns true when the command should end.

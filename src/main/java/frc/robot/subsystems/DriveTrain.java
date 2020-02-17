@@ -46,7 +46,7 @@ public void arcadeDrive(double moveSpeed, double rotateSpeed){
 }
 
 public void tankDrive(double leftSpeed, double rightSpeed){
-  differentialDrive.tankDrive(leftSpeed, rightSpeed)
+  differentialDrive.tankDrive(leftSpeed, rightSpeed);
 }
 
 public void moveLeft() {
