@@ -63,6 +63,8 @@ public class RobotContainer {
   private final ShooterRaise m_shooterRaise;
   private final ShooterShootOut m_shooterShootOut;
   private final ShooterPullIn m_shooterPullIn;
+  private final ShooterLowAuto m_shooterLowAuto;
+  private final ShooterHighAuto m_shooterHighAuto;
   private final HopperPullIn m_hopperPullIn;
   private final HopperShootOut m_hopperShootOut;
   private final AnalogInput m_wideSonar;
@@ -105,11 +107,13 @@ public class RobotContainer {
     m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
     m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
 
-    m_shooter = new Shooter(m_wideSonar, m_narrowSonar );
+    m_shooter = new Shooter(m_wideSonar, m_narrowSonar);
     m_shooterLower = new ShooterLower(m_shooter);
     m_shooterRaise = new ShooterRaise(m_shooter);
     m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
     m_shooterPullIn = new ShooterPullIn(m_shooter, driverController);
+    m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_drivetrain);
+    m_shooterHighAuto = new ShooterHighAuto(m_shooter);
     m_hopperPullIn = new HopperPullIn(m_shooter, driverController);
     m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
 
@@ -193,6 +197,12 @@ public class RobotContainer {
   }
   public Command getShooterShootOut(){
     return m_shooterShootOut;
+  }
+  public Command getShooterLowAuto(){
+    return m_shooterLowAuto;
+  }
+  public Command getShooterHighAuto(){
+    return m_shooterHighAuto;
   }
   public Command getHopperPullIn(){
     return m_hopperPullIn;

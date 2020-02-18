@@ -64,6 +64,9 @@ public void moveForward() {
 public void stop() {
   arcadeDrive(0, 0);
 }
+public void moveBackward() {
+  arcadeDrive(0, 1);
+}
 
   @Override
   public void periodic() {

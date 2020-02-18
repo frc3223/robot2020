@@ -45,6 +45,8 @@ public class Robot extends TimedRobot {
   private Command m_shooterLowerCommand;
   private Command m_hopperPullInCommand;
   private Command m_hopperShootOutCommand;
+  private Command m_shooterLowAutoCommand;
+  private Command m_shooterHighAutoCommand;
   
 
   public static RobotContainer m_robotContainer = null;
@@ -161,6 +163,8 @@ public class Robot extends TimedRobot {
     m_shooterLowerCommand = m_robotContainer.getShooterRaise();
     m_shooterShootOutCommand = m_robotContainer.getShooterShootOut();
     m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
+    m_shooterLowAutoCommand = m_robotContainer.getShooterLowAuto();
+    m_shooterHighAutoCommand = m_robotContainer.getShooterHighAuto();
     m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
     m_hopperShootOutCommand = m_robotContainer.getHopperShootOut();
     
@@ -228,7 +232,7 @@ public class Robot extends TimedRobot {
       m_colorAutoCommand.schedule();
     }
 
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
+    /*if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
       m_shooterRaiseCommand.schedule();
       System.out.println("Shoot out(X) button pressed, shooter motor spinning out");
     }
@@ -252,6 +256,9 @@ public class Robot extends TimedRobot {
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOWER)){
       m_shooterLowerCommand.schedule();
       System.out.println("the A button was pressed, the shooter should be pulling in");
+    }*/
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
+      m_shooterHighAutoCommand.schedule();
     }
   }
 

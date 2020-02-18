@@ -99,6 +99,8 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_pull_in = 000; // dpad down 
     public static final int MANIPULATOR_CONTROLLER_HOPPER_IN  = 000;// dpad left
     public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 000;//dpad right
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 1; // A button
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 3; //X button
 
     //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;
@@ -112,7 +114,16 @@ public final class Constants {
     public static final int SHOOTER_SOLENOID_BACKWARDS = 5;
     
     /* Ultrasonic Sonars */
-    public static final int SONAR_WIDE = 0;
-    public static final int SONAR_NARROW = 1;
+    public static final int SONAR_WIDE = 1;
+    public static final int SONAR_NARROW = 0;
     public static final int SONAR_OVERSAMPLE_COUNT = 2;
+    public static final int SONAR_WIDE_FULL_RANGE = 90;
+    public static final int SONAR_NARROW_FULL_RANGE = 60;
+    public static final int SONAR_STARTING_POINT = 0;
+
+    //Vision
+    public static final String VISION_NETWORK_TABLE_NAME = "chameleon";
+    public static final String VISION_NETWORK_ENTRY_TARGET_FOUND = "targetFound";
+    public static final double LOW_GOAL_DISTANCE = 3.0;//feet
+    public static final double HIGH_GOAL_DISTANCE = 9.0;//feet
 }
