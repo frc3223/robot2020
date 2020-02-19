@@ -40,6 +40,7 @@ public class IntakeAutoLower extends CommandBase {
   public void execute() {
     if(!manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       end(false);
+      System.out.println("Intake Auto Lower should be stopping");
       isDone = true;
     }
   }

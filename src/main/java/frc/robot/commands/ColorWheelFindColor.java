@@ -17,6 +17,8 @@ public class ColorWheelFindColor extends CommandBase {
   private String gameData;
   private Color initialColor;
   private String initialColorString;
+  private Color currentColor;
+  private String currentColorString;
   /**
    * Creates a new ColorWheelFindColor.
    */
@@ -32,16 +34,26 @@ public class ColorWheelFindColor extends CommandBase {
     gameData = DriverStation.getInstance().getGameSpecificMessage();
     initialColor = m_colorWheel.getColor();
     initialColorString = m_colorWheel.getColorString(initialColor);
+    currentColor = initialColor;
+    currentColorString = initialColorString;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(initialColorString == gameData || currentColorString == gameData){
+      end(false);
+    }else{
+      m_colorWheel.wheelSpin(0.5);
+      currentColorString = m_colorWheel.getColorString(currentColor);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_colorWheel.wheelSpinStop();
   }
 
   // Returns true when the command should end.

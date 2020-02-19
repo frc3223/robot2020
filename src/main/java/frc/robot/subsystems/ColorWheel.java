@@ -53,12 +53,17 @@ public class ColorWheel extends SubsystemBase {
      ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
      if (match.color == kBlueTarget) {
       colorString = "Blue";
+      System.out.println("color sensor sees blue");
+      System.out.println("field sensor sees ???");
     } else if (match.color == kRedTarget) {
       colorString = "Red";
+      System.out.println("color sensor sees red");
     } else if (match.color == kGreenTarget) {
       colorString = "Green";
+      System.out.println("color sensor sees green");
     } else if (match.color == kYellowTarget) {
       colorString = "Yellow";
+      System.out.println("color sensor sees yellow");
     } else {
       colorString = "Unknown";
     }

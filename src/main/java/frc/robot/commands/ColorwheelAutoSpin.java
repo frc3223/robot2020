@@ -17,6 +17,7 @@ public class ColorwheelAutoSpin extends CommandBase {
   private String initialColorString;
   private int rotationCount;
   private boolean seesNewColor;
+  private boolean isDone;
 
   /**
    * Creates a new ColorwheelAutoSpin.
@@ -35,6 +36,8 @@ public class ColorwheelAutoSpin extends CommandBase {
     rotationCount = 0;
     seesNewColor = false;
     m_colorWheel.wheelSpin(1.0);
+    isDone = false;
+    System.out.println("auto color spin starting");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,17 +45,22 @@ public class ColorwheelAutoSpin extends CommandBase {
   public void execute() {
     Color currentColor = m_colorWheel.getColor();
     String currentColorString = m_colorWheel.getColorString(currentColor); 
+    if(currentColorString == "Unknown"){
+      end(false);
+    }
     if(seesNewColor == false && currentColorString != initialColorString) {
       seesNewColor = true;
     }
     if(seesNewColor == true &&currentColorString == initialColorString) {
       rotationCount += 1;
       seesNewColor = false;
+      System.out.println("Current rotation count: " + rotationCount);
 
     }
     if(rotationCount == 6) {
       m_colorWheel.wheelSpinStop();
       System.out.println("Stopping ColorWheel motor");
+      isDone = true;
     }
   }
 
@@ -64,6 +72,6 @@ public class ColorwheelAutoSpin extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

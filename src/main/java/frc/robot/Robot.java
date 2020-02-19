@@ -205,7 +205,8 @@ public class Robot extends TimedRobot {
       System.out.println("Left bumper was pressed, intake pulling in");
     }*/
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
-      m_intakeAutoLowerCommand.schedule(); // X button
+      System.out.println("Right bumper was pressed, intake should be happening");
+      m_intakeAutoLowerCommand.schedule(); // Right bumper
     }
     
     /*if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
@@ -226,10 +227,10 @@ public class Robot extends TimedRobot {
     }
     */
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RAISE)) {
-      m_colorWheelRaiseCommand.schedule(); // 
+      m_colorWheelRaiseCommand.schedule(); // back buttons
     } 
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN)) {
-      m_colorAutoCommand.schedule();
+      m_colorAutoCommand.schedule(); // start button
     }
 
     /*if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
