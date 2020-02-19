@@ -113,7 +113,7 @@ public final class Constants {
     public static final int SHOOTER_SOLENOID_FORWARDS = 4;
     public static final int SHOOTER_SOLENOID_BACKWARDS = 5;
     
-    /* Ultrasonic Sonars */
+    /* Ultrasonic Sonars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public static final int SONAR_WIDE = 1;
     public static final int SONAR_NARROW = 0;
     public static final int SONAR_OVERSAMPLE_COUNT = 2;
@@ -121,9 +121,13 @@ public final class Constants {
     public static final int SONAR_NARROW_FULL_RANGE = 60;
     public static final int SONAR_STARTING_POINT = 0;
 
-    //Vision
+    //Vision~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final String VISION_NETWORK_TABLE_NAME = "chameleon";
     public static final String VISION_NETWORK_ENTRY_TARGET_FOUND = "targetFound";
     public static final double LOW_GOAL_DISTANCE = 3.0;//feet
     public static final double HIGH_GOAL_DISTANCE = 9.0;//feet
+
+    //Bumpers~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public static final int LEFT_BUMPER_AUTO = 22;
+    public static final int RIGHT_BUMPER_AUTO = 23;
 }

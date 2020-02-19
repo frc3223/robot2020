@@ -205,7 +205,7 @@ public class Robot extends TimedRobot {
       System.out.println("Left bumper was pressed, intake pulling in");
     }*/
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
-      m_intakeAutoLowerCommand.schedule();
+      m_intakeAutoLowerCommand.schedule(); // X button
     }
     
     /*if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
@@ -226,8 +226,8 @@ public class Robot extends TimedRobot {
     }
     */
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RAISE)) {
-      m_colorWheelRaiseCommand.schedule();
-    }
+      m_colorWheelRaiseCommand.schedule(); // 
+    } 
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN)) {
       m_colorAutoCommand.schedule();
     }
@@ -258,7 +258,7 @@ public class Robot extends TimedRobot {
       System.out.println("the A button was pressed, the shooter should be pulling in");
     }*/
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
-      m_shooterHighAutoCommand.schedule();
+      m_shooterHighAutoCommand.schedule(); // A button
     }
   }
 

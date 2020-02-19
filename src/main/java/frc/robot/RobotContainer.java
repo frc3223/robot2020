@@ -113,7 +113,7 @@ public class RobotContainer {
     m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
     m_shooterPullIn = new ShooterPullIn(m_shooter, driverController);
     m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_drivetrain);
-    m_shooterHighAuto = new ShooterHighAuto(m_shooter);
+    m_shooterHighAuto = new ShooterHighAuto(m_shooter, m_drivetrain);
     m_hopperPullIn = new HopperPullIn(m_shooter, driverController);
     m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
 

@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ShooterLowAuto extends CommandBase {
   private final Shooter m_shooter;
   private final DriveTrain m_driveTrain;
+  private Timer time;
   /**
    * Creates a new ShooterLowAuto.
    */
@@ -22,6 +24,8 @@ public class ShooterLowAuto extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
      m_shooter = shooter;
      m_driveTrain = driveTrain;
+     time = new Timer();
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -37,16 +41,20 @@ public class ShooterLowAuto extends CommandBase {
   public void execute() {
     if(m_shooter.getTargetFound() == true){
 
-      if(m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE){
-        m_driveTrain.moveBackward();
+      if((m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE - 0.1) && (m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE + 0.1)){
+        m_driveTrain.stop();
+        m_shooter.shooterMotorShootOut();
+        time.start();
+        if(time.get() > 5.0){
+          end(false);
+        }
+        //Find out how to set shooter motor to shoot for 5ish seconds
       }
       else if(m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE){
         m_driveTrain.moveForward();
       }
-      else if((m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE - 0.1) && (m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE + 0.1)){
-        m_driveTrain.stop();
-        m_shooter.shooterMotorShootOut();
-        //Find out how to set shooter motor to shoot for 5ish seconds
+      else if(m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE){
+        m_driveTrain.moveBackward();
       }
     }
     else{
@@ -57,6 +65,8 @@ public class ShooterLowAuto extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_driveTrain.stop();
+    m_shooter.shooterMotorsOff();
   }
 
   // Returns true when the command should end.

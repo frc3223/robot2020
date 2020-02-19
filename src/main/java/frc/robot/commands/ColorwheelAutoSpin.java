@@ -48,7 +48,6 @@ public class ColorwheelAutoSpin extends CommandBase {
     if(seesNewColor == true &&currentColorString == initialColorString) {
       rotationCount += 1;
       seesNewColor = false;
-      
 
     }
     if(rotationCount == 6) {
