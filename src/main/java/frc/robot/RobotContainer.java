@@ -45,6 +45,7 @@ public class RobotContainer {
   private final ClimberArmDown m_climberArmDown;
   private final ClimberWinchDown m_climberWinchDown;
   private final ClimberWinchUp m_climberWinchUp;
+
   private final Intake m_intake;
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
@@ -52,12 +53,14 @@ public class RobotContainer {
   private final Compressor m_compressor;
   private final IntakeShootOut m_intakeShootOut;
   private final IntakePullIn m_intakePullIn;
+
   private final ColorWheelLeft m_colorLeft;
   private final ColorWheelRight m_colorRight;
   private final ColorWheelLower m_colorLower;
   private final ColorWheelRaise m_colorRaise;
   private final ColorwheelAutoSpin m_colorAuto;
   private final ColorWheelFindColor m_findColor;
+
   private final Shooter m_shooter;
   private final ShooterLower m_shooterLower;
   private final ShooterRaise m_shooterRaise;
@@ -65,12 +68,13 @@ public class RobotContainer {
   private final ShooterPullIn m_shooterPullIn;
   private final ShooterLowAuto m_shooterLowAuto;
   private final ShooterHighAuto m_shooterHighAuto;
+
   private final HopperPullIn m_hopperPullIn;
   private final HopperShootOut m_hopperShootOut;
   private final AnalogInput m_wideSonar;
   private final AnalogInput m_narrowSonar;
   
-
+  private final TimedAutoDrive m_timedAutoDrive;
 
    
   /**
@@ -117,6 +121,7 @@ public class RobotContainer {
     m_hopperPullIn = new HopperPullIn(m_shooter, driverController);
     m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
 
+    m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
   }
 
   /**
@@ -209,5 +214,8 @@ public class RobotContainer {
   }
   public Command getHopperShootOut(){
     return m_hopperShootOut;
+  }
+  public Command getTimedAutoDrive(){
+    return m_timedAutoDrive;
   }
 }

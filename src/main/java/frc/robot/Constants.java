@@ -65,6 +65,8 @@ public final class Constants {
     public static final int DRIVER_CONTROLLER_CLIMBER_WINCH_UP = 2; //B button
     public static final int DRIVER_CONTROLLER_CLIMBER_ARM_DOWN = 1; //A button
     
+    //Auto test
+    public static final int DRIVER_CONTROLLER_AUTO_DRIVE_TEST = 8; //start button
 
     //Manipulator Controller~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
     //Intake pneumatics
