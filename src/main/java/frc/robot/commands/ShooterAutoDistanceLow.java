@@ -13,7 +13,8 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 
-public class ShooterAutoDistance extends CommandBase {
+public class ShooterAutoDistanceLow extends CommandBase {
+
   private final Shooter m_shooter;
   private final DriveTrain m_driveTrain;
   private Timer time;
@@ -21,10 +22,9 @@ public class ShooterAutoDistance extends CommandBase {
   private boolean isDone;
   private double distance;
   /**
-   * Creates a new ShooterLowAuto.
+   * Creates a new ShooterAutoDistanceLow.
    */
-  public ShooterAutoDistance(Shooter shooter, DriveTrain driveTrain, double distance) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public ShooterAutoDistanceLow(Shooter shooter, DriveTrain driveTrain, double distance) {
      m_shooter = shooter;
      m_driveTrain = driveTrain;
      time = new Timer();
@@ -43,23 +43,18 @@ public class ShooterAutoDistance extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_shooter.getTargetFound() == true){
 
-      if((m_shooter.getNarrowDistance() > distance - 0.1) && (m_shooter.getNarrowDistance() < distance + 0.1)){
-        //m_shooter.shooterMotorShootOut();
-        isDone = true;
-        end(false);
-        //Find out how to set shooter motor to shoot for 5ish seconds
-      }
-      else if(m_shooter.getNarrowDistance() > distance){
-        m_driveTrain.moveForward();
-      }
-      else if(m_shooter.getNarrowDistance() < distance){
-        m_driveTrain.moveBackward();
-      }
+    if((m_shooter.getNarrowDistance() > distance - 0.1) && (m_shooter.getNarrowDistance() < distance + 0.1)){
+      //m_shooter.shooterMotorShootOut();
+      isDone = true;
+      end(false);
+      //Find out how to set shooter motor to shoot for 5ish seconds
     }
-    else{
-      m_driveTrain.stop();
+    else if(m_shooter.getNarrowDistance() > distance){
+      m_driveTrain.moveForward();
+    }
+    else if(m_shooter.getNarrowDistance() < distance){
+      m_driveTrain.moveBackward();
     }
   }
 

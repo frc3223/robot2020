@@ -67,8 +67,8 @@ public class RobotContainer {
   private final ShooterHighAuto m_shooterHighAuto;
   private final ShooterOut m_shooterOut_Low;
   private final ShooterOut m_shooterOut_High;
-  private final ShooterAutoDistance m_shooterDistance_High;
-  private final ShooterAutoDistance m_shooterDistance_Low;
+  private final ShooterAutoDistanceHigh m_shooterDistance_High;
+  private final ShooterAutoDistanceLow m_shooterDistance_Low;
 
   private final HopperShootOut m_hopperShootOut_High;
   private final HopperShootOut m_hopperShootOut_Low;
@@ -121,8 +121,8 @@ public class RobotContainer {
     m_shooterOut_Low = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
     m_shooterPullIn = new ShooterPullIn(m_shooter, manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
 
-    m_shooterDistance_High = new ShooterAutoDistance(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_HIGH);
-    m_shooterDistance_Low = new ShooterAutoDistance(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_LOW);
+    m_shooterDistance_High = new ShooterAutoDistanceHigh(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_HIGH);
+    m_shooterDistance_Low = new ShooterAutoDistanceLow(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_LOW);
     
     m_shooterLower = new ShooterLower(m_shooter,manipulatorController);
 
