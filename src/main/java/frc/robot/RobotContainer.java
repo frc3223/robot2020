@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 // Misc.
 import edu.wpi.first.wpilibj.Compressor;
@@ -62,7 +63,6 @@ public class RobotContainer {
   private final ColorWheelFindColor m_findColor;
 
   private final Shooter m_shooter;
-  private final ShooterLower m_shooterLower;
   private final ShooterRaise m_shooterRaise;
   private final ShooterShootOut m_shooterShootOut;
   private final ShooterPullIn m_shooterPullIn;
@@ -76,16 +76,20 @@ public class RobotContainer {
   
   private final TimedAutoDrive m_timedAutoDrive;
 
+  private final DoubleSolenoid hopperSolenoid;
+
    
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer(Joystick driverController, Joystick manipulatorController) {
+
+    hopperSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
     // Configure the button bindings
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
     m_drivetank = new DriveTank(m_drivetrain, driverController);
-    m_intake = new Intake();
+    m_intake = new Intake(hopperSolenoid);
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
@@ -111,8 +115,7 @@ public class RobotContainer {
     m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
     m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
 
-    m_shooter = new Shooter(m_wideSonar, m_narrowSonar);
-    m_shooterLower = new ShooterLower(m_shooter);
+    m_shooter = new Shooter(m_wideSonar, m_narrowSonar, hopperSolenoid);
     m_shooterRaise = new ShooterRaise(m_shooter);
     m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
     m_shooterPullIn = new ShooterPullIn(m_shooter, driverController);
@@ -122,6 +125,8 @@ public class RobotContainer {
     m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
 
     m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
+
+    
   }
 
   /**
@@ -190,9 +195,6 @@ public class RobotContainer {
   }
   public Command getFindColor(){
     return m_findColor;
-  }
-  public Command getShooterLower(){
-    return m_shooterLower;
   }
   public Command getShooterRaise(){
     return m_shooterRaise;

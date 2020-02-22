@@ -31,6 +31,7 @@ public class IntakeAutoLower extends CommandBase {
   @Override
   public void initialize() {
     m_intake.intakeLower();
+    m_intake.hopperLower();
     m_intake.intakeMotorPullIn();
     isDone = false;
   }

@@ -38,8 +38,8 @@ public class DriveTank extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_LEFT);
-    double rightStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_RIGHT);
+    double leftStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_RIGHT);
+    double rightStick = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_TANK_LEFT);
 
     if(leftStick*rightStick < 0) {
       //Turning make it slower

@@ -22,8 +22,10 @@ public class Intake extends SubsystemBase {
 
   CANSparkMax intakeMotor;
   DoubleSolenoid intakeSolenoid;
+  DoubleSolenoid hopperSolenoid;
 
-  public Intake() {
+  public Intake(DoubleSolenoid hopperSolenoid) {
+    this.hopperSolenoid = hopperSolenoid;
     intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
     intakeSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.INTAKE_SOLENOID_FORWARDS, Constants.INTAKE_SOLENOID_BACKWARDS);
 
@@ -33,6 +35,10 @@ public void intakeRaise() {
 }
 public void intakeLower() {
   intakeSolenoid.set(DoubleSolenoid.Value.kForward);
+}
+
+public void hopperLower(){
+  hopperSolenoid.set(DoubleSolenoid.Value.kReverse);
 }
 
 public void intakeMotorShootOut() {

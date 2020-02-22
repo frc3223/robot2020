@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
   private Command m_shooterRaiseCommand;
   private Command m_shooterShootOutCommand;
   private Command m_shooterPullInCommand;
-  private Command m_shooterLowerCommand;
   private Command m_hopperPullInCommand;
   private Command m_hopperShootOutCommand;
   private Command m_shooterLowAutoCommand;
@@ -83,7 +82,7 @@ public class Robot extends TimedRobot {
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
     m_robotContainer = new RobotContainer(driverController, manipulatorController);
     
-    table = NetworkTableInstance.getDefault().getTable("chameleon-vision").getSubTable("CameraBoi");
+    table = NetworkTableInstance.getDefault().getTable("chameleon").getSubTable("CameraBoi");
     System.out.println("Robot is now online.");
 
     
@@ -150,7 +149,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_teleopCommand = m_robotContainer.getDriveTank();
+    //m_teleopCommand = m_robotContainer.getDriveTank();
+    m_teleopCommand = m_robotContainer.getDriveArcade();
     if (m_teleopCommand != null) {
       m_teleopCommand.schedule();
     }
@@ -175,7 +175,6 @@ public class Robot extends TimedRobot {
     m_colorAutoCommand = m_robotContainer.getColorAuto();
 
     m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
-    m_shooterLowerCommand = m_robotContainer.getShooterRaise();
     m_shooterShootOutCommand = m_robotContainer.getShooterShootOut();
     m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
     m_shooterLowAutoCommand = m_robotContainer.getShooterLowAuto();

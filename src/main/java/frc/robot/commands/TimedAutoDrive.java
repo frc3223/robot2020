@@ -15,12 +15,14 @@ import edu.wpi.first.wpilibj.Timer;
 public class TimedAutoDrive extends CommandBase {
   private final DriveTrain m_driveTrain;
   private Timer time;
+  private boolean isDone;
   /**
    * Creates a new TimedAutoDrive.
    */
   public TimedAutoDrive(DriveTrain driveTrain) {
     time = new Timer();
     m_driveTrain = driveTrain;
+    isDone = false;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -35,18 +37,20 @@ public class TimedAutoDrive extends CommandBase {
   @Override
   public void execute() {
     if(time.get() > 5.0){
-          end(false);
+      isDone = true;
+      end(false);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_driveTrain.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

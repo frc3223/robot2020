@@ -112,8 +112,8 @@ public final class Constants {
     public static final int COLORWHEEL_SOLENOID_FORWARDS = 2;
     public static final int COLORWHEEL_SOLENOID_BACKWARDS = 3;
 
-    public static final int SHOOTER_SOLENOID_FORWARDS = 4;
-    public static final int SHOOTER_SOLENOID_BACKWARDS = 5;
+    public static final int HOPPER_SOLENOID_FORWARDS = 4;
+    public static final int HOPPER_SOLENOID_BACKWARDS = 5;
     
     /* Ultrasonic Sonars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     public static final int SONAR_WIDE = 1;

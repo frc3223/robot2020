@@ -29,7 +29,7 @@ public class ShooterRaise extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shooterRaise();
+    m_shooter.hopperRaise();
     end(false);
   }
 

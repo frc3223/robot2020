@@ -19,6 +19,8 @@ public class ShooterHighAuto extends CommandBase {
   private final Shooter m_shooter;
   private final DriveTrain m_driveTrain;
   private Timer time;
+  private boolean timeDone;
+  private boolean isDone;
   /**
    * Creates a new ShooterHighAuto.
    */
@@ -27,6 +29,8 @@ public class ShooterHighAuto extends CommandBase {
     m_driveTrain = driveTrain;
     m_shooter = shooter;
     time = new Timer();
+    timeDone = false;
+    isDone = false;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -34,6 +38,7 @@ public class ShooterHighAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_shooter.hopperRaise();
     System.out.println("Shooter High Auto should be running");
   }
 
@@ -46,9 +51,14 @@ public class ShooterHighAuto extends CommandBase {
       if((m_shooter.getNarrowDistance() > Constants.HIGH_GOAL_DISTANCE - 0.1) && (m_shooter.getNarrowDistance() < Constants.HIGH_GOAL_DISTANCE + 0.1)){
         m_driveTrain.stop();
         m_shooter.shooterMotorShootOut();
+        if(!timeDone){
         time.start();
+        timeDone = true;
+        }
         if(time.get() > 5.0){
+          isDone = true;
           end(false);
+          
         }
         //Find out how to set shooter motor to shoot for 5ish seconds
       }
@@ -75,6 +85,6 @@ public class ShooterHighAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return isDone;
   }
 }

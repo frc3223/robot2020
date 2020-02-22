@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shooterRightMotor;
   public WPI_VictorSPX hopperMotor;
 
-  public DoubleSolenoid shooterSolenoid;
+  public DoubleSolenoid hopperSolenoid;
 
   public NetworkTableEntry yaw;
   public NetworkTableEntry isDriverMode;
@@ -43,13 +43,14 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  public Shooter(AnalogInput wide, AnalogInput narrow) {
+  public Shooter(AnalogInput wide, AnalogInput narrow, DoubleSolenoid hopperSolenoid) {
+    this.hopperSolenoid = hopperSolenoid;
     shooterLeftMotor = new WPI_TalonSRX(Constants.SHOOTER_LEFT_MOTOR);
     shooterRightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR);
     hopperMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
     ShootSpeed = 1; /* the thing about ShootSpeed is that we are using a button to control the shooter, so by defenition, we cannot have a passed in variable for the motor value.
     If we were to change this, then we need to do a whole makeover of the two shooting commands, robot and robotcontainer,  as well as this subsystem. thanks for your time.  */
-    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.SHOOTER_SOLENOID_FORWARDS, Constants.SHOOTER_SOLENOID_BACKWARDS);
+   
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
     table = inst.getTable(Constants.VISION_NETWORK_TABLE_NAME);
 
@@ -83,7 +84,8 @@ public class Shooter extends SubsystemBase {
     return distance;
   }
   public boolean getTargetFound(){
-    return table.getEntry(Constants.VISION_NETWORK_ENTRY_TARGET_FOUND).getBoolean(false);
+    //return table.getEntry(Constants.VISION_NETWORK_ENTRY_TARGET_FOUND).getBoolean(false);
+    return true;
   }
   public void shooterMotorShootOut(){
     shooterRightMotor.set(-1);
@@ -95,12 +97,8 @@ public class Shooter extends SubsystemBase {
     shooterLeftMotor.set(-1);
   }
 
-  public void shooterRaise(){
-  shooterSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void shooterLower(){
-  shooterSolenoid.set(DoubleSolenoid.Value.kReverse);
+  public void hopperRaise(){
+    hopperSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void hopperShootOut(){
