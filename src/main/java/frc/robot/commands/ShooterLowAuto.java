@@ -7,81 +7,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
-public class ShooterLowAuto extends CommandBase {
-  private final Shooter m_shooter;
-  private final DriveTrain m_driveTrain;
-  private Timer time;
-  private boolean timeDone;
-  private boolean isDone;
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class ShooterLowAuto extends ParallelCommandGroup {
   /**
    * Creates a new ShooterLowAuto.
    */
-  public ShooterLowAuto(Shooter shooter, DriveTrain driveTrain) {
-    // Use addRequirements() here to declare subsystem dependencies.
-     m_shooter = shooter;
-     m_driveTrain = driveTrain;
-     time = new Timer();
-     timeDone = false;
-     isDone = false;
-
-
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    m_shooter.shooterRaise();
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    if(m_shooter.getTargetFound() == true){
-
-      if((m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE - 0.1) && (m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE + 0.1)){
-        m_driveTrain.stop();
-        m_shooter.shooterMotorShootOut();
-        if(!timeDone){
-          time.start();
-          timeDone = true;
-        }
-        
-        if(time.get() > 5.0){
-          isDone = true;
-          end(false);
-        }
-        //Find out how to set shooter motor to shoot for 5ish seconds
-      }
-      else if(m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE){
-        m_driveTrain.moveForward();
-      }
-      else if(m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE){
-        m_driveTrain.moveBackward();
-      }
-    }
-    else{
-      m_driveTrain.stop();
-    }
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_driveTrain.stop();
-    m_shooter.shooterMotorsOff();
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return isDone;
+  public ShooterLowAuto(ShooterRaise shooterRaise, HopperShootOut hopperOut, ShooterOut shooterOut) {
+    // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());super();
+    addCommands(
+      shooterRaise, hopperOut, shooterOut);
   }
 }

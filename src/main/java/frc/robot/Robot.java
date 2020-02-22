@@ -51,14 +51,17 @@ public class Robot extends TimedRobot {
   private Command m_colorAutoCommand;
 
   private Command m_shooterRaiseCommand;
-  private Command m_shooterShootOutCommand;
   private Command m_shooterPullInCommand;
   private Command m_hopperPullInCommand;
-  private Command m_hopperShootOutCommand;
   private Command m_shooterLowAutoCommand;
   private Command m_shooterHighAutoCommand;
 
   private Command m_timedAutoDriveCommand;
+
+  private Command m_shooterOut_High;
+  private Command m_shooterOut_Low;
+  private Command m_hopperShootOut_High;
+  private Command m_hopperShootOut_Low;
 
   NetworkTable table;
   
@@ -175,12 +178,14 @@ public class Robot extends TimedRobot {
     m_colorAutoCommand = m_robotContainer.getColorAuto();
 
     m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
-    m_shooterShootOutCommand = m_robotContainer.getShooterShootOut();
     m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
+    m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
+    m_shooterOut_High = m_robotContainer.getHighShooterOut();
+    m_shooterOut_Low = m_robotContainer.getLowShooterOut();
+    m_hopperShootOut_High = m_robotContainer.getHighHopperOut();
+    m_hopperShootOut_Low = m_robotContainer.getHighHopperOut();
     m_shooterLowAutoCommand = m_robotContainer.getShooterLowAuto();
     m_shooterHighAutoCommand = m_robotContainer.getShooterHighAuto();
-    m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
-    m_hopperShootOutCommand = m_robotContainer.getHopperShootOut();
 
     m_timedAutoDriveCommand = m_robotContainer.getTimedAutoDrive();
     
@@ -208,76 +213,24 @@ public class Robot extends TimedRobot {
 
     
      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /*if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_RAISE)){
-      m_intakeRaiseCommand.schedule();
-      System.out.println("the Y button was pressed, intake raising");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_LOWER)){
-      m_intakeLowerCommand.schedule();
-      System.out.println("the B button was pressed, intake lowering");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_SHOOT_OUT)){
-      m_intakeShootOutCommand.schedule();
-      System.out.println("Right bumper was pressed, intake shooting out");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
-      m_intakePullInCommand.schedule();
-      System.out.println("Left bumper was pressed, intake pulling in");
-    }*/
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       System.out.println("Right bumper was pressed, intake should be happening");
       m_intakeAutoLowerCommand.schedule(); // Right bumper
     }
     
     /*~~~~~~~~~~~~~~~~~~NEWS FLASH!!! there's no space, no the triggers and back bumpers are now open~~~~~~~~~~~
-    if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT)>= 0.05 ){
-      m_colorWheelLeftCommand.schedule();
-      System.out.println("Left trigger pressed, Color Wheel Left");
-    }
-    if(manipulatorController.getRawAxis(Constants.MANIPULATOR_CONTROLLER_WHEEL_ROTATE_RIGHT)>= 0.05 ){
-      m_colorWheelRightCommand.schedule();
-      System.out.println("Right trigger pressed, Color Wheel Right");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_Raise)) {
-      m_colorWheelRaiseCommand.schedule();
-      System.out.println("left manipulator back button pressed, Raiseing color wheel");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_Lower)) {
-      m_colorWheelLowerCommand.schedule();
-      System.out.println("right manipulator back button pressed, Lowering color wheel");
+
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_LOWER)) {
+      m_colorWheelLowerCommand.schedule(); // back button right
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_RAISE)) {
-      m_colorWheelRaiseCommand.schedule(); // back buttons
+      m_colorWheelRaiseCommand.schedule(); // back button left
     } 
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN)) {
       m_colorAutoCommand.schedule(); // start button
     }
     */
 
-    /*if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_RAISE)) {
-      m_shooterRaiseCommand.schedule();
-      System.out.println("Shoot out(X) button pressed, shooter motor spinning out");
-    }
-    if(manipulatorController.getPOV() == 0){
-      m_shooterShootOutCommand.schedule();
-      System.out.println("Up POV pressed, should be raising the shooter");
-    }
-    if(manipulatorController.getPOV() == 180){
-      m_shooterPullInCommand.schedule();
-    System.out.println("Down POV pressed, should be lowering the shooter");
-    }
-    if(manipulatorController.getPOV() == 90){
-      m_hopperShootOutCommand.schedule();
-      System.out.println("Right POV pressed, should be shooting the hopper out");
-    }
-    if(manipulatorController.getPOV() == 270){
-      m_hopperPullInCommand.schedule();
-      System.out.println("Left POV pressed, should be pulling the hopper in");
-    }
-    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOWER)){
-      m_shooterLowerCommand.schedule();
-      System.out.println("the A button was pressed, the shooter should be pulling in");
-    }*/
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
       m_shooterHighAutoCommand.schedule(); // X button
     }

@@ -17,13 +17,15 @@ public class IntakePullIn extends CommandBase {
   Joystick manipulatorController;
   Intake intake;
   boolean isDone;
+  int button;
   /**
    * Creates a new IntakeWheelOut.
    */
-  public IntakePullIn(Intake intake, Joystick manipulatorController) {
+  public IntakePullIn(Intake intake, Joystick manipulatorController, int button) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.manipulatorController = manipulatorController;
     this.intake = intake;
+    this.button = button;
 
     addRequirements(intake);
   }
@@ -38,7 +40,7 @@ public class IntakePullIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_PULL_IN)){
+    if(!manipulatorController.getRawButton(button)){
       end(false);
       isDone = true;
     }

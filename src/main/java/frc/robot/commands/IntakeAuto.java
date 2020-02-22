@@ -8,22 +8,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ShooterOut;
-import frc.robot.commands.HopperShootOut;
-import frc.robot.commands.ShooterRaise;
+import frc.robot.commands.ShooterLower;
+import frc.robot.commands.IntakeLower;
+import frc.robot.commands.ShooterPullIn;
+import frc.robot.commands.IntakePullIn;
+import frc.robot.commands.HopperPullIn;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class ShooterHighAuto extends ParallelCommandGroup {
+public class IntakeAuto extends ParallelCommandGroup {
   /**
-   * Creates a new ShooterHighAuto.
+   * Creates a new IntakeAuto.
    */
-  public ShooterHighAuto(ShooterRaise shooterRaise, HopperShootOut hopperOut, ShooterOut shooterOut) {
+  public IntakeAuto(ShooterLower shooterLower, IntakeLower intakeLower, 
+  ShooterPullIn shooterPullIn, IntakePullIn intakePullIn, HopperPullIn hopperPullIn) {
+    addCommands(
+      shooterLower,intakeLower,shooterPullIn,intakePullIn,hopperPullIn);
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    addCommands(
-      shooterRaise, hopperOut, shooterOut);
-
   }
 }

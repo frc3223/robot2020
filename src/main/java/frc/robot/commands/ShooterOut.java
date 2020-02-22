@@ -14,16 +14,19 @@ import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class ShooterShootOut extends CommandBase {
-    Joystick driverController;
+public class ShooterOut extends CommandBase {
+    Joystick manipulatorController;
     Shooter shooter;
+    boolean isDone;
+    int button;
     
     /**
      * Creates a new IntakeWheelIN.
      */
-    public ShooterShootOut(Shooter shooter, Joystick DriverController) {
-      this.driverController = DriverController;
+    public ShooterOut(Shooter shooter, Joystick manipulatorController, int button) {
+      this.manipulatorController = manipulatorController;
       this.shooter = shooter;
+      this.button = button;
       // Use addRequirements() here to declare subsystem dependencies.
       addRequirements(shooter);
     }
@@ -31,7 +34,7 @@ public class ShooterShootOut extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-      
+      isDone = false;
     }
   
     // Called every time the scheduler runs while the command is scheduled.
@@ -39,8 +42,8 @@ public class ShooterShootOut extends CommandBase {
     public void execute() { 
       shooter.shooterMotorShootOut();
   
-      if(driverController.getPOV() != 0){
-        this.shooter.shooterMotorsOff();
+      if(manipulatorController.getRawButton(button)){
+        isDone = true;
         end(false);
       }
     }
@@ -54,6 +57,6 @@ public class ShooterShootOut extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-      return false;
+      return isDone;
     }
 }

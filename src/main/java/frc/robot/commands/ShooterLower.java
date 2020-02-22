@@ -8,55 +8,43 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Hopper;
-
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Joystick;
 
-public class HopperShootOut extends CommandBase {
-  Joystick manipulatorController;
-  Hopper hopper;
-  boolean isDone;
-  int button;
+public class ShooterLower extends CommandBase {
+    private final Shooter m_shooter;
+    Joystick manipulatorController;
   /**
-   * Creates a new IntakeWheelOut.
+   * Creates a new ShooterLower.
    */
-  public HopperShootOut(Hopper hopper, Joystick manipulatorController, int button) {
+  public ShooterLower(Shooter shooter, Joystick ManipulatorController) {
+    m_shooter = shooter;
+    manipulatorController = ManipulatorController;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.manipulatorController = manipulatorController;
-    this.hopper = hopper;
-    this.button = button;
-    
-
-    addRequirements(hopper);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isDone = false;
-    hopper.hopperShootOut();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!manipulatorController.getRawButton(button)){
-      end(false);
-      isDone = true;
-    }
-
+    m_shooter.shooterLower();
+    end(false);
   }
 
-  // Called once the command ends or is interrupted.s
+  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    hopper.hopperMotorOff();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isDone;
+    return false;
   }
 }

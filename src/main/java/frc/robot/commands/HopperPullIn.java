@@ -16,13 +16,15 @@ public class HopperPullIn extends CommandBase {
   Joystick driverController;
   Hopper hopper;
   boolean isDone; 
+  int button;
   /**
    * Creates a new IntakeWheelOut.
    */
-  public HopperPullIn(Hopper hopper, Joystick DriverController) {
+  public HopperPullIn(Hopper hopper, Joystick DriverController, int button) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driverController = DriverController;
     this.hopper = hopper;
+    this.button = button;
 
     addRequirements(hopper);
   }
@@ -37,7 +39,7 @@ public class HopperPullIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!driverController.getRawButton(Constants.MANIPULATOR_CONTROLLER_HOPPER_IN)){
+    if(!driverController.getRawButton(button)){
       end(false);
       isDone = true;
     }
