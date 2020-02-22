@@ -71,12 +71,11 @@ public class RobotContainer {
 
   private final HopperPullIn m_hopperPullIn;
   private final HopperShootOut m_hopperShootOut;
+  private final Hopper m_hopper;
   private final AnalogInput m_wideSonar;
   private final AnalogInput m_narrowSonar;
   
   private final TimedAutoDrive m_timedAutoDrive;
-
-  private final DoubleSolenoid hopperSolenoid;
 
    
   /**
@@ -84,12 +83,12 @@ public class RobotContainer {
    */
   public RobotContainer(Joystick driverController, Joystick manipulatorController) {
 
-    hopperSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
+   
     // Configure the button bindings
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
     m_drivetank = new DriveTank(m_drivetrain, driverController);
-    m_intake = new Intake(hopperSolenoid);
+    m_intake = new Intake();
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
     m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
@@ -115,14 +114,15 @@ public class RobotContainer {
     m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
     m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
 
-    m_shooter = new Shooter(m_wideSonar, m_narrowSonar, hopperSolenoid);
+    m_shooter = new Shooter(m_wideSonar, m_narrowSonar);
     m_shooterRaise = new ShooterRaise(m_shooter);
     m_shooterShootOut = new ShooterShootOut(m_shooter, driverController);
     m_shooterPullIn = new ShooterPullIn(m_shooter, driverController);
     m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_drivetrain);
     m_shooterHighAuto = new ShooterHighAuto(m_shooter, m_drivetrain);
-    m_hopperPullIn = new HopperPullIn(m_shooter, driverController);
-    m_hopperShootOut = new HopperShootOut(m_shooter, driverController);
+    m_hopper = new Hopper();
+    m_hopperPullIn = new HopperPullIn(m_hopper, driverController);
+    m_hopperShootOut = new HopperShootOut(m_hopper, driverController);
 
     m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
 

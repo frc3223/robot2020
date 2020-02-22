@@ -8,29 +8,29 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hopper;
 
 import edu.wpi.first.wpilibj.Joystick;
 
 public class HopperPullIn extends CommandBase {
   Joystick driverController;
-  Shooter shooter;
+  Hopper hopper;
   boolean isDone; 
   /**
    * Creates a new IntakeWheelOut.
    */
-  public HopperPullIn(Shooter shooter, Joystick DriverController) {
+  public HopperPullIn(Hopper hopper, Joystick DriverController) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.driverController = DriverController;
-    this.shooter = shooter;
+    this.hopper = hopper;
 
-    addRequirements(shooter);
+    addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.hopperPullIn();
+    hopper.hopperPullIn();
     isDone = false;
   }
 
@@ -47,7 +47,7 @@ public class HopperPullIn extends CommandBase {
   // Called once the command ends or is interrupted.s
   @Override
   public void end(boolean interrupted) {
-    shooter.hopperMotorOff();
+    hopper.hopperMotorOff();
   }
 
   // Returns true when the command should end.

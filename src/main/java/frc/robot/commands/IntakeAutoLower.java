@@ -31,14 +31,13 @@ public class IntakeAutoLower extends CommandBase {
   @Override
   public void initialize() {
     m_intake.intakeLower();
-    m_intake.hopperLower();
     m_intake.intakeMotorPullIn();
     isDone = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute(){
     if(!manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       end(false);
       System.out.println("Intake Auto Lower should be stopping");

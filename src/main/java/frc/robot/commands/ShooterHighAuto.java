@@ -38,7 +38,7 @@ public class ShooterHighAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.hopperRaise();
+    m_shooter.shooterRaise();
     System.out.println("Shooter High Auto should be running");
   }
 

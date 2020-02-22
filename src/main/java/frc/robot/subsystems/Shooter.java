@@ -27,9 +27,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shooterLeftMotor;
   public WPI_TalonSRX shooterRightMotor;
-  public WPI_VictorSPX hopperMotor;
-
-  public DoubleSolenoid hopperSolenoid;
 
   public NetworkTableEntry yaw;
   public NetworkTableEntry isDriverMode;
@@ -39,15 +36,16 @@ public class Shooter extends SubsystemBase {
   private NetworkTable table;
 
   public static double ShootSpeed;
+  public DoubleSolenoid shooterSolenoid;
 
   /**
    * Creates a new Shooter.
    */
-  public Shooter(AnalogInput wide, AnalogInput narrow, DoubleSolenoid hopperSolenoid) {
-    this.hopperSolenoid = hopperSolenoid;
+  public Shooter(AnalogInput wide, AnalogInput narrow) {
     shooterLeftMotor = new WPI_TalonSRX(Constants.SHOOTER_LEFT_MOTOR);
     shooterRightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR);
-    hopperMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
+    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
+
     ShootSpeed = 1; /* the thing about ShootSpeed is that we are using a button to control the shooter, so by defenition, we cannot have a passed in variable for the motor value.
     If we were to change this, then we need to do a whole makeover of the two shooting commands, robot and robotcontainer,  as well as this subsystem. thanks for your time.  */
    
@@ -97,26 +95,18 @@ public class Shooter extends SubsystemBase {
     shooterLeftMotor.set(-1);
   }
 
-  public void hopperRaise(){
-    hopperSolenoid.set(DoubleSolenoid.Value.kForward);
-  }
-
-  public void hopperShootOut(){
-    hopperMotor.set(1);
-  }
-
-  public void hopperPullIn(){
-    hopperMotor.set(-1);
-  }
-
   public void shooterMotorsOff(){
     shooterLeftMotor.set(0);
     shooterRightMotor.set(0);
   }
 
-  public void hopperMotorOff(){
-    hopperMotor.set(0);
+  public void shooterRaise(){
+    shooterSolenoid.set(DoubleSolenoid.Value.kForward);
   }
+
+  public void shooterLower(){
+  shooterSolenoid.set(DoubleSolenoid.Value.kReverse);
+}
 
   @Override
   public void periodic() {
