@@ -58,7 +58,6 @@ public class ShooterHigh_Old extends CommandBase {
         if(time.get() > 5.0){
           isDone = true;
           end(false);
-          
         }
         //Find out how to set shooter motor to shoot for 5ish seconds
       }
@@ -72,7 +71,6 @@ public class ShooterHigh_Old extends CommandBase {
     else{
       m_driveTrain.stop();
     }
-
   }
 
   // Called once the command ends or is interrupted.

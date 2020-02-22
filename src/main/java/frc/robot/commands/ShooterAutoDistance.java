@@ -13,24 +13,24 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 
-public class ShooterLow_Old extends CommandBase {
+public class ShooterAutoDistance extends CommandBase {
   private final Shooter m_shooter;
   private final DriveTrain m_driveTrain;
   private Timer time;
   private boolean timeDone;
   private boolean isDone;
+  private double distance;
   /**
    * Creates a new ShooterLowAuto.
    */
-  public ShooterLow_Old(Shooter shooter, DriveTrain driveTrain) {
+  public ShooterAutoDistance(Shooter shooter, DriveTrain driveTrain, double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
      m_shooter = shooter;
      m_driveTrain = driveTrain;
      time = new Timer();
      timeDone = false;
      isDone = false;
-
-
+     this.distance = distance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -38,7 +38,6 @@ public class ShooterLow_Old extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.shooterRaise();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,24 +45,16 @@ public class ShooterLow_Old extends CommandBase {
   public void execute() {
     if(m_shooter.getTargetFound() == true){
 
-      if((m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE - 0.1) && (m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE + 0.1)){
-        m_driveTrain.stop();
-        m_shooter.shooterMotorShootOut();
-        if(!timeDone){
-          time.start();
-          timeDone = true;
-        }
-        
-        if(time.get() > 5.0){
-          isDone = true;
-          end(false);
-        }
+      if((m_shooter.getNarrowDistance() > distance - 0.1) && (m_shooter.getNarrowDistance() < distance + 0.1)){
+        //m_shooter.shooterMotorShootOut();
+        isDone = true;
+        end(false);
         //Find out how to set shooter motor to shoot for 5ish seconds
       }
-      else if(m_shooter.getNarrowDistance() > Constants.LOW_GOAL_DISTANCE){
+      else if(m_shooter.getNarrowDistance() > distance){
         m_driveTrain.moveForward();
       }
-      else if(m_shooter.getNarrowDistance() < Constants.LOW_GOAL_DISTANCE){
+      else if(m_shooter.getNarrowDistance() < distance){
         m_driveTrain.moveBackward();
       }
     }
@@ -76,7 +67,6 @@ public class ShooterLow_Old extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_driveTrain.stop();
-    m_shooter.shooterMotorsOff();
   }
 
   // Returns true when the command should end.

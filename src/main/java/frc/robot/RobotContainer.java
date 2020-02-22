@@ -13,6 +13,7 @@ import frc.robot.Constants;
 
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 // Misc.
 import edu.wpi.first.wpilibj.Compressor;
@@ -21,9 +22,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.commands.*;
 
 //buttons imports
-
-
-//import edu.wpi.first.wpilibj.XboxController; [REDACTED]
 // Robot Container is the new OI, which is setting up buttons, using numbers from Constants, and linking controllers and sensors.
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,7 +31,6 @@ import frc.robot.commands.*;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
@@ -70,6 +67,8 @@ public class RobotContainer {
   private final ShooterHighAuto m_shooterHighAuto;
   private final ShooterOut m_shooterOut_Low;
   private final ShooterOut m_shooterOut_High;
+  private final ShooterAutoDistance m_shooterDistance_High;
+  private final ShooterAutoDistance m_shooterDistance_Low;
 
   private final HopperShootOut m_hopperShootOut_High;
   private final HopperShootOut m_hopperShootOut_Low;
@@ -77,17 +76,15 @@ public class RobotContainer {
   private final Hopper m_hopper;
   private final AnalogInput m_wideSonar;
   private final AnalogInput m_narrowSonar;
-  
+
+  private final SequentialCommandGroup m_shooterSupremeHigh;
+  private final SequentialCommandGroup m_shooterSupremeLow;
   
   private final TimedAutoDrive m_timedAutoDrive;
-
-   
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer(Joystick driverController, Joystick manipulatorController) {
-
-   
     // Configure the button bindings
     m_drivetrain = new DriveTrain();
     m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
@@ -99,8 +96,6 @@ public class RobotContainer {
     m_compressor.setClosedLoopControl(true);
     m_intakeShootOut = new IntakeShootOut(m_intake,manipulatorController);
     m_intakePullIn = new IntakePullIn(m_intake,manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
-    
-
     
     m_colorWheel = new ColorWheel();
     m_colorLeft = new ColorWheelLeft(m_colorWheel,manipulatorController);
@@ -126,6 +121,8 @@ public class RobotContainer {
     m_shooterOut_Low = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
     m_shooterPullIn = new ShooterPullIn(m_shooter, manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
 
+    m_shooterDistance_High = new ShooterAutoDistance(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_HIGH);
+    m_shooterDistance_Low = new ShooterAutoDistance(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_LOW);
     
     m_shooterLower = new ShooterLower(m_shooter,manipulatorController);
 
@@ -140,7 +137,9 @@ public class RobotContainer {
 
     m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
 
-    
+    m_shooterSupremeHigh = new SequentialCommandGroup(m_shooterDistance_High, m_shooterHighAuto);
+    m_shooterSupremeLow = new SequentialCommandGroup(m_shooterDistance_Low, m_shooterLowAuto);
+
   }
 
   /**
@@ -242,5 +241,11 @@ public class RobotContainer {
   }
   public Command getLowShooterOut(){
     return m_shooterOut_Low;
+  }
+  public SequentialCommandGroup getHighShooterSupreme(){
+    return m_shooterSupremeHigh;
+  }
+  public SequentialCommandGroup getLowShooterSupreme(){
+    return m_shooterSupremeLow;
   }
 }

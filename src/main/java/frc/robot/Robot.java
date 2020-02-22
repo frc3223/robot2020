@@ -19,6 +19,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -62,9 +63,10 @@ public class Robot extends TimedRobot {
   private Command m_shooterOut_Low;
   private Command m_hopperShootOut_High;
   private Command m_hopperShootOut_Low;
+  private SequentialCommandGroup m_shooterSupreme_High;
+  private SequentialCommandGroup m_shooterSupreme_Low;
 
   NetworkTable table;
-  
 
   public static RobotContainer m_robotContainer = null;
 
@@ -187,8 +189,10 @@ public class Robot extends TimedRobot {
     m_shooterLowAutoCommand = m_robotContainer.getShooterLowAuto();
     m_shooterHighAutoCommand = m_robotContainer.getShooterHighAuto();
 
-    m_timedAutoDriveCommand = m_robotContainer.getTimedAutoDrive();
-    
+    m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
+    m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
+
+    m_timedAutoDriveCommand = m_robotContainer.getTimedAutoDrive();  
   }
   @Override
   public void teleopPeriodic(){
@@ -210,8 +214,6 @@ public class Robot extends TimedRobot {
       m_timedAutoDriveCommand.schedule();
       System.out.println("everybody watch ya'll's ankles, testing robot autonomous");
     }
-
-    
      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       System.out.println("Right bumper was pressed, intake should be happening");
@@ -230,12 +232,11 @@ public class Robot extends TimedRobot {
       m_colorAutoCommand.schedule(); // start button
     }
     */
-
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
-      m_shooterHighAutoCommand.schedule(); // X button
+      m_shooterSupreme_High.schedule(); // X button
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO)){
-     m_shooterLowAutoCommand.schedule(); //A button
+     m_shooterSupreme_Low.schedule(); //A button
     }
   }
 

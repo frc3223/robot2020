@@ -16,9 +16,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
     //~~~~~~~~CONFIGURATION VARIABLES~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     //controllers
     public static final int DRIVER_CONTROLLER = 0;
     public static final int MANIPULATOR_CONTROLLER = 1;// 0 for testing purposes REMEMBER TO CHANGE BACK TO 1 EVENTUALLY
@@ -26,7 +24,8 @@ public final class Constants {
     //user preferences
     public static final double TANK_DRIVE_SPEED_RATIO = 0.8; //Reduced turning speed for tank drive
 
-
+    public static final double AUTO_SHOOT_DISTANCE_LOW = 1;
+    public static final double AUTO_SHOOT_DISTANCE_HIGH = 2;
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 20;
@@ -47,8 +46,7 @@ public final class Constants {
     public static final int COLORWHEEL_MOTOR = 7;
 
     //~~~~~~~~~~~~~~~~~~~CONTROLLER BUTTONS (xbox)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    //Driver controller
+    //Driver controller~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //Drive arcade joysticks
     public static final int DRIVER_CONTROLLER_LEFT_MOVE_AXIS = 1; //left joystick up down
     public static final int DRIVER_CONTROLLER_LEFT_ROTATE_AXIS = 0; //left joysick left right
@@ -104,7 +102,7 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 1; // A button
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 3; //X button
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;
     public static final int INTAKE_SOLENOID_FORWARDS = 0;
     public static final int INTAKE_SOLENOID_BACKWARDS = 1;
@@ -115,7 +113,7 @@ public final class Constants {
     public static final int HOPPER_SOLENOID_FORWARDS = 4;
     public static final int HOPPER_SOLENOID_BACKWARDS = 5;
     
-    /* Ultrasonic Sonars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    /* Ultrasonic Sonars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
     public static final int SONAR_WIDE = 1;
     public static final int SONAR_NARROW = 0;
     public static final int SONAR_OVERSAMPLE_COUNT = 2;
