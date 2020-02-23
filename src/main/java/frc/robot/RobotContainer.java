@@ -31,8 +31,6 @@ import frc.robot.commands.*;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrain m_drivetrain;
   private final DriveTank m_drivetank;
   private final DriveArcade m_drivearcade;
@@ -48,7 +46,7 @@ public class RobotContainer {
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
   private final IntakeAuto m_intakeAutoLower;
-  private final Compressor m_compressor;
+ 
   private final IntakeShootOut m_intakeShootOut;
   private final IntakePullIn m_intakePullIn;
 
@@ -71,32 +69,41 @@ public class RobotContainer {
   private final ShooterAutoDistanceHigh m_shooterDistance_High;
   private final ShooterAutoDistanceLow m_shooterDistance_Low;
 
+  private final Hopper m_hopper;
   private final HopperShootOut m_hopperShootOut_High;
   private final HopperShootOut m_hopperShootOut_Low;
   private final HopperPullIn m_hopperPullIn;
-  private final Hopper m_hopper;
-  private final AnalogInput m_wideSonar;
-  private final AnalogInput m_narrowSonar;
+ 
+ 
 
   private final SequentialCommandGroup m_shooterSupremeHigh;
   private final SequentialCommandGroup m_shooterSupremeLow;
 
   private final DriveDistance m_driveDistance;
   
-  private final TimedAutoDrive m_timedAutoDrive;
+  private final TimedAutoDrive m_timedAutoDrive; 
+
+  private final Compressor m_compressor; 
+  private final AnalogInput m_wideSonar;
+  private final AnalogInput m_narrowSonar;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer(Joystick driverController, Joystick manipulatorController) {
     // Configure the button bindings
     m_drivetrain = new DriveTrain();
-    m_drivearcade = new DriveArcade(m_drivetrain, driverController, manipulatorController);
+    m_drivearcade = new DriveArcade(m_drivetrain, driverController);
     m_drivetank = new DriveTank(m_drivetrain, driverController);
+    
+    m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
+    m_compressor.setClosedLoopControl(true);
+
+    m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
+    m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
+
     m_intake = new Intake();
     m_intakeRaise = new IntakeRaise(m_intake);
     m_intakeLower = new IntakeLower(m_intake);
-    m_compressor = new Compressor(Constants.PNEUMATICS_MODULE);
-    m_compressor.setClosedLoopControl(true);
     m_intakeShootOut = new IntakeShootOut(m_intake,manipulatorController);
     m_intakePullIn = new IntakePullIn(m_intake,manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
     
@@ -114,26 +121,23 @@ public class RobotContainer {
     m_climberWinchUp = new ClimberWinchUp(m_climber, driverController); 
     m_climberWinchDown = new ClimberWinchDown(m_climber,driverController); 
 
-    m_wideSonar = new AnalogInput(Constants.SONAR_WIDE);
-    m_narrowSonar = new AnalogInput(Constants.SONAR_NARROW);
 
     m_shooter = new Shooter(m_wideSonar, m_narrowSonar);
-    
     m_shooterRaise_Low = new ShooterRaise(m_shooter);
     m_shooterRaise_High = new ShooterRaise(m_shooter);
     m_shooterOut_High = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO);
     m_shooterOut_Low = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
     m_shooterPullIn = new ShooterPullIn(m_shooter, manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
-
-    m_shooterDistance_High = new ShooterAutoDistanceHigh(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_HIGH);
-    m_shooterDistance_Low = new ShooterAutoDistanceLow(m_shooter,m_drivetrain,Constants.AUTO_SHOOT_DISTANCE_LOW);
-    
     m_shooterLower = new ShooterLower(m_shooter,manipulatorController);
+    m_shooterDistance_High = new ShooterAutoDistanceHigh(m_shooter,m_drivetrain,Constants.HIGH_GOAL_DISTANCE);
+    m_shooterDistance_Low = new ShooterAutoDistanceLow(m_shooter,m_drivetrain,Constants.LOW_GOAL_DISTANCE);
+
 
     m_hopper = new Hopper();
     m_hopperPullIn = new HopperPullIn(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
     m_hopperShootOut_High = new HopperShootOut(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO);
     m_hopperShootOut_Low = new HopperShootOut(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
+
 
     m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_shooterRaise_Low, m_hopperShootOut_Low, m_shooterOut_Low);
     m_shooterHighAuto = new ShooterHighAuto(m_shooter, m_shooterRaise_High, m_hopperShootOut_High, m_shooterOut_High);
@@ -155,15 +159,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+
   public Command getDriveTank() {
     return m_drivetank;
   }

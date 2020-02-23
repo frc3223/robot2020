@@ -28,14 +28,11 @@ public class Shooter extends SubsystemBase {
   public WPI_TalonSRX shooterLeftMotor;
   public WPI_TalonSRX shooterRightMotor;
 
-  public NetworkTableEntry yaw;
-  public NetworkTableEntry isDriverMode;
-
   private AnalogInput m_wideSonar;
   private AnalogInput m_narrowSonar;
   private NetworkTable table;
+  private NetworkTable subTable;
 
-  public static double ShootSpeed;
   public DoubleSolenoid shooterSolenoid;
 
   /**
@@ -46,11 +43,8 @@ public class Shooter extends SubsystemBase {
     shooterRightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR);
     shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
 
-    ShootSpeed = 1; /* the thing about ShootSpeed is that we are using a button to control the shooter, so by defenition, we cannot have a passed in variable for the motor value.
-    If we were to change this, then we need to do a whole makeover of the two shooting commands, robot and robotcontainer,  as well as this subsystem. thanks for your time.  */
-   
-    NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    table = inst.getTable(Constants.VISION_NETWORK_TABLE_NAME);
+    table = NetworkTableInstance.getDefault().getTable(Constants.VISION_NETWORK_TABLE_NAME);
+    subTable = table.getSubTable(Constants.VISION_NETWORK_TABLE_SUB_NAME);
 
     m_wideSonar = wide;
     m_wideSonar.setAverageBits(Constants.SONAR_OVERSAMPLE_COUNT);
@@ -58,32 +52,20 @@ public class Shooter extends SubsystemBase {
     m_narrowSonar.setAverageBits(Constants.SONAR_OVERSAMPLE_COUNT);
   }
 
-  /**
-   * 1. Configure our sensors (oversample, etc.)
-   * 2. Create functions we want sensors to do
-   *      - getDistance()
-   *      - getPinpointDistance()/getNarrowDistance()
-   */
-
-  
-
   public double getWideDistance(){
-    //return m_potWide.get();
     double voltage = m_wideSonar.getVoltage();
-    //System.out.println(Math.pow(voltage/2255.682, 4.424191));
     double distance = voltage/0.29;
     return distance;
   }
   
   public double getNarrowDistance(){
-    //return m_potNarrow.get();
     double voltage = m_narrowSonar.getVoltage();
     double distance = voltage/0.29;
     return distance;
   }
   public boolean getTargetFound(){
-    //return table.getEntry(Constants.VISION_NETWORK_ENTRY_TARGET_FOUND).getBoolean(false);
-    return true;
+    NetworkTableEntry targetFound = subTable.getEntry(Constants.VISION_NETWORK_ENTRY_TARGET_FOUND);
+    return targetFound.getBoolean(false);
   }
   public void shooterMotorShootOut(){
     shooterRightMotor.set(-1);

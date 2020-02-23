@@ -20,14 +20,12 @@ public class DriveArcade extends CommandBase {
 
   private final DriveTrain m_drivetrain;
   public Joystick m_driverController;
-  public Joystick m_manipulatorController;
   /**
    * Creates a new DriveArcade.
    */
-  public DriveArcade(DriveTrain drivetrain, Joystick driverController, Joystick manipulatorController) {
+  public DriveArcade(DriveTrain drivetrain, Joystick driverController) {
     m_drivetrain = drivetrain;
     m_driverController = driverController;
-    m_manipulatorController = manipulatorController;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }

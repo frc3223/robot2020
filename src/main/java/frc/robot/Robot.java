@@ -22,7 +22,6 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -32,37 +31,23 @@ import edu.wpi.first.wpilibj.Joystick;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
-  private Command m_teleopCommand;
-  private Command m_intakeLowerCommand;
-  private Command m_intakeRaiseCommand;
+  private Command m_teleopDriveCommand;
 
   private Command m_climbArmUpCommand;
   private Command m_climbArmDownCommand;
   private Command m_climbWinchUpCommand;
   private Command m_climbWinchDownCommand;
 
-  private Command m_intakeShootOutCommand;
-  private Command m_intakePullInCommand;
-  private Command m_intakeAutoLowerCommand;
+  private Command m_intakeAutoCommand;
 
-  private Command m_colorWheelLeftCommand;
+ /* private Command m_colorWheelLeftCommand;
   private Command m_colorWheelRightCommand;
   private Command m_colorWheelRaiseCommand;
   private Command m_colorWheelLowerCommand;
-  private Command m_colorAutoCommand;
+  private Command m_colorAutoCommand; */
 
-  private Command m_shooterPullInCommand;
-  private Command m_hopperPullInCommand;
-  private Command m_shooterLowAutoCommand;
-  private Command m_shooterHighAutoCommand;
-  private Command m_timedAutoDriveCommand;
   private Command m_driveDistance;
 
-  private Command m_shooterOut_High;
-  private Command m_shooterOut_Low;
-  private Command m_hopperShootOut_High;
-  private Command m_hopperShootOut_Low;
   private SequentialCommandGroup m_shooterSupreme_High;
   private SequentialCommandGroup m_shooterSupreme_Low;
 
@@ -130,20 +115,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    System.out.println("Robot is now autonomous.");
+
     m_driveDistance = m_robotContainer.getDriveDistance();
     m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
-     System.out.println("Robot is now autonomous.");
-     NetworkTableEntry position = deb.getEntry("String 0");
-     String auto = position.getString("pos3");
-     if(auto.contains("1")){
-       m_shooterSupreme_High.schedule();
-     }else if(auto.contains("2")){
-        m_driveDistance.schedule();
-        System.out.println("WATCH OUT FOR YALL'S KNEES");
-     }else{
-       m_driveDistance.schedule();
-       //go backwards
-     }
+
+    NetworkTableEntry position = deb.getEntry("String 0");
+    String autoPosition = position.getString("pos3");
+
+    if(autoPosition.contains("1")){
+      m_shooterSupreme_High.schedule();
+    }else if(autoPosition.contains("2")){
+      m_driveDistance.schedule();
+    }else{
+      m_driveDistance.schedule();
+    }
      
   }
 
@@ -162,53 +148,38 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if(m_driveDistance != null){
+      m_driveDistance.cancel();
     }
-    //m_teleopCommand = m_robotContainer.getDriveTank();
-    m_teleopCommand = m_robotContainer.getDriveArcade();
-    if (m_teleopCommand != null) {
-      m_teleopCommand.schedule();
+    if(m_shooterSupreme_High != null){
+      m_shooterSupreme_High.cancel();
     }
-    
-    m_intakeLowerCommand = m_robotContainer.getIntakeLower();
-    m_intakeRaiseCommand = m_robotContainer.getIntakeRaise();
+    //m_teleopDriveCommand = m_robotContainer.getDriveTank();
+    m_teleopDriveCommand = m_robotContainer.getDriveArcade();
+    if (m_teleopDriveCommand != null) {
+      m_teleopDriveCommand.schedule();
+    }
 
     m_climbArmUpCommand = m_robotContainer.getClimbArmUp();
     m_climbArmDownCommand = m_robotContainer.getClimbArmDown();
     m_climbWinchUpCommand = m_robotContainer.getClimbWinchUp();
     m_climbWinchDownCommand = m_robotContainer.getClimbWinchDown();
 
-    m_intakePullInCommand = m_robotContainer.getIntakePullIn();
-    m_intakeShootOutCommand = m_robotContainer.getIntakeShootOut();
+    m_intakeAutoCommand = m_robotContainer.getIntakeAutoLower();
 
-    m_intakeAutoLowerCommand = m_robotContainer.getIntakeAutoLower();
-
-    m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
+   /* m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
     m_colorWheelRaiseCommand = m_robotContainer.getColorRaise();
     m_colorWheelLowerCommand = m_robotContainer.getColorLower();
-    m_colorAutoCommand = m_robotContainer.getColorAuto();
-
-    m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
-    m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
-    m_shooterOut_High = m_robotContainer.getHighShooterOut();
-    m_shooterOut_Low = m_robotContainer.getLowShooterOut();
-    m_hopperShootOut_High = m_robotContainer.getHighHopperOut();
-    m_hopperShootOut_Low = m_robotContainer.getHighHopperOut();
-    m_shooterLowAutoCommand = m_robotContainer.getShooterLowAuto();
-    m_shooterHighAutoCommand = m_robotContainer.getShooterHighAuto();
+    m_colorAutoCommand = m_robotContainer.getColorAuto(); */
 
     m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
     m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
-
-    m_timedAutoDriveCommand = m_robotContainer.getTimedAutoDrive();  
+  
   }
   @Override
   public void teleopPeriodic(){
 
-  // REMEMBER TO UNCOMMENT THIS WHEN TESTING THE ENTIRE ROBOT 
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
       m_climbArmDownCommand.schedule();
     }
@@ -221,17 +192,13 @@ public class Robot extends TimedRobot {
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_WINCH_UP)){
       m_climbWinchUpCommand.schedule();
     }
-    if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_AUTO_DRIVE_TEST)){
-      m_timedAutoDriveCommand.schedule();
-      System.out.println("everybody watch ya'll's ankles, testing robot autonomous");
-    }
      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       System.out.println("Right bumper was pressed, intake should be happening");
-      m_intakeAutoLowerCommand.schedule(); // Right bumper
+      m_intakeAutoCommand.schedule(); // Right bumper
     }
     
-    /*~~~~~~~~~~~~~~~~~~NEWS FLASH!!! there's no space, no the triggers and back bumpers are now open~~~~~~~~~~~
+    /*Colorwheel commands that should be put back in if implemented
 
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_COLORWHEEL_LOWER)) {
       m_colorWheelLowerCommand.schedule(); // back button right

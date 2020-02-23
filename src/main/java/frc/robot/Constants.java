@@ -24,9 +24,8 @@ public final class Constants {
     //user preferences
     public static final double TANK_DRIVE_SPEED_RATIO = 0.8; //Reduced turning speed for tank drive
 
-    public static final double AUTO_SHOOT_DISTANCE_LOW = 1;
-    public static final double AUTO_SHOOT_DISTANCE_HIGH = 2;
-    public static final double DRIVE_AUTO_DISTANCE = 11;
+
+
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 20;
@@ -91,15 +90,8 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_AUTO_SPIN = 8;//Start button
     public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_FIND_COLOR = 4;//Y button
 
-    //Shooter wheel
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_RAISE = 3; //X button
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOWER = 1; // A button
-
     //Shooter 
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_shoot_out = 000; //dpad up
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_pull_in = 000; // dpad down 
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_IN  = 000;// dpad left
-    public static final int MANIPULATOR_CONTROLLER_HOPPER_OUT = 000;//dpad right
+
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 1; // A button
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 3; //X button
 
@@ -118,17 +110,13 @@ public final class Constants {
     public static final int SONAR_WIDE = 1;
     public static final int SONAR_NARROW = 0;
     public static final int SONAR_OVERSAMPLE_COUNT = 2;
-    public static final int SONAR_WIDE_FULL_RANGE = 90;
-    public static final int SONAR_NARROW_FULL_RANGE = 60;
-    public static final int SONAR_STARTING_POINT = 0;
 
     //Vision~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public static final String VISION_NETWORK_TABLE_NAME = "chameleon";
-    public static final String VISION_NETWORK_ENTRY_TARGET_FOUND = "targetFound";
+    public static final String VISION_NETWORK_TABLE_NAME = "chameleon-vision";
+    public static final String VISION_NETWORK_TABLE_SUB_NAME = "CameraBoi";
+    public static final String VISION_NETWORK_ENTRY_TARGET_FOUND = "isValid";
     public static final double LOW_GOAL_DISTANCE = 3.0;//feet
     public static final double HIGH_GOAL_DISTANCE = 9.0;//feet
+    public static final double DRIVE_AUTO_DISTANCE = 11.0;
 
-    //Bumpers~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public static final int LEFT_BUMPER_AUTO = 22;
-    public static final int RIGHT_BUMPER_AUTO = 23;
 }
