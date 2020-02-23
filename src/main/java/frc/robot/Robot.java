@@ -16,6 +16,7 @@ import frc.robot.Constants;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -51,7 +52,6 @@ public class Robot extends TimedRobot {
   private Command m_colorWheelLowerCommand;
   private Command m_colorAutoCommand;
 
-  private Command m_shooterRaiseCommand;
   private Command m_shooterPullInCommand;
   private Command m_hopperPullInCommand;
   private Command m_shooterLowAutoCommand;
@@ -66,7 +66,11 @@ public class Robot extends TimedRobot {
   private SequentialCommandGroup m_shooterSupreme_High;
   private SequentialCommandGroup m_shooterSupreme_Low;
 
+
   NetworkTable table;
+  NetworkTable deb;
+  NetworkTableEntry position;
+
 
   public static RobotContainer m_robotContainer = null;
 
@@ -87,7 +91,9 @@ public class Robot extends TimedRobot {
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
     m_robotContainer = new RobotContainer(driverController, manipulatorController);
     
-    table = NetworkTableInstance.getDefault().getTable("chameleon").getSubTable("CameraBoi");
+    table = NetworkTableInstance.getDefault().getTable("SmartDashboard");
+    deb = table.getSubTable("DB");
+    
     System.out.println("Robot is now online.");
 
     
@@ -127,12 +133,16 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
      System.out.println("Robot is now autonomous.");
-      m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+     NetworkTableEntry position = deb.getEntry("String 0");
+     String auto = position.getString("pos3");
+     if(auto.contains("1")){
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+     }else if(auto.contains("2")){
+
+     }else{
+       //go backwards
+     }
+     
   }
 
   /**
@@ -179,7 +189,6 @@ public class Robot extends TimedRobot {
     m_colorWheelLowerCommand = m_robotContainer.getColorLower();
     m_colorAutoCommand = m_robotContainer.getColorAuto();
 
-    m_shooterRaiseCommand = m_robotContainer.getShooterRaise();
     m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
     m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
     m_shooterOut_High = m_robotContainer.getHighShooterOut();

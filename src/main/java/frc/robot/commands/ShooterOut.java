@@ -28,7 +28,7 @@ public class ShooterOut extends CommandBase {
       this.shooter = shooter;
       this.button = button;
       // Use addRequirements() here to declare subsystem dependencies.
-      addRequirements(shooter);
+      //addRequirements(shooter);
     }
   
     // Called when the command is initially scheduled.

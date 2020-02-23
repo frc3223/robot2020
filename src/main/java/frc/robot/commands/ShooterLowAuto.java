@@ -8,6 +8,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.ShooterOut;
+import frc.robot.commands.HopperShootOut;
+import frc.robot.commands.ShooterRaise;
+import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -16,9 +20,10 @@ public class ShooterLowAuto extends ParallelCommandGroup {
   /**
    * Creates a new ShooterLowAuto.
    */
-  public ShooterLowAuto(ShooterRaise shooterRaise, HopperShootOut hopperOut, ShooterOut shooterOut) {
+  public ShooterLowAuto(Shooter m_shooter, ShooterRaise shooterRaise, HopperShootOut hopperOut, ShooterOut shooterOut) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
+    addRequirements(m_shooter);
     addCommands(
       shooterRaise, hopperOut, shooterOut);
   }

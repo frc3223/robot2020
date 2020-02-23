@@ -21,7 +21,7 @@ public class ShooterLower extends CommandBase {
     m_shooter = shooter;
     manipulatorController = ManipulatorController;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    //addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.

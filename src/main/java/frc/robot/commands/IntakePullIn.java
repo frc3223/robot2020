@@ -27,7 +27,7 @@ public class IntakePullIn extends CommandBase {
     this.intake = intake;
     this.button = button;
 
-    addRequirements(intake);
+    //addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.

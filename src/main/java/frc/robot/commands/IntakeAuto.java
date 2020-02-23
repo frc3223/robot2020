@@ -13,6 +13,9 @@ import frc.robot.commands.IntakeLower;
 import frc.robot.commands.ShooterPullIn;
 import frc.robot.commands.IntakePullIn;
 import frc.robot.commands.HopperPullIn;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Hopper;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -21,8 +24,9 @@ public class IntakeAuto extends ParallelCommandGroup {
   /**
    * Creates a new IntakeAuto.
    */
-  public IntakeAuto(ShooterLower shooterLower, IntakeLower intakeLower, 
+  public IntakeAuto(Shooter m_shooter, Intake m_intake, Hopper m_hopper, ShooterLower shooterLower, IntakeLower intakeLower, 
   ShooterPullIn shooterPullIn, IntakePullIn intakePullIn, HopperPullIn hopperPullIn) {
+    addRequirements(m_shooter, m_intake, m_hopper);
     addCommands(
       shooterLower,intakeLower,shooterPullIn,intakePullIn,hopperPullIn);
     // Add your commands in the super() call, e.g.

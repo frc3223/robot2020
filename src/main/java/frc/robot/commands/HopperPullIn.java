@@ -26,7 +26,7 @@ public class HopperPullIn extends CommandBase {
     this.hopper = hopper;
     this.button = button;
 
-    addRequirements(hopper);
+    //addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.

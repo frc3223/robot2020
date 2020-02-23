@@ -60,7 +60,8 @@ public class RobotContainer {
   private final ColorWheelFindColor m_findColor;
 
   private final Shooter m_shooter;
-  private final ShooterRaise m_shooterRaise;
+  private final ShooterRaise m_shooterRaise_High;
+  private final ShooterRaise m_shooterRaise_Low; 
   private final ShooterLower m_shooterLower;
   private final ShooterPullIn m_shooterPullIn;
   private final ShooterLowAuto m_shooterLowAuto;
@@ -116,7 +117,8 @@ public class RobotContainer {
 
     m_shooter = new Shooter(m_wideSonar, m_narrowSonar);
     
-    m_shooterRaise = new ShooterRaise(m_shooter);
+    m_shooterRaise_Low = new ShooterRaise(m_shooter);
+    m_shooterRaise_High = new ShooterRaise(m_shooter);
     m_shooterOut_High = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO);
     m_shooterOut_Low = new ShooterOut(m_shooter, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
     m_shooterPullIn = new ShooterPullIn(m_shooter, manipulatorController,Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
@@ -131,9 +133,9 @@ public class RobotContainer {
     m_hopperShootOut_High = new HopperShootOut(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO);
     m_hopperShootOut_Low = new HopperShootOut(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO);
 
-    m_shooterLowAuto = new ShooterLowAuto(m_shooterRaise, m_hopperShootOut_Low, m_shooterOut_Low);
-    m_shooterHighAuto = new ShooterHighAuto(m_shooterRaise, m_hopperShootOut_High, m_shooterOut_High);
-    m_intakeAutoLower = new IntakeAuto(m_shooterLower,m_intakeLower,m_shooterPullIn,m_intakePullIn,m_hopperPullIn);
+    m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_shooterRaise_Low, m_hopperShootOut_Low, m_shooterOut_Low);
+    m_shooterHighAuto = new ShooterHighAuto(m_shooter, m_shooterRaise_High, m_hopperShootOut_High, m_shooterOut_High);
+    m_intakeAutoLower = new IntakeAuto(m_shooter, m_intake, m_hopper, m_shooterLower,m_intakeLower,m_shooterPullIn,m_intakePullIn,m_hopperPullIn);
 
     m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
 
@@ -208,9 +210,6 @@ public class RobotContainer {
   }
   public Command getFindColor(){
     return m_findColor;
-  }
-  public Command getShooterRaise(){
-    return m_shooterRaise;
   }
   public Command getShooterPullIn(){
     return m_shooterPullIn;

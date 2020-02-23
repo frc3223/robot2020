@@ -18,7 +18,7 @@ public class ShooterRaise extends CommandBase {
   public ShooterRaise(Shooter shooter){
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    //addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.

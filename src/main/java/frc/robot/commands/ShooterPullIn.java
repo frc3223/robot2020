@@ -29,7 +29,7 @@ public class ShooterPullIn extends CommandBase {
       this.button = button;
       
       // Use addRequirements() here to declare subsystem dependencies.
-      addRequirements(shooter);
+      //addRequirements(shooter);
     }
   
     // Called when the command is initially scheduled.
