@@ -26,6 +26,7 @@ public final class Constants {
 
     public static final double AUTO_SHOOT_DISTANCE_LOW = 1;
     public static final double AUTO_SHOOT_DISTANCE_HIGH = 2;
+    public static final double DRIVE_AUTO_DISTANCE = 11;
     //~~~~~~~~MOTOR CONTROLLER ID NUMBERS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //drive controller can address
     public static final int DRIVETRAIN_LEFT_FRONT_SPARK = 20;

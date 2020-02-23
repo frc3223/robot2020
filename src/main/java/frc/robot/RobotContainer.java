@@ -80,6 +80,8 @@ public class RobotContainer {
 
   private final SequentialCommandGroup m_shooterSupremeHigh;
   private final SequentialCommandGroup m_shooterSupremeLow;
+
+  private final DriveDistance m_driveDistance;
   
   private final TimedAutoDrive m_timedAutoDrive;
   /**
@@ -141,6 +143,8 @@ public class RobotContainer {
 
     m_shooterSupremeHigh = new SequentialCommandGroup(m_shooterDistance_High, m_shooterHighAuto);
     m_shooterSupremeLow = new SequentialCommandGroup(m_shooterDistance_Low, m_shooterLowAuto);
+
+    m_driveDistance = new DriveDistance(Constants.DRIVE_AUTO_DISTANCE,m_drivetrain,m_shooter);
 
   }
 
@@ -246,5 +250,8 @@ public class RobotContainer {
   }
   public SequentialCommandGroup getLowShooterSupreme(){
     return m_shooterSupremeLow;
+  }
+  public Command getDriveDistance(){
+    return m_driveDistance;
   }
 }

@@ -56,8 +56,8 @@ public class Robot extends TimedRobot {
   private Command m_hopperPullInCommand;
   private Command m_shooterLowAutoCommand;
   private Command m_shooterHighAutoCommand;
-
   private Command m_timedAutoDriveCommand;
+  private Command m_driveDistance;
 
   private Command m_shooterOut_High;
   private Command m_shooterOut_Low;
@@ -66,11 +66,9 @@ public class Robot extends TimedRobot {
   private SequentialCommandGroup m_shooterSupreme_High;
   private SequentialCommandGroup m_shooterSupreme_Low;
 
-
   NetworkTable table;
   NetworkTable deb;
   NetworkTableEntry position;
-
 
   public static RobotContainer m_robotContainer = null;
 
@@ -132,14 +130,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_driveDistance = m_robotContainer.getDriveDistance();
+    m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
      System.out.println("Robot is now autonomous.");
      NetworkTableEntry position = deb.getEntry("String 0");
      String auto = position.getString("pos3");
      if(auto.contains("1")){
-
+       m_shooterSupreme_High.schedule();
      }else if(auto.contains("2")){
-
+        m_driveDistance.schedule();
+        System.out.println("WATCH OUT FOR YALL'S KNEES");
      }else{
+       m_driveDistance.schedule();
        //go backwards
      }
      
