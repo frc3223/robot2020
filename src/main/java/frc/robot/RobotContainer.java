@@ -45,7 +45,7 @@ public class RobotContainer {
   private final Intake m_intake;
   private final IntakeLower m_intakeLower;
   private final IntakeRaise m_intakeRaise;
-  private final IntakeAuto m_intakeAutoLower;
+  private final IntakeAuto m_intakeAuto;
  
   private final IntakeShootOut m_intakeShootOut;
   private final IntakePullIn m_intakePullIn;
@@ -141,7 +141,7 @@ public class RobotContainer {
 
     m_shooterLowAuto = new ShooterLowAuto(m_shooter, m_shooterRaise_Low, m_hopperShootOut_Low, m_shooterOut_Low);
     m_shooterHighAuto = new ShooterHighAuto(m_shooter, m_shooterRaise_High, m_hopperShootOut_High, m_shooterOut_High);
-    m_intakeAutoLower = new IntakeAuto(m_shooter, m_intake, m_hopper, m_shooterLower,m_intakeLower,m_shooterPullIn,m_intakePullIn,m_hopperPullIn);
+    m_intakeAuto = new IntakeAuto(m_shooter, m_intake, m_hopper, m_shooterLower,m_intakeLower,m_shooterPullIn,m_intakePullIn,m_hopperPullIn);
 
     m_timedAutoDrive = new TimedAutoDrive(m_drivetrain);
 
@@ -190,8 +190,8 @@ public class RobotContainer {
   public Command getIntakePullIn(){
     return m_intakePullIn;
   }
-  public Command getIntakeAutoLower(){
-    return m_intakeAutoLower;
+  public Command getIntakeAuto(){
+    return m_intakeAuto;
   }
   public Command getColorLeft(){
     return m_colorLeft;

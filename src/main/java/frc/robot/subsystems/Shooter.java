@@ -83,7 +83,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterRaise(){
-    shooterSolenoid.set(DoubleSolenoid.Value.kForward);
+  shooterSolenoid.set(DoubleSolenoid.Value.kForward);
   }
 
   public void shooterLower(){

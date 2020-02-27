@@ -35,6 +35,9 @@ public void intakeRaise() {
 public void intakeLower() {
   intakeSolenoid.set(DoubleSolenoid.Value.kForward);
 }
+public void intakeAuto() {
+  
+}
 
 public void intakeMotorShootOut() {
   intakeMotor.set(1.0);

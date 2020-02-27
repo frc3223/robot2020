@@ -165,7 +165,7 @@ public class Robot extends TimedRobot {
     m_climbWinchUpCommand = m_robotContainer.getClimbWinchUp();
     m_climbWinchDownCommand = m_robotContainer.getClimbWinchDown();
 
-    m_intakeAutoCommand = m_robotContainer.getIntakeAutoLower();
+    m_intakeAutoCommand = m_robotContainer.getIntakeAuto();
 
    /* m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
