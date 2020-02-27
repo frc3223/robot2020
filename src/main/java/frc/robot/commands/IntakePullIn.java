@@ -33,13 +33,15 @@ public class IntakePullIn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.intakeMotorPullIn();
+    
     isDone = false;
+    System.out.println("Intake Pull in Started");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    intake.intakeMotorPullIn();
     if(!manipulatorController.getRawButton(button)){
       end(false);
       isDone = true;
@@ -51,6 +53,7 @@ public class IntakePullIn extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     intake.intakeMotorOff();
+    System.out.println("Intake Pull In Stopped");
   }
 
   // Returns true when the command should end.

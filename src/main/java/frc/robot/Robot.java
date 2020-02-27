@@ -39,6 +39,12 @@ public class Robot extends TimedRobot {
   private Command m_climbWinchDownCommand;
 
   private Command m_intakeAutoCommand;
+  private Command m_intakeLowerCommand;
+  private Command m_intakePullInCommand;
+  private Command m_hopperPullInCommand;
+  private Command m_shooterLowerCommand;
+  private Command m_shooterPullInCommand;
+  
 
  /* private Command m_colorWheelLeftCommand;
   private Command m_colorWheelRightCommand;
@@ -165,7 +171,12 @@ public class Robot extends TimedRobot {
     m_climbWinchUpCommand = m_robotContainer.getClimbWinchUp();
     m_climbWinchDownCommand = m_robotContainer.getClimbWinchDown();
 
-    m_intakeAutoCommand = m_robotContainer.getIntakeAuto();
+    //m_intakeAutoCommand = m_robotContainer.getIntakeAuto();
+    m_intakeLowerCommand = m_robotContainer.getIntakeLower();
+    m_intakePullInCommand = m_robotContainer.getIntakePullIn();
+    m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
+    m_shooterLowerCommand = m_robotContainer.getShooterLower();
+    m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
 
    /* m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
@@ -195,7 +206,12 @@ public class Robot extends TimedRobot {
      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~MANIPULATOR CONTROLLER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER)){
       System.out.println("Right bumper was pressed, intake should be happening");
-      m_intakeAutoCommand.schedule(); // Right bumper
+      //m_intakeAutoCommand.schedule(); // Right bumper
+      m_intakeLowerCommand.schedule();
+      m_intakePullInCommand.schedule();
+      m_hopperPullInCommand.schedule();
+      m_shooterLowerCommand.schedule();
+      m_shooterPullInCommand.schedule();
     }
     
     /*Colorwheel commands that should be put back in if implemented

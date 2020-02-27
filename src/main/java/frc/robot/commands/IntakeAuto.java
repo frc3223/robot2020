@@ -26,9 +26,10 @@ public class IntakeAuto extends ParallelCommandGroup {
    */
   public IntakeAuto(Shooter m_shooter, Intake m_intake, Hopper m_hopper, ShooterLower shooterLower, IntakeLower intakeLower, 
   ShooterPullIn shooterPullIn, IntakePullIn intakePullIn, HopperPullIn hopperPullIn) {
+    super(shooterLower,intakeLower,shooterPullIn,intakePullIn,hopperPullIn);
     addRequirements(m_shooter, m_intake, m_hopper);
-    addCommands(
-      shooterLower,intakeLower,shooterPullIn,intakePullIn,hopperPullIn);
+    //addCommands(
+      //shooterLower,intakeLower,shooterPullIn,intakePullIn,hopperPullIn);
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
   }

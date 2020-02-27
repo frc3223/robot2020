@@ -37,7 +37,7 @@ public class ShooterPullIn extends CommandBase {
     public void initialize() {
       shooter.shooterMotorPullIn();
       isDone = false;
-      
+      System.out.println("Shooter pull in Started");
     }
   
     // Called every time the scheduler runs while the command is scheduled.
@@ -54,6 +54,7 @@ public class ShooterPullIn extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         shooter.shooterMotorsOff();
+        System.out.println("Shooter pullin stopped");
     }
   
     // Returns true when the command should end.

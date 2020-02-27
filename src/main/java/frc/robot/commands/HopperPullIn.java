@@ -34,6 +34,7 @@ public class HopperPullIn extends CommandBase {
   public void initialize() {
     hopper.hopperPullIn();
     isDone = false;
+    System.out.println("Hopper Pull In Started");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,6 +51,7 @@ public class HopperPullIn extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     hopper.hopperMotorOff();
+    System.out.println("Hopper Pull In Stopped");
   }
 
   // Returns true when the command should end.
