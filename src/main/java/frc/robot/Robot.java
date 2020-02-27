@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
   private Command m_hopperPullInCommand;
   private Command m_shooterLowerCommand;
   private Command m_shooterPullInCommand;
+  private Command 
   
 
  /* private Command m_colorWheelLeftCommand;

@@ -19,16 +19,17 @@ public class Hopper extends SubsystemBase {
    * Creates a new Hopper.
    */
   public Hopper() {
-    hopperMotor = new WPI_VictorSPX(Constants.INTAKE_MOTOR);
-     
+    hopperMotor = new WPI_VictorSPX(Constants.SHOOTER_HOPPER_MOTOR);
+     System.out.println("Hopper Constructor");
   }
   
   public void hopperShootOut(){
-    hopperMotor.set(1);
+    hopperMotor.set(-1);
   }
 
   public void hopperPullIn(){
-    hopperMotor.set(-1);
+    hopperMotor.set(1);
+    System.out.println("Hopper pull in Motor started");
   }
 
     public void hopperMotorOff(){
