@@ -46,6 +46,15 @@ public class Robot extends TimedRobot {
   private Command m_shooterPullInCommand;
   private Command m_simpleShooterOut;
   private Command m_distanceCheckCommand;
+  private Command m_shooterDistance_Low;
+  private Command m_shooterDistance_High;
+
+  private Command m_shooterOut_High;
+  private Command m_shooterOut_Low;
+  private Command m_hopperOut_High;
+  private Command m_hopperOut_Low;
+  private Command m_shooterRaise;
+
   
 
  /* private Command m_colorWheelLeftCommand;
@@ -67,6 +76,9 @@ public class Robot extends TimedRobot {
 
   public Joystick driverController;
   public Joystick manipulatorController;
+
+  public boolean highShootDistanceDone;
+  public boolean lowShootDistanceDone;
   
 
   /**
@@ -187,10 +199,22 @@ public class Robot extends TimedRobot {
     m_colorWheelLowerCommand = m_robotContainer.getColorLower();
     m_colorAutoCommand = m_robotContainer.getColorAuto(); */
 
-    m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
-    m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
+    m_shooterRaise = m_robotContainer.getShooterRaiseHigh();
+    m_hopperOut_High = m_robotContainer.getHighHopperOut();
+    m_shooterOut_High = m_robotContainer.getHighShooterOut();
+    m_hopperOut_Low = m_robotContainer.getLowHopperOut();
+    m_shooterOut_Low = m_robotContainer.getLowShooterOut();
+    
+
+    //m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
+    //m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
+    //m_shooterDistance_Low = m_robotContainer.getShooterDistanceLow();
+    //m_shooterDistance_High = m_robotContainer.getShooterDistanceHigh();
 
     m_simpleShooterOut = m_robotContainer.getShooterSimpleOut();
+
+    lowShootDistanceDone = false;
+    highShootDistanceDone = false;
   
   }
   @Override
@@ -237,10 +261,34 @@ public class Robot extends TimedRobot {
       m_simpleShooterOut.schedule();
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
-      m_shooterSupreme_High.schedule(); // X button
+      if(!highShootDistanceDone){
+        m_shooterDistance_High.schedule();
+        highShootDistanceDone = true;
+      } 
+      else if(m_shooterDistance_High.isFinished() && highShootDistanceDone){
+        m_shooterRaise.schedule();
+        m_hopperOut_High.schedule();
+        m_shooterOut_High.schedule();
+        highShootDistanceDone = false;
+      }
+        
+      
+      //m_shooterSupreme_High.schedule(); // X button
     }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO)){
-     m_shooterSupreme_Low.schedule(); //A button
+      //m_shooterDistance_Low.schedule();
+      if(!lowShootDistanceDone){
+        m_shooterDistance_Low.schedule();
+        lowShootDistanceDone = true;
+      } 
+      else if(m_shooterDistance_Low.isFinished() && lowShootDistanceDone){
+        m_shooterRaise.schedule();
+        m_hopperOut_Low.schedule();
+        m_shooterOut_Low.schedule();
+        lowShootDistanceDone = false;
+      }
+
+     //m_shooterSupreme_Low.schedule(); //A button
     }
   }
 

@@ -164,6 +164,18 @@ public class RobotContainer {
   public Command getDistanceCheck(){
     return m_distanceCheck;
   }
+  public Command getShooterDistanceLow(){
+    return m_shooterDistance_Low;
+  }
+  public Command getShooterDistanceHigh(){
+    return m_shooterDistance_High;
+  }
+  public Command getShooterRaiseHigh(){
+    return m_shooterRaise_High;
+  }
+  public Command getShooterRaiseLow(){
+    return m_shooterRaise_Low;
+  }
 
   public Command getDriveTank() {
     return m_drivetank;

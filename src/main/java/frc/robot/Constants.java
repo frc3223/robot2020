@@ -93,8 +93,8 @@ public final class Constants {
     //Shooter 
     public static final int MANIPULATOR_CONTROLLER_TEST_DISTANCE = 4;//Y button
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_OUT = 5;//Left Bumper
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 1; // A button
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 3; //X button
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 2; // B button
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 4; //Y button
 
     //~~~~~~~~~~~~~~~~~~~~~~~~Solenoids!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public static final int PNEUMATICS_MODULE = 21;
@@ -118,6 +118,6 @@ public final class Constants {
     public static final String VISION_NETWORK_ENTRY_TARGET_FOUND = "isValid";
     public static final double LOW_GOAL_DISTANCE = 3.0;//feet
     public static final double HIGH_GOAL_DISTANCE = 9.0;//feet
-    public static final double DRIVE_AUTO_DISTANCE = 11.0;
+    public static final double DRIVE_AUTO_DISTANCE = 11.0;//feet
 
 }

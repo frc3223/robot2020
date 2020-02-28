@@ -69,13 +69,13 @@ public class Shooter extends SubsystemBase {
     return targetFound.getBoolean(false);
   }
   public void shooterMotorShootOut(){
-    shooterRightMotor.set(-1);
-    shooterLeftMotor.set(1);
+    shooterRightMotor.set(1);
+    shooterLeftMotor.set(-1);
   }
 
   public void shooterMotorPullIn(){
-    shooterRightMotor.set(-0.5);
-    shooterLeftMotor.set(0.5);
+    shooterRightMotor.set(-1);
+    shooterLeftMotor.set(1);
   }
 
   public void shooterMotorsOff(){

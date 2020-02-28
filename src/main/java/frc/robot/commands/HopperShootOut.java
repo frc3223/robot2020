@@ -26,21 +26,21 @@ public class HopperShootOut extends CommandBase {
     this.manipulatorController = manipulatorController;
     this.hopper = hopper;
     this.button = button;
-    
 
-    addRequirements(hopper);
+    //addRequirements(hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     isDone = false;
-    hopper.hopperShootOut();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    hopper.hopperShootOut();
     if(!manipulatorController.getRawButton(button)){
       end(false);
       isDone = true;

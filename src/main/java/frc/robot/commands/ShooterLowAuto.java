@@ -23,7 +23,7 @@ public class ShooterLowAuto extends ParallelCommandGroup {
   public ShooterLowAuto(Shooter m_shooter, ShooterRaise shooterRaise, HopperShootOut hopperOut, ShooterOut shooterOut) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());super();
-    addRequirements(m_shooter);
+    //addRequirements(m_shooter);
     addCommands(
       shooterRaise, hopperOut, shooterOut);
   }
