@@ -61,6 +61,7 @@ public class Shooter extends SubsystemBase {
   public double getNarrowDistance(){
     double voltage = m_narrowSonar.getVoltage();
     double distance = voltage/0.29;
+    System.out.println("our distance is: "+ distance + " feet");
     return distance;
   }
   public boolean getTargetFound(){
@@ -73,8 +74,8 @@ public class Shooter extends SubsystemBase {
   }
 
   public void shooterMotorPullIn(){
-    shooterRightMotor.set(-1);
-    shooterLeftMotor.set(1);
+    shooterRightMotor.set(-0.5);
+    shooterLeftMotor.set(0.5);
   }
 
   public void shooterMotorsOff(){

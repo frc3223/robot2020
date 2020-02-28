@@ -74,7 +74,8 @@ public class RobotContainer {
   private final HopperShootOut m_hopperShootOut_Low;
   private final HopperPullIn m_hopperPullIn;
  
- 
+  private Command m_shooterSimpleOut;
+  private Command m_distanceCheck;
 
   private final SequentialCommandGroup m_shooterSupremeHigh;
   private final SequentialCommandGroup m_shooterSupremeLow;
@@ -132,7 +133,6 @@ public class RobotContainer {
     m_shooterDistance_High = new ShooterAutoDistanceHigh(m_shooter,m_drivetrain,Constants.HIGH_GOAL_DISTANCE);
     m_shooterDistance_Low = new ShooterAutoDistanceLow(m_shooter,m_drivetrain,Constants.LOW_GOAL_DISTANCE);
 
-
     m_hopper = new Hopper();
     m_hopperPullIn = new HopperPullIn(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER);
     m_hopperShootOut_High = new HopperShootOut(m_hopper, manipulatorController, Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO);
@@ -150,6 +150,9 @@ public class RobotContainer {
 
     m_driveDistance = new DriveDistance(Constants.DRIVE_AUTO_DISTANCE,m_drivetrain,m_shooter);
 
+    m_shooterSimpleOut = new ShooterSimpleOut(manipulatorController,m_shooter,m_hopper,Constants.MANIPULATOR_CONTROLLER_SHOOTER_OUT);
+    m_distanceCheck = new DistanceCheck(m_shooter);
+
   }
 
   /**
@@ -158,7 +161,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
+  public Command getDistanceCheck(){
+    return m_distanceCheck;
+  }
 
   public Command getDriveTank() {
     return m_drivetank;
@@ -246,6 +251,9 @@ public class RobotContainer {
   }
   public SequentialCommandGroup getLowShooterSupreme(){
     return m_shooterSupremeLow;
+  }
+  public Command getShooterSimpleOut(){
+    return m_shooterSimpleOut;
   }
   public Command getDriveDistance(){
     return m_driveDistance;

@@ -42,7 +42,7 @@ public void intakeMotorShootOut() {
 }
 
 public void intakeMotorPullIn() {
-  intakeMotor.set(-1.0);
+  intakeMotor.set(-0.5);
 }
 
 public void intakeMotorOff(){

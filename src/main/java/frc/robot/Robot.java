@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class Robot extends TimedRobot {
   private Command m_teleopDriveCommand;
-
+ 
   private Command m_climbArmUpCommand;
   private Command m_climbArmDownCommand;
   private Command m_climbWinchUpCommand;
@@ -44,7 +44,8 @@ public class Robot extends TimedRobot {
   private Command m_hopperPullInCommand;
   private Command m_shooterLowerCommand;
   private Command m_shooterPullInCommand;
-  private Command 
+  private Command m_simpleShooterOut;
+  private Command m_distanceCheckCommand;
   
 
  /* private Command m_colorWheelLeftCommand;
@@ -178,6 +179,7 @@ public class Robot extends TimedRobot {
     m_hopperPullInCommand = m_robotContainer.getHopperPullIn();
     m_shooterLowerCommand = m_robotContainer.getShooterLower();
     m_shooterPullInCommand = m_robotContainer.getShooterPullIn();
+    m_distanceCheckCommand = m_robotContainer.getDistanceCheck();
 
    /* m_colorWheelLeftCommand = m_robotContainer.getColorLeft();
     m_colorWheelRightCommand = m_robotContainer.getColorRight();
@@ -187,10 +189,13 @@ public class Robot extends TimedRobot {
 
     m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
     m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
+
+    m_simpleShooterOut = m_robotContainer.getShooterSimpleOut();
   
   }
   @Override
   public void teleopPeriodic(){
+    m_distanceCheckCommand.schedule();
 
     if(driverController.getRawButton(Constants.DRIVER_CONTROLLER_CLIMBER_ARM_DOWN)){
       m_climbArmDownCommand.schedule();
@@ -227,6 +232,10 @@ public class Robot extends TimedRobot {
       m_colorAutoCommand.schedule(); // start button
     }
     */
+    if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_OUT)){
+      System.out.print("Left bumper pressed");
+      m_simpleShooterOut.schedule();
+    }
     if(manipulatorController.getRawButton(Constants.MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO)){
       m_shooterSupreme_High.schedule(); // X button
     }

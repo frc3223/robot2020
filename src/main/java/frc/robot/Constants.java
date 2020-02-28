@@ -91,7 +91,8 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_COLORWHEEL_FIND_COLOR = 4;//Y button
 
     //Shooter 
-
+    public static final int MANIPULATOR_CONTROLLER_TEST_DISTANCE = 4;//Y button
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_OUT = 5;//Left Bumper
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 1; // A button
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 3; //X button
 
@@ -107,8 +108,8 @@ public final class Constants {
     public static final int HOPPER_SOLENOID_BACKWARDS = 5;
     
     /* Ultrasonic Sonars~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-    public static final int SONAR_WIDE = 1;
-    public static final int SONAR_NARROW = 0;
+    public static final int SONAR_WIDE = 0;
+    public static final int SONAR_NARROW = 1;
     public static final int SONAR_OVERSAMPLE_COUNT = 2;
 
     //Vision~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

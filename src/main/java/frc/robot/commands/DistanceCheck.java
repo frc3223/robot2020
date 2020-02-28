@@ -9,57 +9,39 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.Joystick;
-
-public class IntakePullIn extends CommandBase {
-  Joystick manipulatorController;
-  Intake intake;
-  boolean isDone;
+public class DistanceCheck extends CommandBase {
+  Shooter shooter;
   int button;
+  boolean isDone;
   /**
-   * Creates a new IntakeWheelOut.
+   * Creates a new DistanceCheck.
    */
-  public IntakePullIn(Intake intake, Joystick manipulatorController, int button) {
+  public DistanceCheck(Shooter shooter) {
+    this.shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.manipulatorController = manipulatorController;
-    this.intake = intake;
-    this.button = button;
-
-    //addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
-    isDone = false;
-    System.out.println("Intake Pull in Started");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.intakeMotorPullIn();
-    if(!manipulatorController.getRawButton(button)){
-      end(false);
-      isDone = true;
-    }
-
+    System.out.println("our distance is: " + shooter.getNarrowDistance() + " feet");
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.intakeMotorOff();
-    intake.intakeRaise();
-    System.out.println("Intake Pull In Stopped");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return isDone;
+    return false;
   }
 }
