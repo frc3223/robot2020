@@ -76,7 +76,7 @@ public final class Constants {
     public static final int MANIPULATOR_CONTROLLER_INTAKE_PULL_IN = 5;// Left bumper
 
     //Intake auto
-    public static final int MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER = 6;//Right Bumper
+    public static final int MANIPULATOR_CONTROLLER_INTAKE_AUTO_LOWER = 5;//left Bumper
 
     //Colorwheel spin
     public static final int MANIPULATOR_CONTROLLER_WHEEL_ROTATE_LEFT = 2;//left trigger
@@ -92,7 +92,7 @@ public final class Constants {
 
     //Shooter 
     public static final int MANIPULATOR_CONTROLLER_TEST_DISTANCE = 4;//Y button
-    public static final int MANIPULATOR_CONTROLLER_SHOOTER_OUT = 5;//Left Bumper
+    public static final int MANIPULATOR_CONTROLLER_SHOOTER_OUT = 6;//rt Bumper
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_LOW_AUTO = 2; // B button
     public static final int MANIPULATOR_CONTROLLER_SHOOTER_HIGH_AUTO = 4; //Y button
 

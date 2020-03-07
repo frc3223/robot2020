@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.CvSink;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -89,10 +92,17 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    CameraServer.getInstance().startAutomaticCapture();
+    UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+    camera.setResolution(256,144);
+    camera.setFPS(30);
+    //CvSink cvSink = CameraServer.getInstance().getVideo();
+    //CvSource outputStream = CameraServer.getInstance().putVideo("Blur",640,480);
     
     driverController = new Joystick(Constants.DRIVER_CONTROLLER);
     manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);
     m_robotContainer = new RobotContainer(driverController, manipulatorController);
+
     
     table = NetworkTableInstance.getDefault().getTable("SmartDashboard");
     deb = table.getSubTable("DB");
@@ -208,8 +218,8 @@ public class Robot extends TimedRobot {
 
     //m_shooterSupreme_High = m_robotContainer.getHighShooterSupreme();
     //m_shooterSupreme_Low = m_robotContainer.getLowShooterSupreme();
-    //m_shooterDistance_Low = m_robotContainer.getShooterDistanceLow();
-    //m_shooterDistance_High = m_robotContainer.getShooterDistanceHigh();
+    m_shooterDistance_Low = m_robotContainer.getShooterDistanceLow();
+    m_shooterDistance_High = m_robotContainer.getShooterDistanceHigh();
 
     m_simpleShooterOut = m_robotContainer.getShooterSimpleOut();
 

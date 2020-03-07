@@ -58,14 +58,14 @@ public void moveRight() {
 }
 
 public void moveForward() {
-  tankDrive(-0.75, -0.75);
+  tankDrive(0.5, 0.5);
 }
 
 public void stop() {
   tankDrive(0, 0);
 }
 public void moveBackward() {
-  tankDrive(0.75, 0.75);
+  tankDrive(-0.5, -0.5);
 }
 
   @Override

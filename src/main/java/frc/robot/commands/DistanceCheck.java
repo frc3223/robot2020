@@ -31,7 +31,8 @@ public class DistanceCheck extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("our distance is: " + shooter.getNarrowDistance() + " feet");
+    System.out.println("our narrow distance is: " + shooter.getNarrowDistance() + " feet");
+    System.out.println(" our wide distance is: " + shooter.getWideDistance() + " feet");
   }
 
   // Called once the command ends or is interrupted.

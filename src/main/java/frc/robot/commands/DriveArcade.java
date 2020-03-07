@@ -43,7 +43,7 @@ public class DriveArcade extends CommandBase {
     double slowMoveSpeed = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_RIGHT_MOVE_AXIS);
     double slowRotateSpeed = m_driverController.getRawAxis(Constants.DRIVER_CONTROLLER_RIGHT_ROTATE_AXIS);
 
-
+    //rattling sound in drive
 
     if(Math.abs(slowMoveSpeed) >= 0.1 || Math.abs(slowRotateSpeed) >= 0.1) {
       m_drivetrain.arcadeDrive(slowMoveSpeed *0.5, slowRotateSpeed *0.5);

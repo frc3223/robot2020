@@ -44,16 +44,16 @@ public class ShooterAutoDistanceLow extends CommandBase {
   @Override
   public void execute() {
 
-    if((m_shooter.getNarrowDistance() > distance - 0.1) && (m_shooter.getNarrowDistance() < distance + 0.1)){
+    if((m_shooter.getNarrowDistance() >= distance - 0.1) && (m_shooter.getNarrowDistance() <= distance + 0.1)){
       //m_shooter.shooterMotorShootOut();
       isDone = true;
       end(false);
       //Find out how to set shooter motor to shoot for 5ish seconds
     }
-    else if(m_shooter.getNarrowDistance() > distance){
+    else if(m_shooter.getNarrowDistance() > distance + 0.1){
       m_driveTrain.moveForward();
     }
-    else if(m_shooter.getNarrowDistance() < distance){
+    else if(m_shooter.getNarrowDistance() < distance - 0.1){
       m_driveTrain.moveBackward();
     }
   }

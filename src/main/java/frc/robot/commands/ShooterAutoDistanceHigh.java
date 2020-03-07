@@ -43,24 +43,25 @@ public class ShooterAutoDistanceHigh extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_shooter.getTargetFound() == true){
+    //if(m_shooter.getTargetFound() == true){
 
-      if((m_shooter.getNarrowDistance() > distance - 0.1) && (m_shooter.getNarrowDistance() < distance + 0.1)){
+      if((m_shooter.getNarrowDistance() >= distance - 0.1) && (m_shooter.getNarrowDistance() <= distance + 0.1)){
         //m_shooter.shooterMotorShootOut();
         isDone = true;
         end(false);
+        
         //Find out how to set shooter motor to shoot for 5ish seconds
       }
-      else if(m_shooter.getNarrowDistance() > distance){
+      else if(m_shooter.getNarrowDistance() > distance + 0.1){
         m_driveTrain.moveForward();
       }
-      else if(m_shooter.getNarrowDistance() < distance){
+      else if(m_shooter.getNarrowDistance() < distance - 0.1){
         m_driveTrain.moveBackward();
       }
-    }
-    else{
-      m_driveTrain.stop();
-    }
+    //}
+    //else{
+      //m_driveTrain.stop();
+    //}
   }
 
   // Called once the command ends or is interrupted.

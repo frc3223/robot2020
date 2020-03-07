@@ -42,7 +42,7 @@ public class ShooterOut extends CommandBase {
     public void execute() { 
       shooter.shooterMotorShootOut();
   
-      if(manipulatorController.getRawButton(button)){
+      if(!manipulatorController.getRawButton(button)){
         isDone = true;
         end(false);
       }

@@ -10,12 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.Timer;
 
 public class DriveDistance extends CommandBase {
   double distance;
   DriveTrain driveTrain;
   boolean isDone;
   Shooter shooter;
+  Timer time;
   /**
    * Creates a new DriveDistance.
    */
@@ -24,30 +26,33 @@ public class DriveDistance extends CommandBase {
     this.distance = distance;
     this.driveTrain = driveTrain;
     this.shooter = shooter;
-
+    time = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     isDone = false;
+    time.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if((shooter.getNarrowDistance() > distance - 0.1) && (shooter.getNarrowDistance() < distance + 0.1)){
+    if(time.get() > 2.0){
+      if((shooter.getNarrowDistance() > distance - 0.1) && (shooter.getNarrowDistance() < distance + 0.1)){
       //m_shooter.shooterMotorShootOut();
       
-      isDone = true;
-      end(false);
+        isDone = true;
+        end(false);
       //Find out how to set shooter motor to shoot for 5ish seconds
-    }
-    else if(shooter.getNarrowDistance() > distance){
-      driveTrain.moveForward();
-    }
-    else if(shooter.getNarrowDistance() < distance){
-      driveTrain.moveBackward();
+      }
+      else if(shooter.getNarrowDistance() > distance){
+        driveTrain.moveForward();
+      }
+      else if(shooter.getNarrowDistance() < distance){
+        driveTrain.moveBackward();
+      }
     }
   }
 
