@@ -50,22 +50,22 @@ public void tankDrive(double leftSpeed, double rightSpeed){
 }
 
 public void moveLeft() {
-  tankDrive(-0.75, 0.75);
+  tankDrive(-1, 1);
 }
 
 public void moveRight() {
-  tankDrive(0.75, -0.75);
+  tankDrive(1, -1);
 }
 
 public void moveForward() {
-  tankDrive(0.5, 0.5);
+  tankDrive(1, 1);
 }
 
 public void stop() {
   tankDrive(0, 0);
 }
 public void moveBackward() {
-  tankDrive(-0.5, -0.5);
+  tankDrive(-1, -1);
 }
 
   @Override
