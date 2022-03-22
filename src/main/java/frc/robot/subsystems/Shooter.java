@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
@@ -41,7 +42,7 @@ public class Shooter extends SubsystemBase {
   public Shooter(AnalogInput wide, AnalogInput narrow) {
     shooterLeftMotor = new WPI_TalonSRX(Constants.SHOOTER_LEFT_MOTOR);
     shooterRightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR);
-    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
+    shooterSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE,PneumaticsModuleType.CTREPCM, Constants.HOPPER_SOLENOID_FORWARDS, Constants.HOPPER_SOLENOID_BACKWARDS);
 
     table = NetworkTableInstance.getDefault().getTable(Constants.VISION_NETWORK_TABLE_NAME);
     subTable = table.getSubTable(Constants.VISION_NETWORK_TABLE_SUB_NAME);

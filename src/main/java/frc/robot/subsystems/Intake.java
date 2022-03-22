@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
@@ -26,7 +27,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR, MotorType.kBrushless);
-    intakeSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.INTAKE_SOLENOID_FORWARDS, Constants.INTAKE_SOLENOID_BACKWARDS);
+    intakeSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, PneumaticsModuleType.CTREPCM, Constants.INTAKE_SOLENOID_FORWARDS, Constants.INTAKE_SOLENOID_BACKWARDS);
 
   }
 public void intakeRaise() {

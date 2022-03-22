@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
@@ -38,7 +39,7 @@ public class ColorWheel extends SubsystemBase {
    */
   public ColorWheel() {
     colorWheelMotor = new CANSparkMax(Constants.COLORWHEEL_MOTOR, MotorType.kBrushless);
-    colorWheelSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, Constants.COLORWHEEL_SOLENOID_FORWARDS, Constants.COLORWHEEL_SOLENOID_BACKWARDS);
+    colorWheelSolenoid = new DoubleSolenoid(Constants.PNEUMATICS_MODULE, PneumaticsModuleType.CTREPCM, Constants.COLORWHEEL_SOLENOID_FORWARDS, Constants.COLORWHEEL_SOLENOID_BACKWARDS);
     i2cPort = I2C.Port.kOnboard;
     m_colorSensor = new ColorSensorV3(i2cPort);
     m_colorMatcher = new ColorMatch();
